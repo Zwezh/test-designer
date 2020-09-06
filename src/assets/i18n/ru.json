@@ -1,3 +1,17 @@
 {
-    "appTitle": "Конструктор тестов"
+    "appTitle": "Конструктор тестов",
+    "teachers": {
+        "newTeacherTitle": "Добавить нового преподавателя",
+        "position": "Должность",
+        "name": "Имя",
+        "lastName": "Фамилия",
+        "patronymic": "Отчество",
+        "password": "Пароль",
+        "confirmPassword": "Подтвердите пароль",
+        "hidePassword": "Скрыть пароль"
+    },
+    "errors": {
+        "required": "Данное поле является обязательным",
+        "notMathced": "Пароли не совпадают"
+    }
 }

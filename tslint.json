@@ -124,6 +124,8 @@
       "options": [
         "ban-keywords",
         "check-format",
+        "require-const-for-all-caps",
+        "allow-leading-underscore",
         "allow-pascal-case"
       ]
     },
@@ -140,33 +142,33 @@
     "ordered-imports": [
       true,
       {
-          "module-source-path": "full",
-          "grouped-imports": true,
-          "type": "list",
-          "groups": [
-              {
-                  "name": "angular",
-                  "match": "^[@angular].*",
-                  "order": 1
-              },
-              {
-                  "name": "rxjs",
-                  "match": "^[rxjs].*",
-                  "order": 1
-              },
-              {
-                  "name": "internal modules",
-                  "match": "^[@app].*",
-                  "order": 3
-              },
-              {
-                  "name": "relative dir",
-                  "match": "..\/.*",
-                  "order": 4
-              }
-          ]
+        "module-source-path": "full",
+        "grouped-imports": true,
+        "type": "list",
+        "groups": [
+          {
+            "name": "angular",
+            "match": "^[@angular].*",
+            "order": 1
+          },
+          {
+            "name": "rxjs",
+            "match": "^[rxjs].*",
+            "order": 1
+          },
+          {
+            "name": "internal modules",
+            "match": "^[@app].*",
+            "order": 3
+          },
+          {
+            "name": "relative dir",
+            "match": "..\/.*",
+            "order": 4
+          }
+        ]
       }
-  ],
+    ],
     "no-conflicting-lifecycle": true,
     "no-host-metadata-property": true,
     "no-input-rename": true,
