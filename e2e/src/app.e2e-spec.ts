@@ -2,16 +2,15 @@ import { browser, logging } from 'protractor';
 
 import { AppPage } from './app.po';
 
-describe('workspace-project App', () => {
+describe('Main page', () => {
   let page: AppPage;
-
   beforeEach(() => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
+  it('should display correct header title', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('test-designer app is running!');
+    expect(page.getTitleText()).toEqual('Конструктор тестов');
   });
 
   afterEach(async () => {
