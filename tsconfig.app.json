@@ -1,16 +1,9 @@
 /* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
-  "extends": "./tsconfig.base.json",
+  "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
-    "types": [],
-    "baseUrl": "src",
-    "paths": {
-      "@appConstants": ["app/common/constants"],
-      "@appSharedModule": ["app/common/shared.module.ts"],
-      "@appLayouts/*": ["app/layout/*"],
-      "@appComponents": ["app/common/components"]
-    },
+    "types": [],  
   },
   "files": [
     "src/main.ts",
