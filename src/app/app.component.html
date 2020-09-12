@@ -1,2 +1,7 @@
-<td-header></td-header>
-<router-outlet></router-outlet>
+<div class="page column-container">
+  <td-header></td-header>
+  <main class="main-content"
+        [@routerTransition]="getState(o)">
+    <router-outlet #o="outlet"></router-outlet>
+  </main>
+</div>

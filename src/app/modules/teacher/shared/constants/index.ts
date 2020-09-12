@@ -1,0 +1,1 @@
+export * from './teachers-resources.constants';

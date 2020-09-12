@@ -1,0 +1,1 @@
+export * from './teacher-page/teacher-page.component';

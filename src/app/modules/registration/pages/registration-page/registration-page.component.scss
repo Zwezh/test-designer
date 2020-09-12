@@ -1,0 +1,15 @@
+.registration-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+    &__container {
+        width: 30rem;
+    }
+}
+
+.form-field {
+    width: 100%;
+}
