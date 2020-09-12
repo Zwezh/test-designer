@@ -1,0 +1,24 @@
+.login-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+  &__container {
+    max-width: 500px;
+  }
+}
+
+.form-line {
+  display: flex;
+}
+
+.form-field {
+  width: 100%;
+}
+
+.add-icon {
+  margin-left: 0.4rem;
+  margin-top: 0.5rem;
+}
