@@ -32,7 +32,7 @@ export class RegistrationPageObject extends BasePageObject {
   }
 
   constructor() {
-    super('registration', '.ts-registration-title')
+    super('registration', '.ts-registration-title');
     this._page = element(by.css('.ts-registration-page'));
     this._saveButton = element(by.css('.ts-save-button'));
     this._cancelButton = element(by.css('.ts-cancel-button'));
