@@ -11,7 +11,6 @@ describe('Teacher page', () => {
 
   it('Title should display correct title of the teacher page', () => {
     page.navigateTo();
-    page.titlePage.then(s => console.info(`================================${s}===============================================`));
     expect(page.titlePage).toEqual('Страница находится в разработке');
   });
 
