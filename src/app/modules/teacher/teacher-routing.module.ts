@@ -13,7 +13,7 @@ import { TeacherPageComponent } from './pages';
 
 const routes: Routes = [
   {
-    path: '',
+    path: ':id',
     component: TeacherPageComponent,
     pathMatch: 'full'
   }
