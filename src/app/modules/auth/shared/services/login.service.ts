@@ -19,7 +19,7 @@ export class LoginService {
   public addTeacher$(teacher: Teacher): Observable<number> {
     return this._apiService.addTeacher$(teacher)
       .pipe(tap((id: number) => {
-        const teacherCollection = this._teacherColleciton$.getValue();
+        const teacherCollection = this._teacherColleciton$.getValue() || [];
         this._teacherColleciton$.next([...teacherCollection, { ...teacher, id }]);
       }));
   }

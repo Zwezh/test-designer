@@ -16,9 +16,9 @@
                         class="form-field">
           <mat-label>{{ 'teachers.selectTeacher' | translate }}</mat-label>
           <mat-select class="ts-teacher-selector"
-                      [(ngModel)]="teacherId">
+                      [(ngModel)]="selectedTeacher">
             <mat-option *ngFor="let teacher of (teacherCollection$ | async)  trackBy:trackByTeacher"
-                        [value]="teacher.id">
+                        [value]="teacher">
               {{teacher.lastName}} {{teacher.name}} {{teacher.patronymic}}
             </mat-option>
           </mat-select>
@@ -38,6 +38,7 @@
         <mat-label>{{ 'teachers.password' | translate }}</mat-label>
         <input matInput
                class="ts-password"
+               [(ngModel)]="password"
                placeholder="{{ 'teachers.password' | translate }}"
                [type]="hide ? 'password' : 'text'">
         <button mat-icon-button
@@ -47,10 +48,11 @@
                 [attr.aria-pressed]="hide">
           <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>
-        <!-- <mat-error *ngIf="form.password.hasError('required')">
-          {{'errors.required' | translate}}
-        </mat-error> -->
       </mat-form-field>
+      
+      <mat-error *ngIf="isShowError" @fadeInContentByHeightOpacity>
+        {{'errors.passwordNotEqual' | translate}}
+      </mat-error>
     </mat-card-content>
     <mat-card-actions align="end">
       <button mat-raised-button

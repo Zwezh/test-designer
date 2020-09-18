@@ -3,9 +3,9 @@ import { Router } from '@angular/router';
 import { Teacher } from '@appApi';
 import { take } from 'rxjs/operators';
 
+import { AuthResourcesConstants } from '../../shared';
 import { TeacherEditForm } from '../../shared/forms';
 import { LoginService } from '../../shared/services';
-import { AuthResourcesConstants } from '../../shared';
 
 
 @Component({

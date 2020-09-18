@@ -31,8 +31,8 @@ describe('Login page', () => {
     expect(page.isEnabledHelpButton).toBeTruthy();
   });
 
-  it('Login button should be disabled', () => {
-    expect(page.isEnabledLoginButton).toBeTruthy();
+  it('Login button should be enable', () => {
+    expect(page.isEnabledLoginButton).toBeFalsy();
   });
 
   afterEach(async () => {

@@ -28,11 +28,11 @@ export class LoginPageObject extends BasePageObject {
   }
 
   public get isEnabledPasswordField(): promise.Promise<boolean> {
-    return this._loginButton.isEnabled();
+    return this._password.isEnabled();
   }
 
   constructor() {
-    super('login', '.ts-login-title');
+    super('auth/login', '.ts-login-title');
     this._registrationButton = element(by.css('.ts-registration-button'));
     this._password = element(by.css('.ts-password'));
     this._teacherSelector = element(by.css('.ts-teacher-selector'));

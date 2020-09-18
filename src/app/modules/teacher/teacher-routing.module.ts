@@ -6,21 +6,12 @@ import {
 
 import { TeacherPageComponent } from './pages';
 
-// import {
-//   TeachersDetailsPageComponent,
-//   TeachersMainPageComponent
-// } from './pages';
-
 const routes: Routes = [
   {
-    path: ':id',
+    path: '',
     component: TeacherPageComponent,
     pathMatch: 'full'
   }
-  // {
-  //   path: ':id',
-  //   component: TeachersDetailsPageComponent,
-  // }
 ];
 
 @NgModule({

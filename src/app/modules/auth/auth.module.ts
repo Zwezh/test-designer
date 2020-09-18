@@ -24,8 +24,7 @@ const MATERAIL = [
   MatIconModule,
   MatDividerModule,
   MatSelectModule,
-  MatCardModule,
-  TeachersApiModule
+  MatCardModule
 ];
 
 @NgModule({
@@ -33,7 +32,8 @@ const MATERAIL = [
     CommonModule,
     SharedModule,
     AuthRoutingModule,
-    ...MATERAIL
+    ...MATERAIL,
+    TeachersApiModule
   ],
   declarations: [LoginPageComponent, RegistrationPageComponent],
   providers: [LoginService]
