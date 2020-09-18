@@ -1,9 +1,11 @@
 import { DBConfig, ObjectStoreMeta } from 'ngx-indexed-db';
 
+import { StoreNamesConstants } from '../constants/storeNames.constants';
+
 export class DbApiConfigModel {
 
   private teachersStore: ObjectStoreMeta = {
-    store: 'teachers',
+    store: StoreNamesConstants.TEACHERS_STORE,
     storeConfig: { keyPath: 'id', autoIncrement: true },
     storeSchema: [
       { name: 'position', keypath: 'position', options: { unique: false } },
@@ -15,7 +17,7 @@ export class DbApiConfigModel {
   };
 
   private testsStore: ObjectStoreMeta = {
-    store: 'tests',
+    store: StoreNamesConstants.TESTS_STORE,
     storeConfig: { keyPath: 'id', autoIncrement: true },
     storeSchema: [
       { name: 'discipline', keypath: 'discipline', options: { unique: false } },
@@ -25,7 +27,7 @@ export class DbApiConfigModel {
   };
 
   private topicsStore: ObjectStoreMeta = {
-    store: 'topics',
+    store: StoreNamesConstants.TOPICS_STORE,
     storeConfig: { keyPath: 'id', autoIncrement: true },
     storeSchema: [
       { name: 'title', keypath: 'title', options: { unique: false } },
@@ -34,7 +36,7 @@ export class DbApiConfigModel {
   };
 
   private questionsStore: ObjectStoreMeta = {
-    store: 'questions',
+    store: StoreNamesConstants.QUESTIONS_STORE,
     storeConfig: { keyPath: 'id', autoIncrement: true },
     storeSchema: [
       { name: 'category', keypath: 'category', options: { unique: false } },
@@ -45,7 +47,7 @@ export class DbApiConfigModel {
   };
 
   private fillAnswersStore: ObjectStoreMeta = {
-    store: 'fillAnswers',
+    store: StoreNamesConstants.FILL_ANSWERS_STORE,
     storeConfig: { keyPath: 'id', autoIncrement: true },
     storeSchema: [
       { name: 'description', keypath: 'description', options: { unique: false } },
@@ -54,7 +56,7 @@ export class DbApiConfigModel {
   };
 
   private chooseAnswersStore: ObjectStoreMeta = {
-    store: 'chooseAnswers',
+    store: StoreNamesConstants.CHOOSE_ANSWERS_STORE,
     storeConfig: { keyPath: 'id', autoIncrement: true },
     storeSchema: [
       { name: 'description', keypath: 'description', options: { unique: false } },
@@ -64,7 +66,7 @@ export class DbApiConfigModel {
   };
 
   private comparisonAnswersStore: ObjectStoreMeta = {
-    store: 'comparisonAnswers',
+    store: StoreNamesConstants.COMPARISON_ANSWERS_STORE,
     storeConfig: { keyPath: 'id', autoIncrement: true },
     storeSchema: [
       { name: 'description', keypath: 'description', options: { unique: false } },
@@ -74,7 +76,7 @@ export class DbApiConfigModel {
   };
 
   private orderAnswersStore: ObjectStoreMeta = {
-    store: 'orderAnswers',
+    store: StoreNamesConstants.ORDER_ANSWERS_STORE,
     storeConfig: { keyPath: 'id', autoIncrement: true },
     storeSchema: [
       { name: 'description', keypath: 'description', options: { unique: false } },

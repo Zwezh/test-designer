@@ -1,9 +1,14 @@
 import { browser, logging } from 'protractor';
 
+import { BasePageObject } from './page-objects/base.page-object';
 import { TeacherPage } from './page-objects/teacher.page-object';
 
 describe('Teacher page', () => {
   let page: TeacherPage;
+
+  beforeAll(() => {
+    BasePageObject.login();
+  });
 
   beforeEach(() => {
     page = new TeacherPage();
@@ -15,10 +20,13 @@ describe('Teacher page', () => {
   });
 
   afterEach(async () => {
-    // Assert that there are no errors emitted from the browser
     const logs = await browser.manage().logs().get(logging.Type.BROWSER);
     expect(logs).not.toContain(jasmine.objectContaining({
       level: logging.Level.SEVERE,
     } as logging.Entry));
+  });
+
+  afterAll(() => {
+    BasePageObject.logout();
   });
 });
