@@ -30,7 +30,7 @@ export class RegistrationPageComponent {
   }
 
   public onOpenLoginPage(): void {
-    this._router.navigate([AuthResourcesConstants.LOGIN_PAGE]);
+    this._router.navigateByUrl('');
   }
 
   public onAddNewTeacher(): void {

@@ -1,0 +1,1 @@
+export * from './teacher-menu.module';

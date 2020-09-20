@@ -20,6 +20,7 @@ export class DbApiConfigModel {
     store: StoreNamesConstants.TESTS_STORE,
     storeConfig: { keyPath: 'id', autoIncrement: true },
     storeSchema: [
+      { name: 'name', keypath: 'name', options: { unique: false } },
       { name: 'discipline', keypath: 'discipline', options: { unique: false } },
       { name: 'modifiedDate', keypath: 'modifiedDate', options: { unique: false } },
       { name: 'teacherId', keypath: 'teacherId', options: { unique: false } }

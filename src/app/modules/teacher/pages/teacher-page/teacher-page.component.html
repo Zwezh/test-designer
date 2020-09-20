@@ -1,4 +1,9 @@
-<h2 class="ts-teacher-title">Страница находится в разработке</h2>
-<h3>
-  {{(teacher$ | async)?.lastName}} {{(teacher$ | async)?.name}} {{(teacher$ | async)?.patronymic}}
-</h3>
+<div class="teacher_actions">
+  <button mat-raised-button
+          class="teacher__action">Добавить новый тест</button>
+  <button mat-raised-button
+          class="teacher__action">Сохранить тест в файл</button>
+</div>
+<div class="table">
+  <td-teacher-tests-list></td-teacher-tests-list>
+</div>

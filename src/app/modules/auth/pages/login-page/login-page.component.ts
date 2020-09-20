@@ -23,7 +23,6 @@ export class LoginPageComponent implements OnInit {
   public selectedTeacher: Teacher;
   public password: string;
   public hide = true;
-
   public get isDisable(): boolean {
     return !this.selectedTeacher || this.selectedTeacher?.password !== this.password;
   }
@@ -42,6 +41,9 @@ export class LoginPageComponent implements OnInit {
 
   ngOnInit(): void {
     this._loginService.getTeacherCollection$().pipe(take(1)).subscribe();
+    if (this._authService.currentTeacher) {
+      this._router.navigate([AuthResourcesConstants.TEACHERS_PAGE]);
+    }
   }
 
   public trackByTeacher(index: number, teacher: Teacher): number {

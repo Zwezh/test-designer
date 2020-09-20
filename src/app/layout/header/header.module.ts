@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { TeacherMenuModule } from '@appLayouts/teacher-menu';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { HeaderComponent } from './header.component';
@@ -8,7 +9,8 @@ import { HeaderComponent } from './header.component';
   imports: [
     CommonModule,
     TranslateModule,
-    MatToolbarModule
+    MatToolbarModule,
+    TeacherMenuModule
   ],
   declarations: [HeaderComponent],
   exports: [HeaderComponent]

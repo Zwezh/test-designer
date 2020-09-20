@@ -1,0 +1,23 @@
+<section class="person">
+  <div class="person__data">
+    <div class="mat-body">{{teacher.position}}</div>
+    <div class="mat-body">{{teacher.lastName}} {{teacher.name}} {{teacher.patronymic}}</div>
+  </div>
+  <button mat-mini-fab
+          color="basic"
+          [matMenuTriggerFor]="menu"
+          aria-label="Example icon-button with menu icon">
+    Ф.А.
+  </button>
+</section>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item
+          disabled>
+    <mat-icon>create</mat-icon>
+    <span>Редактировать</span>
+  </button>
+  <button mat-menu-item (click)="onSignOut()">
+    <mat-icon>exit_to_app</mat-icon>
+    <span>Выйти</span>
+  </button>
+</mat-menu>

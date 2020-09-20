@@ -1,6 +1,10 @@
-<mat-toolbar color="primary">
-  <mat-toolbar-row>
+<mat-toolbar color="primary" class="mat-elevation-z6">
+  <mat-toolbar-row class="header__row">
     <h1 class="ts-title"
         title="{{ 'appTitle' | translate }}">{{ 'appTitle' | translate }}</h1>
+    <ng-container *ngIf="currentTeacher$ | async">
+      <td-teacher-menu [teacher]="currentTeacher$ | async"
+                       (signOut)="onSignOut()"></td-teacher-menu>
+    </ng-container>
   </mat-toolbar-row>
 </mat-toolbar>
