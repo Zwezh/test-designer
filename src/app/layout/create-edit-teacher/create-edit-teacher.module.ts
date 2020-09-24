@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -10,11 +11,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { SharedModule } from '@appSharedModule';
 
-
-import { AuthRoutingModule } from './auth-routing.module';
-import { LoginPageComponent } from './pages';
+import { CreateEditTeacherComponent } from './components';
 
 const MATERAIL = [
+  MatDialogModule,
   MatToolbarModule,
   MatButtonModule,
   MatFormFieldModule,
@@ -29,9 +29,9 @@ const MATERAIL = [
   imports: [
     CommonModule,
     SharedModule,
-    AuthRoutingModule,
     ...MATERAIL
   ],
-  declarations: [LoginPageComponent],
+  declarations: [CreateEditTeacherComponent],
+  exports: [CreateEditTeacherComponent]
 })
-export class AuthModule { }
+export class CreateEditTeacherModule { }

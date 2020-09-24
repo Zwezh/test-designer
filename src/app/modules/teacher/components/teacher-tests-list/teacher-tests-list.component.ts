@@ -29,7 +29,7 @@ export class TeacherTestsListComponent {
 
   constructor() { }
 
-  displayedColumns: Array<string> = ['name', 'discipline', 'modifiedDate'];
+  displayedColumns: Array<string> = ['name', 'discipline', 'count', 'modifiedDate'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
   public applyFilter(event: Event): void {

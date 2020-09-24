@@ -3,6 +3,7 @@ import {
     FormGroup,
     Validators
 } from '@angular/forms';
+import { Teacher } from '@appApi';
 
 import { CustomValidators } from '../validators';
 
@@ -33,14 +34,14 @@ export class TeacherEditForm extends FormGroup {
         return this.get('confirmPassword') as FormControl;
     }
 
-    constructor() {
+    constructor(teacher?: Teacher) {
         super({
-            position: new FormControl('', Validators.required),
-            lastName: new FormControl('', Validators.required),
-            name: new FormControl('', Validators.required),
-            patronymic: new FormControl('', Validators.required),
-            password: new FormControl('', Validators.required),
-            confirmPassword: new FormControl('', Validators.required),
+            position: new FormControl(teacher?.position || '', Validators.required),
+            lastName: new FormControl(teacher?.lastName || '', Validators.required),
+            name: new FormControl(teacher?.name || '', Validators.required),
+            patronymic: new FormControl(teacher?.patronymic || '', Validators.required),
+            password: new FormControl(teacher?.password || '', Validators.required),
+            confirmPassword: new FormControl(teacher?.password || '', Validators.required),
         }, {
             validators: CustomValidators.confirmedPasswords
         });

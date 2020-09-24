@@ -7,6 +7,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { TeachersApiModule } from './common/api/teachers-api';
 import { HeaderModule } from './layout';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -30,7 +31,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
         deps: [HttpClient]
       }
     }),
-    HeaderModule
+    HeaderModule,
+    TeachersApiModule
   ],
   bootstrap: [AppComponent]
 })

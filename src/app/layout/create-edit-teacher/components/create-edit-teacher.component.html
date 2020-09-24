@@ -3,8 +3,14 @@
     <mat-card-title>
       <mat-toolbar color="accent">
         <mat-toolbar-row>
-          <h1 class="ts-registration-title"
-              title="{{ 'teachers.newTeacherTitle' | translate }}">{{ 'teachers.newTeacherTitle' | translate }}</h1>
+          <ng-container *ngIf="!isEdit;else editHeaderTitle">
+            <h1 class="ts-registration-title"
+                title="{{ 'teachers.newTeacherTitle' | translate }}">{{ 'teachers.newTeacherTitle' | translate }}</h1>
+          </ng-container>
+          <ng-template #editHeaderTitle>
+            <h1 class="ts-registration-title"
+                title="{{ 'teachers.editTeacherTitle' | translate }}">{{ 'teachers.editTeacherTitle' | translate }}</h1>
+          </ng-template>
         </mat-toolbar-row>
       </mat-toolbar>
     </mat-card-title>
@@ -101,14 +107,13 @@
       <button mat-button
               class="ts-cancel-button"
               title="{{ 'buttons.cancel' | translate }}"
-              (click)="onOpenLoginPage()">{{ 'buttons.cancel' | translate }}</button>
+              (click)="onCloseDialog()">{{ 'buttons.cancel' | translate }}</button>
       <button mat-stroked-button
               [disabled]="isDisable"
-              (click)="onAddNewTeacher()"
+              (click)="onSave()"
               color="primary"
               class="ts-save-button"
-              title="{{ 'buttons.save' | translate }}"
-              cdkFocusInitial>{{ 'buttons.save' | translate }}</button>
+              title="{{ 'buttons.save' | translate }}">{{ 'buttons.save' | translate }}</button>
     </mat-card-actions>
   </mat-card>
 </section>

@@ -5,7 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { TeacherMenuComponent } from './components';
+import { TeacherBarComponent } from './components';
 
 const MATERAIL = [
   MatButtonModule,
@@ -19,7 +19,7 @@ const MATERAIL = [
     TranslateModule,
     ...MATERAIL
   ],
-  declarations: [TeacherMenuComponent],
-  exports: [TeacherMenuComponent]
+  declarations: [TeacherBarComponent],
+  exports: [TeacherBarComponent]
 })
-export class TeacherMenuModule { }
+export class TeacherBarModule { }

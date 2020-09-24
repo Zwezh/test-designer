@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { TeacherMenuModule } from '@appLayouts/teacher-menu';
+import { CreateEditTeacherModule } from '@appLayouts/create-edit-teacher';
+import { TeacherBarModule } from '@appLayouts/teacher-bar';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { HeaderComponent } from './header.component';
@@ -10,7 +11,8 @@ import { HeaderComponent } from './header.component';
     CommonModule,
     TranslateModule,
     MatToolbarModule,
-    TeacherMenuModule
+    TeacherBarModule,
+    CreateEditTeacherModule,
   ],
   declarations: [HeaderComponent],
   exports: [HeaderComponent]

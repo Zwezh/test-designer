@@ -7,16 +7,17 @@
           color="basic"
           [matMenuTriggerFor]="menu"
           aria-label="Example icon-button with menu icon">
-    Ф.А.
+    {{shortName}}
   </button>
 </section>
 <mat-menu #menu="matMenu">
   <button mat-menu-item
-          disabled>
+          (click)="onEditTeacher()">
     <mat-icon>create</mat-icon>
     <span>Редактировать</span>
   </button>
-  <button mat-menu-item (click)="onSignOut()">
+  <button mat-menu-item
+          (click)="onSignOut()">
     <mat-icon>exit_to_app</mat-icon>
     <span>Выйти</span>
   </button>

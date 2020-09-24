@@ -1,18 +1,17 @@
-.teacher_actions {
+.actions {
   display: flex;
   width: 40rem;
   justify-content: space-around;
   padding: 2rem;
   margin: auto;
-}
 
-.teacher__action {
-  padding: 4rem 1rem;
-  & .teacher__action {
-    margin-left: 1rem;
+  ._action {
+    padding: 4rem 1rem;
+    & _action {
+      margin-left: 1rem;
+    }
   }
 }
-
-.table {
+.test-list {
   padding: 1.5rem;
 }

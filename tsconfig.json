@@ -10,7 +10,8 @@
       "@appComponents": ["app/common/components"],
       "@appDBModule": ["app/db/db.module.ts"],
       "@appApi": ["app/common/api"],
-      "@appServices": ["app/common/services"]
+      "@appServices": ["app/common/services"],
+      "@appStores": ["app/common/stores"]
     },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,

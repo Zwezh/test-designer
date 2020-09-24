@@ -1,14 +1,15 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Teacher } from '@appApi';
 import { FADE_IN_CONTENT_BY_HEIGHT_OPACITY } from '@appConstants';
+import { CreateEditTeacherComponent } from '@appLayouts/create-edit-teacher';
 import { AuthenticationService } from '@appServices';
+import { TeachersStore } from '@appStores';
 import { Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { filter, switchMap, take } from 'rxjs/operators';
 
 import { AuthResourcesConstants } from '../../shared';
-import { LoginService } from '../../shared/services';
-
 
 @Component({
   selector: 'td-login-page',
@@ -23,25 +24,27 @@ export class LoginPageComponent implements OnInit {
   public selectedTeacher: Teacher;
   public password: string;
   public hide = true;
+
   public get isDisable(): boolean {
     return !this.selectedTeacher || this.selectedTeacher?.password !== this.password;
   }
+
   public get isShowError(): boolean {
     return this.selectedTeacher && this.selectedTeacher.password !== this.password;
   }
 
   constructor(
     private _authService: AuthenticationService,
-    private _loginService: LoginService,
-    private _router: Router
-  ) {
-    this.teacherCollection$ = _loginService.teacherCollection$;
+    private _store: TeachersStore,
+    private _router: Router,
+    private _dialog: MatDialog) {
+    this.teacherCollection$ = _store.teacherCollection$;
     this.selectedTeacher = null;
   }
 
   ngOnInit(): void {
-    this._loginService.getTeacherCollection$().pipe(take(1)).subscribe();
-    if (this._authService.currentTeacher) {
+    this._store.getTeacherCollection$().pipe(take(1)).subscribe();
+    if (this._authService.isLogged) {
       this._router.navigate([AuthResourcesConstants.TEACHERS_PAGE]);
     }
   }
@@ -51,11 +54,22 @@ export class LoginPageComponent implements OnInit {
   }
 
   public onOpenRegistrationPage(): void {
-    this._router.navigate([AuthResourcesConstants.REGISTRATION_PAGE]);
+    this._dialog.open(CreateEditTeacherComponent, {
+      width: '550px',
+      data: this._store.currentTeacher
+    }).afterClosed()
+      .pipe(
+        take(1),
+        filter((teacher: Teacher) => !!teacher),
+        switchMap((teacher: Teacher) => this._store.addTeacher$(teacher)))
+      .subscribe();
   }
 
   public onSignIn(): void {
-    this._authService.login(this.selectedTeacher);
+    this._store.getCurrentTeacher$(this.selectedTeacher.id)
+      .pipe(take(1))
+      .subscribe();
+    this._authService.login(this.selectedTeacher.id);
     this._router.navigate([AuthResourcesConstants.TEACHERS_PAGE]);
   }
 

@@ -1,6 +1,11 @@
-.tests-list {
-  width: 100%;
+.list {
+  &__container {
+    width: 100%;
+  }
   &__table {
     width: 100%;
   }
+}
+.search-field {
+  width: 100%;
 }

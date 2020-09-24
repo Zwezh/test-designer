@@ -4,7 +4,7 @@ import {
   Routes
 } from '@angular/router';
 
-import { LoginPageComponent, RegistrationPageComponent } from './pages';
+import { LoginPageComponent } from './pages';
 
 const routes: Routes = [
   {
@@ -12,11 +12,6 @@ const routes: Routes = [
     pathMatch: 'full',
     component: LoginPageComponent,
 
-  },
-  {
-    path: 'registration',
-    component: RegistrationPageComponent,
-    pathMatch: 'full'
   }
 ];
 

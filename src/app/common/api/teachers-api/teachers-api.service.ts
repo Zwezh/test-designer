@@ -14,6 +14,10 @@ export class TeachersApiService {
     return this.dbService.add(StoreNamesConstants.TEACHERS_STORE, teacher);
   }
 
+  updateTeacher$(teacher: Teacher): Observable<Array<Teacher>> {
+    return this.dbService.update(StoreNamesConstants.TEACHERS_STORE, teacher);
+  }
+
   getAllTeachers$(): Observable<Array<Teacher>> {
     return this.dbService.getAll(StoreNamesConstants.TEACHERS_STORE);
   }
