@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { SharedModule } from '@appSharedModule';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { CreateEditTeacherComponent } from './components';
 

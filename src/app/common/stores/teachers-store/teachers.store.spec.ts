@@ -1,65 +1,65 @@
 /* tslint:disable:no-unused-variable */
 
-import { TestBed, async, inject } from '@angular/core/testing';
+import { inject, TestBed } from '@angular/core/testing';
+import { Teacher, TeachersApiService } from '@appApi';
+import { of } from 'rxjs';
+
 import { TeachersStore } from './teachers.store';
 
 describe('Service: TeachersStore', () => {
+
+  let store: TeachersStore;
+  let apiService: TeachersApiService;
+
+  const expectedTeacherId = 13;
+  const expectedTeacher = {
+    id: expectedTeacherId
+  } as Teacher;
+  const expectedTeacherColection = [expectedTeacher];
+
+  const apiServiceStub = {
+    addTeacher$: () => of(expectedTeacherId),
+    getAllTeachers$: () => of(expectedTeacherColection),
+    updateTeacher$: () => of(expectedTeacherColection),
+    getTeacher$: () => of(expectedTeacher)
+  };
+
+
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [TeachersStore]
+      providers: [TeachersStore, { provide: TeachersApiService, useValue: apiServiceStub }]
+    });
+    store = TestBed.inject(TeachersStore);
+    apiService = TestBed.inject(TeachersApiService);
+  });
+
+  it('should be created', () => {
+    expect(store).toBeTruthy();
+  });
+
+  it('should be create new Teacher', () => {
+    store.addTeacher$(expectedTeacher).subscribe((id: number) => {
+      expect(id).toEqual(expectedTeacherId);
     });
   });
 
-  //GET FROM LOGIN SERVICE
+  it('should be update Teacher', () => {
+    const updatedTeacher = { ...expectedTeacher, name: 'Name' };
+    store.updateTeacher$(updatedTeacher).subscribe(() => {
+      const teacher = store.currentTeacher;
+      expect(teacher).toEqual(updatedTeacher);
+    });
+  });
 
-  it('should ...', inject([TeachersStore], (service: TeachersStore) => {
-    expect(service).toBeTruthy();
-  }));
+  it('should get teacher collection', () => {
+    store.getTeacherCollection$().subscribe((teacherCollection: Array<Teacher>) => {
+      expect(teacherCollection).toEqual(expectedTeacherColection);
+    });
+  });
+
+  it('should get current teacher', () => {
+    store.getCurrentTeacher$(expectedTeacherId).subscribe((teacher: Teacher) => {
+      expect(teacher).toEqual(expectedTeacher);
+    });
+  });
 });
-// import { TestBed } from '@angular/core/testing';
-// import { Teacher, TeachersApiService } from '@appApi';
-// import { of } from 'rxjs';
-
-// import { LoginService } from './login.service';
-
-// describe('Service: Login', () => {
-
-//   let service: LoginService;
-//   let apiService: TeachersApiService;
-
-//   const expectedTeacherId = 13;
-//   const expectedTeacher = {
-//     id: expectedTeacherId
-//   } as Teacher;
-//   const expectedTeacherColection = [expectedTeacher];
-
-//   const apiServiceStub = {
-//     addTeacher$: () => of(expectedTeacherId),
-//     getAllTeachers$: () => of(expectedTeacherColection)
-//   };
-
-//   beforeEach(() => {
-//     TestBed.configureTestingModule({
-//       providers: [LoginService, { provide: TeachersApiService, useValue: apiServiceStub }]
-//     });
-//     service = TestBed.inject(LoginService);
-//     apiService = TestBed.inject(TeachersApiService);
-//   });
-
-//   it('should be created', () => {
-//     expect(service).toBeTruthy();
-//   });
-
-//   it('should be create new Teacher', () => {
-//     service.addTeacher$(expectedTeacher).subscribe((id: number) => {
-//       expect(id).toEqual(expectedTeacherId);
-//     });
-//   });
-
-
-//   it('should get teacher collection', () => {
-//     service.getTeacherCollection$().subscribe((teacherCollection: Array<Teacher>) => {
-//       expect(teacherCollection).toEqual(expectedTeacherColection);
-//     });
-//   });
-// });

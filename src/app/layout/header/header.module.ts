@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { CreateEditTeacherModule } from '@appLayouts/create-edit-teacher';
 import { TeacherBarModule } from '@appLayouts/teacher-bar';
@@ -11,6 +12,7 @@ import { HeaderComponent } from './header.component';
     CommonModule,
     TranslateModule,
     MatToolbarModule,
+    MatDialogModule,
     TeacherBarModule,
     CreateEditTeacherModule,
   ],

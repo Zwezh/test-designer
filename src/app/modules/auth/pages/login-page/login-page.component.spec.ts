@@ -1,25 +1,40 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Teacher } from '@appApi';
+import { TeachersStore } from '@appStores';
 import { TranslateModule } from '@ngx-translate/core';
 import { of } from 'rxjs';
-
-import { LoginService } from '../../shared/services';
 
 import { LoginPageComponent } from './login-page.component';
 
 
 describe('LoginPageComponent', () => {
 
-  function setTimeoutPromise(milliseconds: number): Promise<void> {
-    return new Promise((resolve) => {
-      setTimeout(resolve, milliseconds);
-    });
-  }
-
   let component: LoginPageComponent;
   let fixture: ComponentFixture<LoginPageComponent>;
-  let loginService: LoginService;
+  let store: TeachersStore;
+
+  const MATERAIL = [
+    MatToolbarModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MatDividerModule,
+    MatSelectModule,
+    MatCardModule,
+    MatDialogModule
+  ];
 
   const expectedTeacher: Teacher = {
     id: null,
@@ -32,7 +47,7 @@ describe('LoginPageComponent', () => {
 
   const expectedTeacherColleciton: Array<Teacher> = [expectedTeacher];
 
-  const loginServiceStub = {
+  const storeStub = {
     teacherCollection$: of(expectedTeacherColleciton),
     getTeacherCollection$: () => of(expectedTeacherColleciton)
   };
@@ -42,13 +57,15 @@ describe('LoginPageComponent', () => {
       declarations: [LoginPageComponent],
       imports: [
         RouterTestingModule,
-        TranslateModule.forRoot()
+        TranslateModule.forRoot(),
+        NoopAnimationsModule,
+        MATERAIL
       ],
-      providers: [{ provide: LoginService, useValue: loginServiceStub }]
+      providers: [{ provide: TeachersStore, useValue: storeStub }]
     })
       .compileComponents();
 
-    loginService = TestBed.inject(LoginService);
+    store = TestBed.inject(TeachersStore);
   }));
 
   beforeEach(() => {

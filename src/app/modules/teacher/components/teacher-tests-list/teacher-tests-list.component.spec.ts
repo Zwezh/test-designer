@@ -1,7 +1,6 @@
-/* tslint:disable:no-unused-variable */
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { TranslateModule } from '@ngx-translate/core';
+import { TeacherTableColumnsConstants } from '../../shared/constants';
 
 import { TeacherTestsListComponent } from './teacher-tests-list.component';
 
@@ -9,11 +8,12 @@ describe('TeacherTestsListComponent', () => {
   let component: TeacherTestsListComponent;
   let fixture: ComponentFixture<TeacherTestsListComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ TeacherTestsListComponent ]
+      imports: [TranslateModule.forRoot()],
+      declarations: [TeacherTestsListComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -25,4 +25,9 @@ describe('TeacherTestsListComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('Correct column values', () => {
+    expect(component.displayedColumns.join()).toEqual(TeacherTableColumnsConstants.join());
+  });
+
 });

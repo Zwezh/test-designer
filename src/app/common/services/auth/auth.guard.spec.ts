@@ -36,7 +36,7 @@ describe('Service: AuthGuard', () => {
   });
 
   it('should allow the authenticated user to access app', () => {
-    spyOnProperty(authService, 'currentTeacher').and.returnValue(true);
+    spyOnProperty(authService, 'isLogged').and.returnValue(true);
     expect(guard.canActivate(routeStub, routeStateStub)).toEqual(true);
   });
 });

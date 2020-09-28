@@ -32,7 +32,6 @@ export class TeachersStore {
   }
 
   public addTeacher$(teacher: Teacher): Observable<number> {
-    console.info(teacher);
     return this._apiService.addTeacher$(teacher)
       .pipe(tap((id: number) => {
         const teacherCollection = this._teacherColleciton$.getValue() || [];

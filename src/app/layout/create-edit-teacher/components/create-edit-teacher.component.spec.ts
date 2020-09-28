@@ -1,35 +1,34 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TranslateModule } from '@ngx-translate/core';
-
-import { LoginService } from '../../shared/services';
-
-import { RegistrationPageComponent } from './registration-page.component';
+import { CreateEditTeacherComponent } from './create-edit-teacher.component';
 
 
-describe('RegistrationComponent', () => {
 
-  let component: RegistrationPageComponent;
-  let fixture: ComponentFixture<RegistrationPageComponent>;
-  let loginService: LoginService;
 
-  const loginServiceStub = {};
+describe('CreateEditTeacherComponent', () => {
+
+  let component: CreateEditTeacherComponent;
+  let fixture: ComponentFixture<CreateEditTeacherComponent>;
+
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [RegistrationPageComponent],
+      declarations: [CreateEditTeacherComponent],
       imports: [
-        RouterTestingModule,
+        MatDialogModule,
         TranslateModule.forRoot()
       ],
-      providers: [{ provide: LoginService, useValue: loginServiceStub }]
+      providers: [
+        { provide: MAT_DIALOG_DATA, useValue: {} },
+        { provide: MatDialogRef, useValue: {} }
+      ]
     })
       .compileComponents();
-    loginService = TestBed.inject(LoginService);
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RegistrationPageComponent);
+    fixture = TestBed.createComponent(CreateEditTeacherComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

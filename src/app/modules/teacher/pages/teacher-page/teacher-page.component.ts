@@ -8,11 +8,4 @@ import { Observable } from 'rxjs';
   styleUrls: ['./teacher-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TeacherPageComponent {
-
-  public teacher$: Observable<Teacher>;
-
-  constructor() {
-  }
-
-}
+export class TeacherPageComponent { }
