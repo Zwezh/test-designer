@@ -8,6 +8,7 @@ import {
 } from '@angular/animations';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+
 import { getCurrentTeacherAction } from './store/features';
 
 const routerTransition = trigger('routerTransition', [

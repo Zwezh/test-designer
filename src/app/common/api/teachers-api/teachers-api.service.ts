@@ -16,7 +16,7 @@ export class TeachersApiService {
 
   updateTeacher$(teacher: Teacher): Observable<Teacher> {
     return this.dbService
-      .update(StoreNamesConstants.TEACHERS_STORE, teacher, teacher.id)
+      .update(StoreNamesConstants.TEACHERS_STORE, teacher)
       .pipe(
         map((teacherCollection: Teacher[]) =>
           teacherCollection.find((t: Teacher) => t.id === teacher.id)

@@ -9,7 +9,7 @@ export const getTeacherCollectionAction = createAction(
 
 export const getTeacherCollectionSuccessAction = createAction(
   AuthActionTypes.GET_TEACHER_COLLECTION_SUCCESS,
-  props<{ teacherCollection: Array<Teacher> }>()
+  props<{ teacherCollection: Teacher[] }>()
 );
 
 export const getTeacherCollectionFailureAction = createAction(

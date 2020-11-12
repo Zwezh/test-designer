@@ -7,13 +7,14 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
 import { environment } from 'environments/environment';
+import { TeachersApiModule } from './common/api/teachers-api';
+import { GetCurrentTeacherEffect } from './store/features';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TeachersApiModule } from './common/api/teachers-api';
 import { HeaderModule } from './layout';
-import { GetCurrentTeacherEffect } from './store/features';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);

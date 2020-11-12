@@ -11,7 +11,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Teacher } from '@appApi';
-import { TeachersStore } from '@appStores';
 import { TranslateModule } from '@ngx-translate/core';
 import { of } from 'rxjs';
 
@@ -22,7 +21,7 @@ describe('LoginPageComponent', () => {
 
   let component: LoginPageComponent;
   let fixture: ComponentFixture<LoginPageComponent>;
-  let store: TeachersStore;
+  // let store: any;
 
   const MATERAIL = [
     MatToolbarModule,
@@ -45,7 +44,7 @@ describe('LoginPageComponent', () => {
     password: '1'
   };
 
-  const expectedTeacherColleciton: Array<Teacher> = [expectedTeacher];
+  const expectedTeacherColleciton: Teacher[] = [expectedTeacher];
 
   const storeStub = {
     teacherCollection$: of(expectedTeacherColleciton),
@@ -61,11 +60,11 @@ describe('LoginPageComponent', () => {
         NoopAnimationsModule,
         MATERAIL
       ],
-      providers: [{ provide: TeachersStore, useValue: storeStub }]
+      // providers: [{ provide: TeachersStore, useValue: storeStub }]
     })
       .compileComponents();
 
-    store = TestBed.inject(TeachersStore);
+    // store = TestBed.inject(TeachersStore);
   }));
 
   beforeEach(() => {
@@ -91,7 +90,7 @@ describe('LoginPageComponent', () => {
   });
 
   it('Teacher colleciton is loaded', () => {
-    component.teacherCollection$.subscribe((teacherCollection: Array<Teacher>) => {
+    component.teacherCollection$.subscribe((teacherCollection: Teacher[]) => {
       expect(teacherCollection).toEqual(expectedTeacherColleciton);
     });
   });

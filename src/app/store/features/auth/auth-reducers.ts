@@ -12,7 +12,9 @@ import {
   logoutAction,
   registerAction,
   registerFailueAction,
-  registerSuccessAction
+  registerSuccessAction,
+  updateCurrentTeacherAction,
+  updateCurrentTeacherSuccessAction
 } from './actions';
 import { AuthState } from './types';
 
@@ -126,6 +128,28 @@ const reducer = createReducer(
       ...state,
       isLoggedIn: false,
       currentTeacher: null
+    })
+  ),
+  on(
+    updateCurrentTeacherAction,
+    (state): AuthState => ({
+      ...state,
+      isLoading: true
+    })
+  ),
+  on(
+    updateCurrentTeacherSuccessAction,
+    (state, action): AuthState => ({
+      ...state,
+      isLoading: false,
+      currentTeacher: action.currentTeacher
+    })
+  ),
+  on(
+    updateCurrentTeacherSuccessAction,
+    (state): AuthState => ({
+      ...state,
+      isLoading: false
     })
   )
 );

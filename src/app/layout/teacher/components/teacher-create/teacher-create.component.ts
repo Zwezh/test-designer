@@ -1,7 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { registerAction, RegisterEffect } from '@appStore';
+import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
+import { registerSuccessAction } from 'app/store';
 import { take } from 'rxjs/operators';
 
 import { TeacherBase } from '../teacher-base/teacher-base';
@@ -15,19 +17,23 @@ import { TeacherBase } from '../teacher-base/teacher-base';
 export class TeacherCreateComponent extends TeacherBase implements OnInit {
   constructor(
     private store: Store,
-    private registerEffect: RegisterEffect,
+    private actions$: Actions,
     dialogRef: MatDialogRef<TeacherCreateComponent>
   ) {
     super(dialogRef);
   }
 
   public ngOnInit(): void {
-    this.registerEffect.register$.pipe(take(1)).subscribe(() => {
-      this.dialogRef.close();
-    });
+    this.initListeners();
   }
 
   protected onSave(): void {
     this.store.dispatch(registerAction({ teacher: this.form.teacherFromForm }));
+  }
+
+  private initListeners(): void {
+    this.actions$.pipe(ofType(registerSuccessAction), take(1)).subscribe(() => {
+      this.dialogRef.close();
+    });
   }
 }

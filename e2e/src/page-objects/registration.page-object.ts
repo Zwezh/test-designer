@@ -4,72 +4,72 @@ import { BasePageObject } from './base.page-object';
 
 export class RegistrationPageObject extends BasePageObject {
 
-  private _page: ElementFinder;
-  private _saveButton: ElementFinder;
-  private _cancelButton: ElementFinder;
-  private _position: ElementFinder;
-  private _name: ElementFinder;
-  private _lastName: ElementFinder;
-  private _patronymic: ElementFinder;
-  private _password: ElementFinder;
-  private _confirmPassword: ElementFinder;
+  private page: ElementFinder;
+  private saveButton: ElementFinder;
+  private cancelButton: ElementFinder;
+  private position: ElementFinder;
+  private name: ElementFinder;
+  private lastName: ElementFinder;
+  private patronymic: ElementFinder;
+  private password: ElementFinder;
+  private confirmPassword: ElementFinder;
 
 
   public get isEnabledSaveButton(): promise.Promise<boolean> {
-    return this._saveButton.isEnabled();
+    return this.saveButton.isEnabled();
   }
 
   public get isEnabledCancelButton(): promise.Promise<boolean> {
-    return this._cancelButton.isEnabled();
+    return this.cancelButton.isEnabled();
   }
 
   public get isPresentPage(): promise.Promise<boolean> {
-    return this._page.isPresent();
+    return this.page.isPresent();
   }
 
   public get isClickableSaveButton(): promise.Promise<void> {
-    return this.waitingForClickable(this._saveButton);
+    return this.waitingForClickable(this.saveButton);
   }
 
   constructor() {
     super('auth/registration', '.ts-registration-title');
-    this._page = element(by.css('.ts-registration-page'));
-    this._saveButton = element(by.css('.ts-save-button'));
-    this._cancelButton = element(by.css('.ts-cancel-button'));
-    this._position = element(by.css('.ts-position'));
-    this._name = element(by.css('.ts-name'));
-    this._lastName = element(by.css('.ts-last-name'));
-    this._patronymic = element(by.css('.ts-patronymic'));
-    this._password = element(by.css('.ts-password'));
-    this._confirmPassword = element(by.css('.ts-confirm-password'));
+    this.page = element(by.css('.ts-registration-page'));
+    this.saveButton = element(by.css('.ts-save-button'));
+    this.cancelButton = element(by.css('.ts-cancel-button'));
+    this.position = element(by.css('.ts-position'));
+    this.name = element(by.css('.ts-name'));
+    this.lastName = element(by.css('.ts-last-name'));
+    this.patronymic = element(by.css('.ts-patronymic'));
+    this.password = element(by.css('.ts-password'));
+    this.confirmPassword = element(by.css('.ts-confirm-password'));
   }
 
   public clickCancel(): Promise<void> {
-    return this._cancelButton.click() as Promise<void>;
+    return this.cancelButton.click() as Promise<void>;
   }
 
   public fillPosition(value: string): promise.Promise<void> {
-    return this._position.sendKeys(value);
+    return this.position.sendKeys(value);
   }
 
   public fillName(value: string): promise.Promise<void> {
-    return this._name.sendKeys(value);
+    return this.name.sendKeys(value);
   }
 
   public fillLastName(value: string): promise.Promise<void> {
-    return this._lastName.sendKeys(value);
+    return this.lastName.sendKeys(value);
   }
 
   public fillPatronymic(value: string): promise.Promise<void> {
-    return this._patronymic.sendKeys(value);
+    return this.patronymic.sendKeys(value);
   }
 
   public fillPassword(value: string): promise.Promise<void> {
-    return this._password.sendKeys(value);
+    return this.password.sendKeys(value);
   }
 
   public fillConfirmPassword(value: string): promise.Promise<void> {
-    return this._confirmPassword.sendKeys(value);
+    return this.confirmPassword.sendKeys(value);
   }
 
 }

@@ -1,14 +1,11 @@
-/* tslint:disable:no-unused-variable */
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
-
-import { TeacherBarComponent } from './teacher-bar.component';
-import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 import { Teacher } from '@appApi';
 import { TranslateModule } from '@ngx-translate/core';
+
+import { TeacherBarComponent } from './teacher-bar.component';
 
 describe('TeacherBarComponent', () => {
   let component: TeacherBarComponent;

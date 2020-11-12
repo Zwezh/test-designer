@@ -1,4 +1,4 @@
-import { inject, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { NgxIndexedDBService } from 'ngx-indexed-db';
 import { Observable, of } from 'rxjs';
 
@@ -6,7 +6,6 @@ import { Teacher } from './teachers-api.interface';
 import { TeachersApiService } from './teachers-api.service';
 
 describe('Service: TeacherApi', () => {
-
   let service: TeachersApiService;
   let dbService: NgxIndexedDBService;
 
@@ -29,17 +28,19 @@ describe('Service: TeacherApi', () => {
   const dbServiceStub = {
     getByID: (): Observable<Teacher> => of(expectedTeacher),
     add: (): Observable<number> => of(expectedId),
-    getAll: (): Observable<Array<Teacher>> => of(expectedTeacherCollection)
+    getAll: (): Observable<Teacher[]> => of(expectedTeacherCollection)
   };
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [TeachersApiService, { provide: NgxIndexedDBService, useValue: dbServiceStub }]
+      providers: [
+        TeachersApiService,
+        { provide: NgxIndexedDBService, useValue: dbServiceStub }
+      ]
     });
 
     service = TestBed.inject(TeachersApiService);
     dbService = TestBed.inject(NgxIndexedDBService);
-
   });
 
   it('should be created', () => {
@@ -60,7 +61,7 @@ describe('Service: TeacherApi', () => {
   });
 
   it('should get all teachers from IndexedDB', () => {
-    service.getAllTeachers$().subscribe((teacherCollection: Array<Teacher>) => {
+    service.getAllTeachers$().subscribe((teacherCollection: Teacher[]) => {
       expect(teacherCollection).toEqual(expectedTeacherCollection);
     });
   });

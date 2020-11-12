@@ -11,7 +11,7 @@ describe('Login page', () => {
 
   it('Title of page should be corrected', () => {
     page.navigateTo();
-    expect(page.titlePage).toEqual('Страница авторизации пользователя');
+    expect(page.title).toEqual('Страница авторизации пользователя');
   });
 
   it('Teacher selector should be enabled', () => {
