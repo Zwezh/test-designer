@@ -3,13 +3,16 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Teacher } from '@appApi';
 import { FADE_IN_CONTENT_BY_HEIGHT_OPACITY } from '@appConstants';
-import { CreateEditTeacherComponent } from '@appLayouts/create-edit-teacher';
-import { AuthenticationService } from '@appServices';
-import { TeachersStore } from '@appStores';
+import { TeacherCreateComponent } from '@appLayouts/teacher';
+import {
+  authIsLoadingSelector,
+  authTeacherCollectionSelector,
+  getTeacherCollectionAction,
+  loginAction
+} from '@appStore';
+import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { filter, switchMap, take } from 'rxjs/operators';
-
-import { AuthResourcesConstants } from '../../shared';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'td-login-page',
@@ -19,34 +22,35 @@ import { AuthResourcesConstants } from '../../shared';
   animations: [FADE_IN_CONTENT_BY_HEIGHT_OPACITY]
 })
 export class LoginPageComponent implements OnInit {
-
-  public teacherCollection$: Observable<Array<Teacher>>;
+  public teacherCollection$: Observable<Teacher[] | null>;
+  public isLoading$: Observable<boolean>;
   public selectedTeacher: Teacher;
   public password: string;
   public hide = true;
 
   public get isDisable(): boolean {
-    return !this.selectedTeacher || this.selectedTeacher?.password !== this.password;
+    return (
+      !this.selectedTeacher || this.selectedTeacher?.password !== this.password
+    );
   }
 
   public get isShowError(): boolean {
-    return this.selectedTeacher && this.selectedTeacher.password !== this.password;
+    return (
+      this.selectedTeacher && this.selectedTeacher.password !== this.password
+    );
   }
 
   constructor(
-    private _authService: AuthenticationService,
-    private _store: TeachersStore,
-    private _router: Router,
-    private _dialog: MatDialog) {
-    this.teacherCollection$ = _store.teacherCollection$;
+    private store: Store,
+    private dialog: MatDialog,
+    private router: Router
+  ) {
     this.selectedTeacher = null;
   }
 
   ngOnInit(): void {
-    this._store.getTeacherCollection$().pipe(take(1)).subscribe();
-    if (this._authService.isLogged) {
-      this._router.navigate([AuthResourcesConstants.TEACHERS_PAGE]);
-    }
+    this.initData();
+    this.initSelectors();
   }
 
   public trackByTeacher(index: number, teacher: Teacher): number {
@@ -54,23 +58,27 @@ export class LoginPageComponent implements OnInit {
   }
 
   public onOpenRegistrationPage(): void {
-    this._dialog.open(CreateEditTeacherComponent, {
-      width: '550px',
-      data: this._store.currentTeacher
-    }).afterClosed()
-      .pipe(
-        take(1),
-        filter((teacher: Teacher) => !!teacher),
-        switchMap((teacher: Teacher) => this._store.addTeacher$(teacher)))
+    this.dialog
+      .open(TeacherCreateComponent, {
+        width: '550px'
+      })
+      .afterClosed()
+      .pipe(take(1))
       .subscribe();
   }
 
   public onSignIn(): void {
-    this._store.getCurrentTeacher$(this.selectedTeacher.id)
-      .pipe(take(1))
-      .subscribe();
-    this._authService.login(this.selectedTeacher.id);
-    this._router.navigate([AuthResourcesConstants.TEACHERS_PAGE]);
+    this.store.dispatch(loginAction({ id: this.selectedTeacher.id }));
   }
 
+  private initSelectors(): void {
+    this.isLoading$ = this.store.pipe(select(authIsLoadingSelector));
+    this.teacherCollection$ = this.store.pipe(
+      select(authTeacherCollectionSelector)
+    );
+  }
+
+  private initData(): void {
+    this.store.dispatch(getTeacherCollectionAction());
+  }
 }

@@ -1,0 +1,14 @@
+<section class="ts-registration-pane teacher-dialog">
+  <mat-card>
+    <mat-card-title>
+      <mat-toolbar color="accent">
+        <mat-toolbar-row>
+          <h1 class="ts-registration-title"
+              title="{{ 'teachers.newTeacherTitle' | translate }}">{{ 'teachers.newTeacherTitle' | translate }}</h1>
+        </mat-toolbar-row>
+      </mat-toolbar>
+    </mat-card-title>
+    <td-teacher-edit-content [form]="form"
+                             (action)="onAction($event)"></td-teacher-edit-content>
+  </mat-card>
+</section>

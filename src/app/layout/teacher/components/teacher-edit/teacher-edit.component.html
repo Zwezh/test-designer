@@ -1,0 +1,14 @@
+<section class="ts-edit-page teacher-dialog">
+  <mat-card>
+    <mat-card-title>
+      <mat-toolbar color="accent">
+        <mat-toolbar-row>
+          <h1 class="ts-edit-title"
+              title="{{ 'teachers.editTeacherTitle' | translate }}">{{ 'teachers.editTeacherTitle' | translate }}</h1>
+        </mat-toolbar-row>
+      </mat-toolbar>
+    </mat-card-title>
+    <td-teacher-edit-content [form]="form"
+                             (action)="onAction($event)"></td-teacher-edit-content>
+  </mat-card>
+</section>

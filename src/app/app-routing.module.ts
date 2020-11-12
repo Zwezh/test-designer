@@ -10,11 +10,13 @@ const routes: Routes = [
   },
   {
     path: 'auth',
-    loadChildren: () => import('./modules/auth/auth.module').then((m) => m.AuthModule)
+    loadChildren: () =>
+      import('./modules/auth/auth.module').then((m) => m.AuthModule)
   },
   {
-    path: 'teacher',
-    loadChildren: () => import('./modules/teacher/teacher.module').then((m) => m.TeacherModule),
+    path: 'tests',
+    loadChildren: () =>
+      import('./modules/tests/tests.module').then((m) => m.TestsModule),
     canActivate: [AuthGuard]
   },
   {
@@ -27,4 +29,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

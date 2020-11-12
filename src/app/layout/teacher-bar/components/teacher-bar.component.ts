@@ -7,7 +7,6 @@ import { Teacher } from '@appApi';
   styleUrls: ['./teacher-bar.component.scss']
 })
 export class TeacherBarComponent {
-
   @Input() teacher: Teacher;
   @Output() signOut: EventEmitter<void>;
   @Output() editTeacher: EventEmitter<void>;
@@ -20,6 +19,7 @@ export class TeacherBarComponent {
     this.signOut = new EventEmitter<void>();
     this.editTeacher = new EventEmitter<void>();
   }
+
   public onSignOut(): void {
     this.signOut.emit();
   }

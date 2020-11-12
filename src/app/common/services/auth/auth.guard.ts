@@ -1,19 +1,30 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import {
+  ActivatedRouteSnapshot,
+  CanActivate,
+  Router,
+  RouterStateSnapshot
+} from '@angular/router';
+import { PersistanceKeys } from '@appConstants';
 
-import { AuthenticationService } from './authentication.service';
-
+import { PersistanceService } from '../persistance.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
   constructor(
     private router: Router,
-    private authenticationService: AuthenticationService
-  ) { }
+    private persistanceService: PersistanceService
+  ) {}
 
-  public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    if (!!this.authenticationService.isLogged) { return true; }
+  public canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): boolean {
+    if (!!this.persistanceService.get(PersistanceKeys.authKey)) {
+      return true;
+    }
     this.router.navigate(['auth/login']);
+    console.error(`Fix it`);
     return false;
   }
 }

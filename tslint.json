@@ -9,7 +9,7 @@
     },
     "array-type": [
       true,
-      "generic"
+      "array"
     ],
     "arrow-parens": true,
     "arrow-return-shorthand": true,
@@ -125,7 +125,6 @@
         "ban-keywords",
         "check-format",
         "require-const-for-all-caps",
-        "allow-leading-underscore",
         "allow-pascal-case"
       ]
     },

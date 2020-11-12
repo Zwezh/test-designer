@@ -3,7 +3,7 @@
   <mat-toolbar-row class="header__row">
     <h1 class="ts-title"
         title="{{ 'appTitle' | translate }}">{{ 'appTitle' | translate }}</h1>
-    <ng-container *ngIf="(currentTeacher$ | async)">
+    <ng-container *ngIf="(isLoggedIn$ | async)">
       <td-teacher-bar [teacher]="currentTeacher$ | async"
                        (signOut)="onSignOut()"
                        (editTeacher)="onEditTeacher()"></td-teacher-bar>

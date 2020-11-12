@@ -1,1 +1,0 @@
-export * from './teacher-tests-list/teacher-tests-list.component';

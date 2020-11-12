@@ -8,8 +8,18 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { TeacherModule } from '@appLayouts/teacher';
 import { SharedModule } from '@appSharedModule';
-
+import {
+  authReducers,
+  GetCurrentTeacherEffect,
+  GetTeacherCollectionEffect,
+  LoginEffect,
+  LogoutEffect,
+  RegisterEffect
+} from '@appStore';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
 
 import { AuthRoutingModule } from './auth-routing.module';
 import { LoginPageComponent } from './pages';
@@ -30,8 +40,17 @@ const MATERAIL = [
     CommonModule,
     SharedModule,
     AuthRoutingModule,
+    TeacherModule,
+    EffectsModule.forFeature([
+      GetTeacherCollectionEffect,
+      RegisterEffect,
+      LoginEffect,
+      LogoutEffect,
+      GetCurrentTeacherEffect
+    ]),
+    StoreModule.forFeature('auth', authReducers),
     ...MATERAIL
   ],
-  declarations: [LoginPageComponent],
+  declarations: [LoginPageComponent]
 })
-export class AuthModule { }
+export class AuthModule {}

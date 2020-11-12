@@ -2,11 +2,15 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Teacher } from '@appApi';
-import { CreateEditTeacherComponent } from '@appLayouts/create-edit-teacher';
-import { AuthenticationService } from '@appServices';
-import { TeachersStore } from '@appStores';
+import { TeacherEditComponent } from '@appLayouts/teacher';
+import {
+  authGetCurrentTeacherSelector,
+  authIsLoggedInSelector,
+  logoutAction
+} from '@appStore';
+import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { filter, switchMap, take } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'td-header',
@@ -15,40 +19,34 @@ import { filter, switchMap, take } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent implements OnInit {
-
   public currentTeacher$: Observable<Teacher>;
+  public isLoggedIn$: Observable<boolean>;
 
   constructor(
-    private _store: TeachersStore,
-    private _router: Router,
-    private _dialog: MatDialog,
-    private _authService: AuthenticationService) {
-    this.currentTeacher$ = _store.currentTeacher$;
-  }
-  ngOnInit(): void {
-    this._store.getCurrentTeacher$(this._authService.teacherId)
-      .pipe(take(1))
-      .subscribe();
+    private store: Store,
+    private router: Router,
+    private dialog: MatDialog
+  ) {}
+
+  public ngOnInit(): void {
+    this.initSelectors();
   }
 
   public onEditTeacher(): void {
-    const dialogRef = this._dialog.open(CreateEditTeacherComponent, {
-      width: '550px',
-      data: this._store.currentTeacher
+    const dialogRef = this.dialog.open(TeacherEditComponent, {
+      width: '550px'
     });
-
-    dialogRef.afterClosed()
-      .pipe(
-        take(1),
-        filter((teacher: Teacher) => !!teacher),
-        switchMap((teacher: Teacher) => this._store.updateTeacher$({ ...teacher, id: this._store.currentTeacher.id })))
-      .subscribe();
+    dialogRef.afterClosed().pipe(take(1)).subscribe();
   }
 
   public onSignOut(): void {
-    this._authService.logout();
-    this._store.currentTeacher = null;
-    this._router.navigateByUrl('');
+    this.store.dispatch(logoutAction());
   }
 
+  private initSelectors(): void {
+    this.currentTeacher$ = this.store.pipe(
+      select(authGetCurrentTeacherSelector)
+    );
+    this.isLoggedIn$ = this.store.pipe(select(authIsLoggedInSelector));
+  }
 }

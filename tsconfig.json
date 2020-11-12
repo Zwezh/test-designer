@@ -11,7 +11,8 @@
       "@appDBModule": ["app/db/db.module.ts"],
       "@appApi": ["app/common/api"],
       "@appServices": ["app/common/services"],
-      "@appStores": ["app/common/stores"]
+      "@appStores": ["app/common/stores"],
+      "@appStore": ["app/store"]
     },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
