@@ -4,7 +4,7 @@
     <h1 class="ts-title"
         title="{{ 'appTitle' | translate }}">{{ 'appTitle' | translate }}</h1>
     <ng-container *ngIf="(isLoggedIn$ | async)">
-      <td-teacher-bar [teacher]="currentTeacher$ | async"
+      <td-teacher-bar @fadeInContentByOpacityOneWay [teacher]="currentTeacher$ | async"
                        (signOut)="onSignOut()"
                        (editTeacher)="onEditTeacher()"></td-teacher-bar>
     </ng-container>

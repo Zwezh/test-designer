@@ -3,16 +3,16 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Teacher } from '@appApi';
-import { TeachersStore } from '@appStores';
+import { AuthState } from '@appStore';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { TranslateModule } from '@ngx-translate/core';
-import { of } from 'rxjs';
 
 import { HeaderComponent } from './header.component';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
   let fixture: ComponentFixture<HeaderComponent>;
-  let store: TeachersStore;
+  let store: MockStore;
 
   const expectedTeacher: Teacher = {
     id: null,
@@ -23,25 +23,29 @@ describe('HeaderComponent', () => {
     password: '1'
   };
 
-
-  const storeStub = {
-    getCurrentTeacher$: (id: number) => of(expectedTeacher)
+  const initialState: AuthState = {
+    isLoading: false,
+    currentTeacher: expectedTeacher,
+    teacherCollection: [],
+    isLoggedIn: true
   };
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [HeaderComponent],
-      imports: [
-        TranslateModule.forRoot(),
-        RouterTestingModule,
-        MatToolbarModule,
-        MatDialogModule
-      ],
-      providers: [{ provide: TeachersStore, useValue: storeStub }]
-    })
-      .compileComponents();
 
-    store = TestBed.inject(TeachersStore);
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [HeaderComponent],
+        imports: [
+          TranslateModule.forRoot(),
+          RouterTestingModule,
+          MatToolbarModule,
+          MatDialogModule
+        ],
+        providers: [provideMockStore({ initialState })]
+      }).compileComponents();
+
+      store = TestBed.inject(MockStore);
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(HeaderComponent);

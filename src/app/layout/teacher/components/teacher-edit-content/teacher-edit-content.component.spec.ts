@@ -23,4 +23,13 @@ describe('TeacherEditContentComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('Should isDisable be true', () => {
+    expect(component.isDisable).toBeTruthy();
+  });
+
+  it('Should input form', () => {
+    const form = component.form;
+    expect(form).toBeTruthy();
+  });
 });

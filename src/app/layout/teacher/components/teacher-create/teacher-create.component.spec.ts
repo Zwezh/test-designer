@@ -1,32 +1,57 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {
+  MatDialogModule,
+  MatDialogRef,
+  MAT_DIALOG_DATA
+} from '@angular/material/dialog';
+import { Teacher } from '@appApi';
+import { AuthState } from '@appStore';
+import { Actions } from '@ngrx/effects';
+import { provideMockActions } from '@ngrx/effects/testing';
+import { Action, Store, StoreModule } from '@ngrx/store';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { TranslateModule } from '@ngx-translate/core';
+import { Observable } from 'rxjs';
 
 import { TeacherCreateComponent } from './teacher-create.component';
 
-
-
-
-describe('CreateEditTeacherComponent', () => {
-
+describe('TeacherCreateComponent', () => {
   let component: TeacherCreateComponent;
   let fixture: ComponentFixture<TeacherCreateComponent>;
+  let store: MockStore;
+  let actions$ = new Observable<Action>();
+  const expectedTeacher: Teacher = {
+    id: null,
+    position: '',
+    name: '',
+    lastName: '',
+    patronymic: '',
+    password: '1'
+  };
 
+  const initialState: AuthState = {
+    isLoading: false,
+    currentTeacher: expectedTeacher,
+    teacherCollection: [],
+    isLoggedIn: true
+  };
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [TeacherCreateComponent],
-      imports: [
-        MatDialogModule,
-        TranslateModule.forRoot()
-      ],
-      providers: [
-        { provide: MAT_DIALOG_DATA, useValue: {} },
-        { provide: MatDialogRef, useValue: {} }
-      ]
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [TeacherCreateComponent],
+        imports: [StoreModule, MatDialogModule, TranslateModule.forRoot()],
+        providers: [
+          { provide: MAT_DIALOG_DATA, useValue: {} },
+          { provide: MatDialogRef, useValue: {} },
+          { provide: Actions, useValue: {} },
+          provideMockStore({ initialState }),
+          provideMockActions(() => actions$)
+        ]
+      }).compileComponents();
+      store = TestBed.inject(MockStore);
     })
-      .compileComponents();
-  }));
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TeacherCreateComponent);
@@ -41,9 +66,5 @@ describe('CreateEditTeacherComponent', () => {
   it('Should create form', () => {
     const form = component.form;
     expect(form).toBeTruthy();
-  });
-
-  it('Should isDisable be true', () => {
-    // expect(component.isDisable).toBeTruthy();
   });
 });

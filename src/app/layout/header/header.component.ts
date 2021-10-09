@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { Teacher } from '@appApi';
+import { FADE_IN_CONTENT_BY_OPACITY_ONE_WAY } from '@appConstants';
 import { TeacherEditComponent } from '@appLayouts/teacher';
 import {
   authGetCurrentTeacherSelector,
@@ -16,17 +16,14 @@ import { take } from 'rxjs/operators';
   selector: 'td-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
+  animations: [FADE_IN_CONTENT_BY_OPACITY_ONE_WAY],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent implements OnInit {
   public currentTeacher$: Observable<Teacher>;
   public isLoggedIn$: Observable<boolean>;
 
-  constructor(
-    private store: Store,
-    private router: Router,
-    private dialog: MatDialog
-  ) {}
+  constructor(private store: Store, private dialog: MatDialog) {}
 
   public ngOnInit(): void {
     this.initSelectors();

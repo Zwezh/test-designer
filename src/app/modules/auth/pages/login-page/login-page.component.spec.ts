@@ -11,17 +11,17 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Teacher } from '@appApi';
+import { AuthState } from '@appStore';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { of } from 'rxjs';
 
 import { LoginPageComponent } from './login-page.component';
 
-
 describe('LoginPageComponent', () => {
-
   let component: LoginPageComponent;
   let fixture: ComponentFixture<LoginPageComponent>;
-  // let store: any;
+  let store: MockStore;
 
   const MATERAIL = [
     MatToolbarModule,
@@ -44,28 +44,31 @@ describe('LoginPageComponent', () => {
     password: '1'
   };
 
+  const initialState: AuthState = {
+    isLoading: false,
+    currentTeacher: expectedTeacher,
+    teacherCollection: [],
+    isLoggedIn: true
+  };
+  
   const expectedTeacherColleciton: Teacher[] = [expectedTeacher];
 
-  const storeStub = {
-    teacherCollection$: of(expectedTeacherColleciton),
-    getTeacherCollection$: () => of(expectedTeacherColleciton)
-  };
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [LoginPageComponent],
+        imports: [
+          RouterTestingModule,
+          TranslateModule.forRoot(),
+          NoopAnimationsModule,
+          MATERAIL
+        ],
+        providers: [provideMockStore({ initialState })]
+      }).compileComponents();
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [LoginPageComponent],
-      imports: [
-        RouterTestingModule,
-        TranslateModule.forRoot(),
-        NoopAnimationsModule,
-        MATERAIL
-      ],
-      // providers: [{ provide: TeachersStore, useValue: storeStub }]
+      store = TestBed.inject(MockStore);
     })
-      .compileComponents();
-
-    // store = TestBed.inject(TeachersStore);
-  }));
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LoginPageComponent);
