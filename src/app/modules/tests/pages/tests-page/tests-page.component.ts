@@ -10,9 +10,10 @@ import {
   searchQuizAction
 } from '@appStore';
 import { select, Store } from '@ngrx/store';
+import { TranslateService } from '@ngx-translate/core';
 import { Observable, takeWhile } from 'rxjs';
-import { TestsAddDialogComponent } from '../../components/tests-add-dialog/tests-add-dialog.component';
-import { TestsActionEmmited, TestsActions } from '../../shared/tests-event.model';
+import { TestsAddDialogComponent } from '../../components';
+import { TestsActionEmmited, TestsActions } from '../../shared/models';
 
 @Component({
   selector: 'td-tests-page',
@@ -27,7 +28,11 @@ export class TestsPageComponent implements OnInit {
 
   private alive = true;
 
-  constructor(private store: Store, private dialog: MatDialog) { }
+
+  constructor(
+    private store: Store,
+    private dialog: MatDialog,
+    private translator: TranslateService) { }
 
   ngOnInit(): void {
     this.initData();
@@ -37,15 +42,36 @@ export class TestsPageComponent implements OnInit {
   public onAction({ action, data }: TestsActionEmmited): void {
     switch (action) {
       case TestsActions.SEARCH:
-        this.onSearch(data);
+        this.onSearch(data as string);
         break;
       case TestsActions.ADD:
         this.onAddTest();
+        break;
+      case TestsActions.EDIT:
+        this.onEditTest(data as Partial<Quiz>);
+        break;
     }
   }
 
   private onAddTest(): void {
-    const dialogRef = this.dialog.open(TestsAddDialogComponent);
+    const dialogRef = this.dialog.open(TestsAddDialogComponent, {
+      data: {
+        title: this.translator.instant('actionTests.add')
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (!result) return;
+      this.store.dispatch(addQuizAction({ quiz: result.quiz }));
+    });
+  }
+
+  private onEditTest(quiz: Partial<Quiz>): void {
+    const dialogRef = this.dialog.open(TestsAddDialogComponent, {
+      data: {
+        title: this.translator.instant('actionTests.edit'),
+        quiz
+      }
+    });
     dialogRef.afterClosed().subscribe(result => {
       if (!result) return;
       this.store.dispatch(addQuizAction({ quiz: result.quiz }));

@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
-import { TestsActionEmmited, TestsActions } from '../../shared/tests-event.model';
+import { TestsActionEmmited, TestsActions } from '../../shared/models';
 
 @Component({
   selector: 'td-tests-actions',

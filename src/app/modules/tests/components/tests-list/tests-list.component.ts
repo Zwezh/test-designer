@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Quiz } from '@appApi';
+import { TestsActionEmmited, TestsActions } from '../../shared/models';
 
 import { TestsTableColumnsConstants } from '../../shared/constants';
 
@@ -10,6 +11,9 @@ import { TestsTableColumnsConstants } from '../../shared/constants';
   styleUrls: ['./tests-list.component.scss']
 })
 export class TestsListComponent {
+
+  @Output() action: EventEmitter<TestsActionEmmited> = new EventEmitter<TestsActionEmmited>();
+
   public dataSource: MatTableDataSource<Quiz>;
 
   @Input() set collection(value: Quiz[]) {
@@ -22,5 +26,15 @@ export class TestsListComponent {
 
   constructor() {
     this.dataSource = new MatTableDataSource();
+  }
+
+  onEditQuiz(quiz: Quiz): void {
+    this.action.emit({
+      action: TestsActions.EDIT,
+      data: {
+        name: quiz.name,
+        discipline: quiz.discipline
+      }
+    })
   }
 }

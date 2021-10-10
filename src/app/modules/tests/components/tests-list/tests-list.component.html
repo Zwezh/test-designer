@@ -41,7 +41,7 @@
                 class="_actions"
                 *matCellDef="let element">
                 <button mat-icon-button
-                        disabled
+                (click)="onEditQuiz(element)"
                         color="primary"
                         title="{{'actions.edit' | translate}}">
                     <mat-icon>edit</mat-icon>

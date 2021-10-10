@@ -18,10 +18,10 @@ export class TestsAdd extends FormGroup {
     return quiz;
   }
 
-  constructor() {
+  constructor(quiz?: Partial<Quiz>) {
     super({
-      name: new FormControl('', Validators.required),
-      discipline: new FormControl('', Validators.required)
+      name: new FormControl(quiz?.name || '', Validators.required),
+      discipline: new FormControl(quiz?.discipline || '', Validators.required)
     });
   }
 }

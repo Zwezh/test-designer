@@ -1,21 +1,25 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, OnInit, ChangeDetectionStrategy, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TestsAdd } from '../../shared/forms';
+import { TestsDialogData } from '../../shared/models';
 
 @Component({
-  selector: 'td-tests-add-dialog',
   templateUrl: './tests-add-dialog.component.html',
   styleUrls: ['./tests-add-dialog.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TestsAddDialogComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<TestsAddDialogComponent>) { }
+  constructor(
+    public dialogRef: MatDialogRef<TestsAddDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: TestsDialogData
+  ) {
+  }
 
   public form: TestsAdd;
 
   public ngOnInit() {
-    this.form = new TestsAdd();
+    this.form = new TestsAdd(this.data.quiz);
   }
 
   public onSave(): void {
