@@ -13,6 +13,7 @@ describe('Service: TeacherApi', () => {
     id: 0,
     name: '',
     discipline: '',
+    createdDate: new Date(),
     modifiedDate: new Date(),
     teacherId: 0
   };

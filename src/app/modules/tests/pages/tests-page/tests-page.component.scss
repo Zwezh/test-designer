@@ -1,17 +1,3 @@
-.actions {
-  display: flex;
-  width: 40rem;
-  justify-content: space-around;
-  padding: 2rem;
-  margin: auto;
-
-  ._action {
-    padding: 4rem 1rem;
-    & _action {
-      margin-left: 1rem;
-    }
-  }
-}
-.test-list {
+.page-wrapper {
   padding: 1.5rem;
 }

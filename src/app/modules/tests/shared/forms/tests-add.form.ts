@@ -1,5 +1,5 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { QuizNew } from '@appStore';
+import { Quiz } from '@appApi';
 
 export class TestsAdd extends FormGroup {
   public get name(): FormControl {
@@ -10,7 +10,7 @@ export class TestsAdd extends FormGroup {
     return this.get('discipline') as FormControl;
   }
 
-  public get quizFromForm(): Partial<QuizNew> {
+  public get quizFromForm(): Partial<Quiz> {
     const quiz = {
       name: this.name.value,
       discipline: this.discipline.value

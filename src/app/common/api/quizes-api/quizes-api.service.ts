@@ -2,18 +2,20 @@ import { Injectable } from '@angular/core';
 import { StoreNamesConstants } from 'app/db';
 import { NgxIndexedDBService } from 'ngx-indexed-db';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { Quiz } from './quizes-api.interface';
 
 @Injectable()
 export class QuizesApiService {
-  constructor(private dbService: NgxIndexedDBService) {}
+  constructor(private dbService: NgxIndexedDBService) { }
 
-  addQuiz$(test: Partial<Quiz>, teacherId: number): Observable<number> {
+  addQuiz$(test: Partial<Quiz>, teacherId: number): Observable<Quiz> {
     return this.dbService.add(StoreNamesConstants.TESTS_STORE, {
       ...test,
       teacherId
-    });
+    }).pipe(
+      switchMap((id: number) => this.dbService.getByID(StoreNamesConstants.TESTS_STORE, id)),
+      map(res => res as Quiz));
   }
 
   updateQuiz$(test: Partial<Quiz>): Observable<Quiz> {

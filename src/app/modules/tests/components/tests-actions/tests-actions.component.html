@@ -1,0 +1,13 @@
+<button mat-flat-button
+        class="add-test"
+        (click)="onAddTest()"
+        color="primary">{{ 'actionTests.add' | translate }}</button>
+<mat-form-field appearance="fill"
+                class="search-field">
+  <mat-label>{{'actions.search' | translate}}</mat-label>
+  <input matInput
+         [value]="value"
+         (keyup)="onSearch($event)"
+         placeholder="{{'actions.search' | translate}}"
+         #input>
+</mat-form-field>

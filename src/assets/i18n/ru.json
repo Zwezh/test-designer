@@ -1,50 +1,52 @@
 {
-    "appTitle": "Конструктор тестов",
-    "teachers": {
-        "newTeacherTitle": "Добавить нового преподавателя",
-        "editTeacherTitle": "Редактировать преподавателя",
-        "signInTitle": "Страница авторизации пользователя",
-        "selectTeacher": "Выберите преподавателя",
-        "position": "Должность",
-        "name": "Имя",
-        "lastName": "Фамилия",
-        "patronymic": "Отчество",
-        "password": "Пароль",
-        "confirmPassword": "Подтвердите пароль",
-        "hidePassword": "Скрыть пароль"
-    },
-    "actionTests": {
-        "add": "Добавить новый тест",
-        "export": "Сохранить тест в файл"
-    },
-    "test": {
-        "name": "Название теста",
-        "discipline": "Дисциплина",
-        "countOfQuestions": "Количество вопросов",
-        "date": "Дата",
-        "noData": "Нет данных, соответствующих фильтру"
-    },
-    "question": {
-        "add" :"Добавить вопрос",
-        "exit" :"Сохранить и выйти",
-        "count": "Количество вопросов",
-        "weight": "Вес",
-        "description":"Описание",
-        "category": "Тип вопроса"
-    },
-    "errors": {
-        "required": "Данное поле является обязательным",
-        "notMathced": "Пароли не совпадают",
-        "passwordNotEqual": "Введен не верный пароль"
-    },
-    "actions": {
-        "search": "Поиск",
-        "cancel": "Отмена",
-        "save": "Сохранить",
-        "edit": "Редактировать",
-        "delete": "Удалить",
-        "help": "Помощь",
-        "signIn": "Войти",
-        "signOut": "Выйти"
-    }
+  "appTitle": "Конструктор тестов",
+  "teachers": {
+    "newTeacherTitle": "Добавить нового преподавателя",
+    "editTeacherTitle": "Редактировать преподавателя",
+    "signInTitle": "Страница авторизации пользователя",
+    "selectTeacher": "Выберите преподавателя",
+    "position": "Должность",
+    "name": "Имя",
+    "lastName": "Фамилия",
+    "patronymic": "Отчество",
+    "password": "Пароль",
+    "confirmPassword": "Подтвердите пароль",
+    "hidePassword": "Скрыть пароль"
+  },
+  "actionTests": {
+    "add": "Добавить новый тест",
+    "export": "Сохранить тест в файл"
+  },
+  "test": {
+    "name": "Название теста",
+    "discipline": "Дисциплина",
+    "countOfQuestions": "Количество вопросов",
+    "date": "Дата",
+    "createdDate": "Дата создания",
+    "modifiedDate": "Дата редактирования",
+    "noData": "Тесты отсутствуют"
+  },
+  "question": {
+    "add": "Добавить вопрос",
+    "exit": "Сохранить и выйти",
+    "count": "Количество вопросов",
+    "weight": "Вес",
+    "description": "Описание",
+    "category": "Тип вопроса"
+  },
+  "errors": {
+    "required": "Данное поле является обязательным",
+    "notMathced": "Пароли не совпадают",
+    "passwordNotEqual": "Введен не верный пароль"
+  },
+  "actions": {
+    "search": "Поиск",
+    "cancel": "Отмена",
+    "save": "Сохранить",
+    "edit": "Редактировать",
+    "delete": "Удалить",
+    "help": "Помощь",
+    "signIn": "Войти",
+    "signOut": "Выйти"
+  }
 }

@@ -5,18 +5,27 @@ import {
   addQuizSuccessAction,
   getQuizCollectionAction,
   getQuizCollectionFailureAction,
-  getQuizCollectionSuccessAction
+  getQuizCollectionSuccessAction,
+  searchQuizAction
 } from './actions';
 import { QuizState } from './types';
 
 const initalState: QuizState = {
   isLoading: false,
   currentQuiz: null,
+  search: null,
   quizCollection: null
 };
 
 const reducer = createReducer(
   initalState,
+  on(
+    searchQuizAction,
+    (state, action): QuizState => ({
+      ...state,
+      search: action.search
+    })
+  ),
   on(
     addQuizAction,
     (state): QuizState => ({
@@ -26,9 +35,10 @@ const reducer = createReducer(
   ),
   on(
     addQuizSuccessAction,
-    (state): QuizState => ({
+    (state, action): QuizState => ({
       ...state,
-      isLoading: false
+      isLoading: false,
+      quizCollection: [...state.quizCollection, action.newQuiz]
     })
   ),
   on(

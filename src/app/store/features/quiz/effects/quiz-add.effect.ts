@@ -19,7 +19,7 @@ export class QuizAddEffect {
     private quizesApi: QuizesApiService,
     private persistanceService: PersistanceService,
     private router: Router
-  ) {}
+  ) { }
 
   addQuiz$ = createEffect(() =>
     this.actions$.pipe(
@@ -27,11 +27,11 @@ export class QuizAddEffect {
       switchMap(({ quiz }) =>
         this.quizesApi
           .addQuiz$(
-            { ...quiz, modifiedDate: new Date() },
+            { ...quiz, createdDate: new Date(), modifiedDate: new Date() },
             +this.persistanceService.get(PersistanceKeys.authKey)
           )
           .pipe(
-            map(() => addQuizSuccessAction()),
+            map((newQuiz: Quiz) => addQuizSuccessAction({ newQuiz })),
             catchError(() => of(addQuizFailureAction()))
           )
       )

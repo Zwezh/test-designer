@@ -1,0 +1,36 @@
+<h1 mat-dialog-title>{{'actionTests.add' | translate}}</h1>
+<div mat-dialog-content>
+  <form [formGroup]="form"
+        class="test-form">
+    <mat-form-field appearance="outline"
+                    class="form-field">
+      <mat-label>{{ 'test.name' | translate }}</mat-label>
+      <input matInput
+             class="ts-test-name-field input-field"
+             formControlName="name"
+             placeholder="{{ 'test.name' | translate }}">
+      <mat-error *ngIf="form.name.hasError('required')">
+        {{'errors.required' | translate}}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline"
+                    class="form-field">
+      <mat-label>{{ 'test.discipline' | translate }}</mat-label>
+      <input matInput
+             class="ts-discipline-field input-field"
+             formControlName="discipline"
+             placeholder="{{ 'test.discipline' | translate }}">
+      <mat-error *ngIf="form.name.hasError('required')">
+        {{'errors.required' | translate}}
+      </mat-error>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions class="_right">
+  <button mat-button
+          (click)="onCancel()">{{'actions.cancel' | translate}}</button>
+  <button mat-raised-button
+          color="primary"
+          (click)="onSave()"
+          [disabled]="form.pristine || form.invalid">{{'actions.save' | translate}}</button>
+</div>
