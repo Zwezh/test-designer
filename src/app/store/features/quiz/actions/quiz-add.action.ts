@@ -6,6 +6,5 @@ export const addQuizAction = createAction(
   QuizActionTypes.ADD,
   props<{ quiz: Partial<Quiz> }>()
 );
-export const searchQuizAction = createAction(QuizActionTypes.SEARCH, props<{ search: string }>());
 export const addQuizSuccessAction = createAction(QuizActionTypes.ADD_SUCCESS, props<{ newQuiz: Quiz }>());
 export const addQuizFailureAction = createAction(QuizActionTypes.ADD_FAILURE);

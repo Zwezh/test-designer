@@ -7,13 +7,14 @@
       "@appConstants": ["app/common/constants"],
       "@appSharedModule": ["app/common/shared.module.ts"],
       "@appLayouts/*": ["app/layout/*"],
-      "@appComponents": ["app/common/components"],
       "@appPipes/*": ["app/common/pipes/*"],
       "@appDBModule": ["app/db/db.module.ts"],
       "@appApi": ["app/common/api"],
       "@appServices": ["app/common/services"],
       "@appStores": ["app/common/stores"],
-      "@appStore": ["app/store"]
+      "@appStore": ["app/store"],
+      "@appModules/*": ["app/modules/*"],
+      "@appUI/*": ["app/ui/*"]
     },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,

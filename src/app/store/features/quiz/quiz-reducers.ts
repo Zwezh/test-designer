@@ -3,10 +3,16 @@ import {
   addQuizAction,
   addQuizFailureAction,
   addQuizSuccessAction,
+  deleteQuizAction,
+  deleteQuizFailureAction,
+  deleteQuizSuccessAction,
   getQuizCollectionAction,
   getQuizCollectionFailureAction,
   getQuizCollectionSuccessAction,
-  searchQuizAction
+  searchQuizAction,
+  updateQuizAction,
+  updateQuizFailureAction,
+  updateQuizSuccessAction
 } from './actions';
 import { QuizState } from './types';
 
@@ -43,6 +49,50 @@ const reducer = createReducer(
   ),
   on(
     addQuizFailureAction,
+    (state): QuizState => ({
+      ...state,
+      isLoading: false
+    })
+  ),
+  on(
+    updateQuizAction,
+    (state): QuizState => ({
+      ...state,
+      isLoading: true
+    })
+  ),
+  on(
+    updateQuizSuccessAction,
+    (state, action): QuizState => ({
+      ...state,
+      isLoading: false,
+      quizCollection: action.quizCollection
+    })
+  ),
+  on(
+    updateQuizFailureAction,
+    (state): QuizState => ({
+      ...state,
+      isLoading: false
+    })
+  ),
+  on(
+    deleteQuizAction,
+    (state): QuizState => ({
+      ...state,
+      isLoading: true
+    })
+  ),
+  on(
+    deleteQuizSuccessAction,
+    (state, action): QuizState => ({
+      ...state,
+      isLoading: false,
+      quizCollection: action.quizCollection
+    })
+  ),
+  on(
+    deleteQuizFailureAction,
     (state): QuizState => ({
       ...state,
       isLoading: false

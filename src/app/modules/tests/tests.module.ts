@@ -13,25 +13,25 @@ import { SearchModule } from '@appPipes/search';
 import { SharedModule } from '@appSharedModule';
 import {
   QuizAddEffect,
+  QuizDeleteEffect,
   QuizGetCollectionEffect,
-  quizReducers
+  quizReducers,
+  QuizUpdateEffect
 } from '@appStore';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
+import { DialogModule } from '@appUI/dialog';
 import { QuestionsModule } from '../questions/questions.module';
 
-import { TestsListComponent } from './components';
-import { TestsActionsComponent } from './components/tests-actions/tests-actions.component';
-import { TestsAddDialogComponent } from './components/tests-add-dialog/tests-add-dialog.component';
+import { TestsActionsComponent, TestsListComponent } from './components';
 import { TestsAddPageComponent, TestsPageComponent } from './pages';
 import { TestsRoutingModule } from './tests-routing.module';
+import { QuizPropertiesEditorModule } from '@appModules/quiz-properties-editor';
 
 const MATERIAL = [
   MatButtonModule,
   MatTableModule,
-  MatCardModule,
   MatFormFieldModule,
-  MatInputModule,
   MatIconModule,
   MatToolbarModule,
   MatTooltipModule,
@@ -45,16 +45,18 @@ const MATERIAL = [
     TeachersApiModule,
     QuizesApiModule,
     QuestionsModule,
-    EffectsModule.forFeature([QuizAddEffect, QuizGetCollectionEffect]),
+    EffectsModule.forFeature([QuizAddEffect, QuizGetCollectionEffect, QuizUpdateEffect, QuizDeleteEffect]),
     StoreModule.forFeature('quiz', quizReducers),
     SearchModule,
+    DialogModule,
+    QuizPropertiesEditorModule,
     ...MATERIAL
   ],
   declarations: [
     TestsPageComponent,
     TestsListComponent,
     TestsAddPageComponent,
-    TestsActionsComponent,
-    TestsAddDialogComponent]
+    TestsActionsComponent
+  ]
 })
 export class TestsModule { }

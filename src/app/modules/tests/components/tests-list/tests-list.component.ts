@@ -1,14 +1,17 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Quiz } from '@appApi';
 import { TestsActionEmmited, TestsActions } from '../../shared/models';
 
 import { TestsTableColumnsConstants } from '../../shared/constants';
+import { FADE_IN_CONTENT_BY_OPACITY } from '@appConstants';
 
 @Component({
   selector: 'td-tests-list',
   templateUrl: './tests-list.component.html',
-  styleUrls: ['./tests-list.component.scss']
+  styleUrls: ['./tests-list.component.scss'],
+  animations: [FADE_IN_CONTENT_BY_OPACITY],
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class TestsListComponent {
 
@@ -28,13 +31,10 @@ export class TestsListComponent {
     this.dataSource = new MatTableDataSource();
   }
 
-  onEditQuiz(quiz: Quiz): void {
+  onDeleteQuiz(data: number): void {
     this.action.emit({
-      action: TestsActions.EDIT,
-      data: {
-        name: quiz.name,
-        discipline: quiz.discipline
-      }
+      action: TestsActions.DELETE,
+      data
     })
   }
 }

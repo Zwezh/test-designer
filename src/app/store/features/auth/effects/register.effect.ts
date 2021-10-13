@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { Teacher, TeachersApiService } from '@appApi';
 import { PersistanceKeys } from '@appConstants';
 import { PersistanceService } from '@appServices';
@@ -19,8 +18,7 @@ export class RegisterEffect {
     private actions$: Actions,
     private teacherApiService: TeachersApiService,
     private persistanceService: PersistanceService,
-    private router: Router
-  ) {}
+  ) { }
 
   register$ = createEffect(() =>
     this.actions$.pipe(
@@ -41,16 +39,5 @@ export class RegisterEffect {
         )
       )
     )
-  );
-
-  redirectAfterRegister$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(registerSuccessAction),
-        tap(() => {
-          this.router.navigateByUrl('tests');
-        })
-      ),
-    { dispatch: false }
   );
 }

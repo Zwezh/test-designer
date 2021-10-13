@@ -1,18 +1,20 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Quiz } from '@appApi';
+import { QuizPropertiesEditorComponent } from '@appModules/quiz-properties-editor';
 import {
   addQuizAction,
+  deleteQuizAction,
   getQuizCollectionAction,
   quizGetCollectionSelector,
   quizIsLoadingSelector,
   quizSearchSelector,
-  searchQuizAction
+  searchQuizAction,
 } from '@appStore';
+import { ConfirmationDialogComponent } from '@appUI/dialog';
 import { select, Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
-import { Observable, takeWhile } from 'rxjs';
-import { TestsAddDialogComponent } from '../../components';
+import { filter, Observable, take, takeWhile } from 'rxjs';
 import { TestsActionEmmited, TestsActions } from '../../shared/models';
 
 @Component({
@@ -45,37 +47,43 @@ export class TestsPageComponent implements OnInit {
         this.onSearch(data as string);
         break;
       case TestsActions.ADD:
-        this.onAddTest();
+        this.addTest();
         break;
-      case TestsActions.EDIT:
-        this.onEditTest(data as Partial<Quiz>);
+      case TestsActions.DELETE:
+        this.deleteTest(data as Quiz);
         break;
     }
   }
 
-  private onAddTest(): void {
-    const dialogRef = this.dialog.open(TestsAddDialogComponent, {
-      data: {
-        title: this.translator.instant('actionTests.add')
-      }
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      if (!result) return;
-      this.store.dispatch(addQuizAction({ quiz: result.quiz }));
-    });
+  private addTest(): void {
+    this.openCreateEditDialog(this.translator.instant('actionTests.add'))
+      .pipe(take(1)).subscribe(result => {
+        this.store.dispatch(addQuizAction({ quiz: result }));
+      });
   }
 
-  private onEditTest(quiz: Partial<Quiz>): void {
-    const dialogRef = this.dialog.open(TestsAddDialogComponent, {
-      data: {
-        title: this.translator.instant('actionTests.edit'),
-        quiz
-      }
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      if (!result) return;
-      this.store.dispatch(addQuizAction({ quiz: result.quiz }));
-    });
+  private deleteTest(quiz: Quiz): void {
+    console.info(quiz);
+    const title = this.translator.instant('actionTests.deleteTitle');
+    const message = this.translator.instant('actionTests.deleteMessage').replace('{1}', quiz.name);
+    this.dialog.open(ConfirmationDialogComponent, { data: { title, message, type: 'accent' } })
+      .afterClosed()
+      .pipe(
+        take(1),
+        filter((Boolean)))
+      .subscribe(() => {
+        this.store.dispatch(deleteQuizAction({ id: quiz.id }));
+      });
+  }
+
+  private openCreateEditDialog(title: string, quiz?: Quiz): Observable<Partial<Quiz>> {
+    console.info(quiz);
+    return this.dialog.open(QuizPropertiesEditorComponent, { data: { title, quiz } })
+      .afterClosed()
+      .pipe(
+        take(1),
+        filter((result) => !!result)
+      );
   }
 
   private onSearch(search: string) {

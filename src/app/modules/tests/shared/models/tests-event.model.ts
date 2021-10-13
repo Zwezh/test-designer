@@ -3,10 +3,10 @@ import { Quiz } from '@appApi';
 export enum TestsActions {
   SEARCH = 'SEARCH',
   ADD = 'ADD',
-  EDIT = 'EDIT'
+  DELETE = 'DELETE'
 }
 
 export class TestsActionEmmited {
   action: TestsActions;
-  data?: string | Partial<Quiz>;
+  data?: string | number | Quiz;
 }

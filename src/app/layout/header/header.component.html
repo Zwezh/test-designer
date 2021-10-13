@@ -4,9 +4,10 @@
     <h1 class="ts-title"
         title="{{ 'appTitle' | translate }}">{{ 'appTitle' | translate }}</h1>
     <ng-container *ngIf="(isLoggedIn$ | async)">
-      <td-teacher-bar @fadeInContentByOpacityOneWay [teacher]="currentTeacher$ | async"
-                       (signOut)="onSignOut()"
-                       (editTeacher)="onEditTeacher()"></td-teacher-bar>
+      <td-teacher-bar @fadeInContentByOpacityOneWay
+                      [teacher]="currentTeacher$ | async"
+                      (signOut)="onSignOut()"
+                      (editTeacher)="onEditTeacher()"></td-teacher-bar>
     </ng-container>
   </mat-toolbar-row>
 </mat-toolbar>

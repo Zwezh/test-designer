@@ -18,14 +18,14 @@ export class QuizesApiService {
       map(res => res as Quiz));
   }
 
-  updateQuiz$(test: Partial<Quiz>): Observable<Quiz> {
-    return this.dbService
-      .update(StoreNamesConstants.TESTS_STORE, test)
-      .pipe(
-        map((testCollection: Quiz[]) =>
-          testCollection.find((t: Quiz) => t.id === test.id)
-        )
-      );
+  updateQuiz$(quiz: Partial<Quiz>): Observable<Quiz[]> {
+    return this.dbService.update(StoreNamesConstants.TESTS_STORE, quiz)
+      .pipe(map((list: Quiz[]) => list));
+  }
+
+  deleteQuiz$(id: number): Observable<Quiz[]> {
+    return this.dbService.delete(StoreNamesConstants.TESTS_STORE, id)
+      .pipe(map((list: Quiz[]) => list));
   }
 
   getAllQuiz$(teacherId: number): Observable<Quiz[]> {

@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { Teacher } from '@appApi';
 
 @Component({
   selector: 'td-teacher-bar',
   templateUrl: './teacher-bar.component.html',
-  styleUrls: ['./teacher-bar.component.scss']
+  styleUrls: ['./teacher-bar.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TeacherBarComponent {
   @Input() teacher: Teacher;

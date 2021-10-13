@@ -1,6 +1,6 @@
 import { Quiz } from '@appApi';
 
-export interface TestsDialogData {
+export interface QuizPropertiesEditorData {
   title: string;
   quiz:Partial<Quiz>;
 }
