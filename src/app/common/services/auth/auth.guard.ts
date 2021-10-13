@@ -14,17 +14,13 @@ export class AuthGuard implements CanActivate {
   constructor(
     private router: Router,
     private persistanceService: PersistanceService
-  ) {}
+  ) { }
 
-  public canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): boolean {
+  public canActivate(): boolean {
     if (!!this.persistanceService.get(PersistanceKeys.authKey)) {
       return true;
     }
     this.router.navigate(['auth/login']);
-    console.error(`Fix it`);
     return false;
   }
 }

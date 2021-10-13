@@ -13,7 +13,7 @@
     "confirmPassword": "Подтвердите пароль",
     "hidePassword": "Скрыть пароль"
   },
-  "actionTests": {
+  "actionQuizes": {
     "add": "Добавить новый тест",
     "edit": "Редактировать тест",
     "export": "Сохранить тест в файл",

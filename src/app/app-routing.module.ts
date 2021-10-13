@@ -14,9 +14,9 @@ const routes: Routes = [
       import('./modules/auth/auth.module').then((m) => m.AuthModule)
   },
   {
-    path: 'tests',
+    path: 'quizes',
     loadChildren: () =>
-      import('./modules/tests/tests.module').then((m) => m.TestsModule),
+      import('./modules/quizes/quizes.module').then((m) => m.QuizesModule),
     canActivate: [AuthGuard]
   },
   {

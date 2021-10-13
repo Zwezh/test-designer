@@ -15,15 +15,14 @@ import { ConfirmationDialogComponent } from '@appUI/dialog';
 import { select, Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { filter, Observable, take, takeWhile } from 'rxjs';
-import { TestsActionEmmited, TestsActions } from '../../shared/models';
+import { QuizesEventEmmited, QuizesEvents } from '../../shared/models';
 
 @Component({
-  selector: 'td-tests-page',
-  templateUrl: './tests-page.component.html',
-  styleUrls: ['./tests-page.component.scss'],
+  templateUrl: './quizes-page.component.html',
+  styleUrls: ['./quizes-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TestsPageComponent implements OnInit {
+export class QuizesPageComponent implements OnInit {
   public quizCollection$: Observable<Quiz[] | null>;
   public isLoading$: Observable<boolean>;
   public search: string;
@@ -41,22 +40,22 @@ export class TestsPageComponent implements OnInit {
     this.initSelectors();
   }
 
-  public onAction({ action, data }: TestsActionEmmited): void {
+  public onAction({ action, data }: QuizesEventEmmited): void {
     switch (action) {
-      case TestsActions.SEARCH:
+      case QuizesEvents.SEARCH:
         this.onSearch(data as string);
         break;
-      case TestsActions.ADD:
+      case QuizesEvents.ADD:
         this.addTest();
         break;
-      case TestsActions.DELETE:
+      case QuizesEvents.DELETE:
         this.deleteTest(data as Quiz);
         break;
     }
   }
 
   private addTest(): void {
-    this.openCreateEditDialog(this.translator.instant('actionTests.add'))
+    this.openCreateEditDialog(this.translator.instant('actionQuizes.add'))
       .pipe(take(1)).subscribe(result => {
         this.store.dispatch(addQuizAction({ quiz: result }));
       });
@@ -64,8 +63,8 @@ export class TestsPageComponent implements OnInit {
 
   private deleteTest(quiz: Quiz): void {
     console.info(quiz);
-    const title = this.translator.instant('actionTests.deleteTitle');
-    const message = this.translator.instant('actionTests.deleteMessage').replace('{1}', quiz.name);
+    const title = this.translator.instant('actionQuizes.deleteTitle');
+    const message = this.translator.instant('actionQuizes.deleteMessage').replace('{1}', quiz.name);
     this.dialog.open(ConfirmationDialogComponent, { data: { title, message, type: 'accent' } })
       .afterClosed()
       .pipe(

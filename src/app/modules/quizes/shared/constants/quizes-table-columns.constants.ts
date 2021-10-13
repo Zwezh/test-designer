@@ -1,4 +1,4 @@
-export const TestsTableColumnsConstants: string[] = [
+export const QuizesTableColumnsConstants: string[] = [
   'name',
   'discipline',
   'createdDate',

@@ -16,8 +16,8 @@ export class DbApiConfigModel {
     ]
   };
 
-  private testsStore: ObjectStoreMeta = {
-    store: StoreNamesConstants.TESTS_STORE,
+  private quizesStore: ObjectStoreMeta = {
+    store: StoreNamesConstants.QUIZES_STORE,
     storeConfig: { keyPath: 'id', autoIncrement: true },
     storeSchema: [
       { name: 'name', keypath: 'name', options: { unique: false } },
@@ -93,7 +93,7 @@ export class DbApiConfigModel {
       version: 1,
       objectStoresMeta: [
         this.teachersStore,
-        this.testsStore,
+        this.quizesStore,
         this.topicsStore,
         this.questionsStore,
         this.fillAnswersStore,

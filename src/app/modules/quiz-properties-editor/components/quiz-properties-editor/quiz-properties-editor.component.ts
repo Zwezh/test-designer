@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { QuizPropertiesEditorForm } from '../../shared/forms/quiz-properties-editor.form';
+import { QuizPropertiesEditorForm } from '../../shared/forms';
 import { QuizPropertiesEditorData } from '../../shared/quiz-properties-editor.model';
 
 @Component({

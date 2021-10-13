@@ -1,8 +1,0 @@
-<div class="page-wrapper">
-  <td-tests-actions [value]="search"
-                    (action)="onAction($event)"></td-tests-actions>
-  <div class="test-list">
-    <td-tests-list [collection]="quizCollection$ | async | search: search"
-                   (action)="onAction($event)"></td-tests-list>
-  </div>
-</div>

@@ -1,1 +1,1 @@
-export * from './tests-add.form';
+export * from './quiz-properties-editor.form';

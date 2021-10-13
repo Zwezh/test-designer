@@ -1,12 +1,12 @@
 import { Quiz } from '@appApi';
 
-export enum TestsActions {
+export enum QuizesEvents {
   SEARCH = 'SEARCH',
   ADD = 'ADD',
   DELETE = 'DELETE'
 }
 
-export class TestsActionEmmited {
-  action: TestsActions;
+export class QuizesEventEmmited {
+  action: QuizesEvents;
   data?: string | number | Quiz;
 }

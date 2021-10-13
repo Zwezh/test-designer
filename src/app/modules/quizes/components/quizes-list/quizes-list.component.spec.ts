@@ -1,25 +1,25 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { TestsTableColumnsConstants } from '../../shared/constants';
+import { QuizesTableColumnsConstants } from '../../shared/constants';
 
-import { TestsListComponent } from './tests-list.component';
+import { QuizesListComponent } from './quizes-list.component';
 
-describe('TeacherTestsListComponent', () => {
-  let component: TestsListComponent;
-  let fixture: ComponentFixture<TestsListComponent>;
+describe('QuizesListComponent', () => {
+  let component: QuizesListComponent;
+  let fixture: ComponentFixture<QuizesListComponent>;
 
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
         imports: [TranslateModule.forRoot()],
-        declarations: [TestsListComponent]
+        declarations: [QuizesListComponent]
       }).compileComponents();
     })
   );
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TestsListComponent);
+    fixture = TestBed.createComponent(QuizesListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -30,7 +30,7 @@ describe('TeacherTestsListComponent', () => {
 
   it('Correct column values', () => {
     expect(component.displayedColumns.join()).toEqual(
-      TestsTableColumnsConstants.join()
+      QuizesTableColumnsConstants.join()
     );
   });
 });

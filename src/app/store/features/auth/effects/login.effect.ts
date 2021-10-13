@@ -37,7 +37,7 @@ export class LoginEffect {
     () =>
       this.actions$.pipe(
         ofType(loginSuccessAction),
-        tap(() => this.router.navigateByUrl('tests'))
+        tap(() => this.router.navigateByUrl('quizes'))
       ),
     { dispatch: false }
   );

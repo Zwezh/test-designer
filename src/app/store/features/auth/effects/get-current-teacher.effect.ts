@@ -18,7 +18,7 @@ export class GetCurrentTeacherEffect {
     private actions$: Actions,
     private authService: TeachersApiService,
     private persistanceService: PersistanceService
-  ) {}
+  ) { }
 
   getCurrentTeacher$ = createEffect(() =>
     this.actions$.pipe(
@@ -32,6 +32,9 @@ export class GetCurrentTeacherEffect {
         }
         return this.authService.getTeacher$(currentTeacherId).pipe(
           map((currentTeacher: Teacher) => {
+            if (!currentTeacher) {
+              throw Error('There are no users with current id')
+            }
             return getCurrentTeacherSuccessAction({ currentTeacher });
           }),
           catchError(() => of(getCurrentTeacherFailueAction()))

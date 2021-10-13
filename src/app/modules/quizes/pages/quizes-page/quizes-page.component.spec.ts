@@ -1,24 +1,24 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { TestsPageComponent } from './tests-page.component';
+import { QuizesPageComponent } from './quizes-page.component';
 
 
 
-describe('TestsPageComponent', () => {
-  let component: TestsPageComponent;
-  let fixture: ComponentFixture<TestsPageComponent>;
+describe('QuizesPageComponent', () => {
+  let component: QuizesPageComponent;
+  let fixture: ComponentFixture<QuizesPageComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [TranslateModule.forRoot()],
-      declarations: [TestsPageComponent]
+      declarations: [QuizesPageComponent]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TestsPageComponent);
+    fixture = TestBed.createComponent(QuizesPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
