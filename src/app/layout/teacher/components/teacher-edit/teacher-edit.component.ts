@@ -4,13 +4,12 @@ import { Teacher } from '@appApi';
 import {
   authGetCurrentTeacherSelector,
   updateCurrentTeacherAction,
-  UpdateCurrentTeacherEffect
 } from '@appStore';
 import { Actions, ofType } from '@ngrx/effects';
 import { select, Store } from '@ngrx/store';
 import { updateCurrentTeacherSuccessAction } from 'app/store';
 import { Subscription } from 'rxjs';
-import { take, takeUntil } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 
 import { TeacherBase } from '../teacher-base/teacher-base';
 

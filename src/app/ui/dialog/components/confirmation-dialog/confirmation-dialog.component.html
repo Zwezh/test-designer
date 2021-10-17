@@ -5,10 +5,12 @@
 <div mat-dialog-actions
      class="_right">
   <button mat-flat-button
+          class="ts-cancel-button"
           (click)="onCancel()">
     {{ 'actions.cancel' | translate }}
   </button>
   <button mat-raised-button
+          class="ts-confirm-button"
           [color]="data.type"
           (click)="onConfirm()">
     {{ 'actions.yes' | translate }}

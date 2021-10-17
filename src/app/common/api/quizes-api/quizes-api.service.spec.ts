@@ -4,11 +4,10 @@ import { Observable, of } from 'rxjs';
 import { Quiz } from './quizes-api.interface';
 import { QuizesApiService } from './quizes-api.service';
 
-describe('Service: TeacherApi', () => {
+describe('Service: QuizApi', () => {
   let service: QuizesApiService;
-  let dbService: NgxIndexedDBService;
 
-  const expectedId = 12;
+  const expectedId = 0;
   const expectedQuiz: Quiz = {
     id: 0,
     name: '',
@@ -18,7 +17,7 @@ describe('Service: TeacherApi', () => {
     teacherId: 0
   };
 
-  const expectedTeacherCollection = [
+  const expectedQuizCollection = [
     expectedQuiz,
     expectedQuiz,
     expectedQuiz
@@ -27,7 +26,9 @@ describe('Service: TeacherApi', () => {
   const dbServiceStub = {
     getByID: (): Observable<Quiz> => of(expectedQuiz),
     add: (): Observable<number> => of(expectedId),
-    getAll: (): Observable<Quiz[]> => of(expectedTeacherCollection)
+    getAllByIndex: (): Observable<Quiz[]> => of(expectedQuizCollection),
+    update: (): Observable<Quiz[]> => of(expectedQuizCollection),
+    delete: (): Observable<Quiz[]> => of(expectedQuizCollection)
   };
 
   beforeEach(() => {
@@ -37,31 +38,41 @@ describe('Service: TeacherApi', () => {
         { provide: NgxIndexedDBService, useValue: dbServiceStub }
       ]
     });
-
     service = TestBed.inject(QuizesApiService);
-    dbService = TestBed.inject(NgxIndexedDBService);
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
 
-  // it('should have GET teacher from IndexedDB', () => {
-  //   service.getTeacher$(0).subscribe((teacher: Teacher) => {
-  //     expect(teacher).toEqual(expectedQuiz);
-  //   });
-  // });
+  it('should have GET quiz from IndexedDB', () => {
+    service.getQuiz$(expectedQuiz.teacherId).subscribe((quiz: Quiz) => {
+      expect(quiz).toEqual(expectedQuiz);
+    });
+  });
 
-  // it('should add new teacher to IndexedDB', () => {
-  //   const teacher = { ...expectedQuiz, id: expectedId };
-  //   service.addTeacher$(teacher).subscribe((teacherId: number) => {
-  //     expect(teacherId).toEqual(expectedId);
-  //   });
-  // });
+  it('should add new quiz to IndexedDB', () => {
+    const quiz = { ...expectedQuiz, id: expectedId } as Quiz;
+    service.addQuiz$(quiz, expectedQuiz.teacherId).subscribe((quizId: Quiz) => {
+      expect(quizId.id).toEqual(expectedId);
+    });
+  });
 
-  // it('should get all teachers from IndexedDB', () => {
-  //   service.getAllTeachers$().subscribe((teacherCollection: Teacher[]) => {
-  //     expect(teacherCollection).toEqual(expectedTeacherCollection);
-  //   });
-  // });
+  it('should get all quizes from IndexedDB', () => {
+    service.getAllQuiz$(0).subscribe((quizCollection: Quiz[]) => {
+      expect(quizCollection).toEqual(expectedQuizCollection);
+    });
+  });
+
+  it('should update quiz from IndexedDB', () => {
+    service.updateQuiz$(expectedQuiz).subscribe((result: Quiz[]) => {
+      expect(result).toEqual(expectedQuizCollection);
+    });
+  });
+
+  it('should delete quiz from IndexedDB', () => {
+    service.deleteQuiz$(expectedQuiz.id).subscribe((quizCollection: Quiz[]) => {
+      expect(quizCollection).toEqual(expectedQuizCollection);
+    });
+  });
 });

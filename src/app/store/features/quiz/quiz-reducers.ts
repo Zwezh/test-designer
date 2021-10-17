@@ -18,7 +18,7 @@ import { QuizState } from './types';
 
 const initalState: QuizState = {
   isLoading: false,
-  currentQuiz: null,
+  // currentQuiz: null,
   search: null,
   quizCollection: null
 };
@@ -117,7 +117,8 @@ const reducer = createReducer(
     getQuizCollectionFailureAction,
     (state): QuizState => ({
       ...state,
-      isLoading: false
+      isLoading: false,
+      quizCollection: []
     })
   )
 );

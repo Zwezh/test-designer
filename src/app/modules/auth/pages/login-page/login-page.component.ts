@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { Teacher } from '@appApi';
 import { FADE_IN_CONTENT_BY_HEIGHT_OPACITY } from '@appConstants';
 import { TeacherCreateComponent } from '@appLayouts/teacher';
@@ -43,7 +42,6 @@ export class LoginPageComponent implements OnInit {
   constructor(
     private store: Store,
     private dialog: MatDialog,
-    private router: Router
   ) {
     this.selectedTeacher = null;
   }
@@ -68,7 +66,7 @@ export class LoginPageComponent implements OnInit {
   }
 
   public onSignIn(): void {
-    this.store.dispatch(loginAction({ id: this.selectedTeacher.id }));
+    this.store.dispatch(loginAction({ id: this.selectedTeacher?.id }));
   }
 
   private initSelectors(): void {

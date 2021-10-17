@@ -1,12 +1,12 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { StoreModule } from '@ngrx/store';
-import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { provideMockStore } from '@ngrx/store/testing';
 
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
-  let store: MockStore;
 
   const initialState = {};
   beforeEach(
@@ -14,9 +14,9 @@ describe('AppComponent', () => {
       TestBed.configureTestingModule({
         imports: [RouterTestingModule, StoreModule],
         declarations: [AppComponent],
-        providers: [provideMockStore({ initialState })]
+        providers: [provideMockStore({ initialState })],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA]
       }).compileComponents();
-      store = TestBed.inject(MockStore);
     })
   );
 

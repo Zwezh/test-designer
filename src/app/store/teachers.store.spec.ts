@@ -4,11 +4,8 @@
 // import { Teacher, TeachersApiService } from '@appApi';
 // import { of } from 'rxjs';
 
-// import { TeachersStore } from './teachers.store';
-
 // describe('Service: TeachersStore', () => {
 
-//   let store: TeachersStore;
 //   let apiService: TeachersApiService;
 
 //   const expectedTeacherId = 13;

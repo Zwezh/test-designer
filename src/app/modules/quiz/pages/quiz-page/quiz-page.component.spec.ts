@@ -3,21 +3,21 @@
 // import { By } from '@angular/platform-browser';
 // import { DebugElement } from '@angular/core';
 
-// import { QuestionsListComponent } from './questions-list.component';
+// import { QuizPageComponent } from './quiz-page.component';
 
-// describe('QuestionsListComponent', () => {
-//   let component: QuestionsListComponent;
-//   let fixture: ComponentFixture<QuestionsListComponent>;
+// describe('QuizPageComponent', () => {
+//   let component: QuizPageComponent;
+//   let fixture: ComponentFixture<QuizPageComponent>;
 
 //   beforeEach(async(() => {
 //     TestBed.configureTestingModule({
-//       declarations: [ QuestionsListComponent ]
+//       declarations: [ QuizPageComponent ]
 //     })
 //     .compileComponents();
 //   }));
 
 //   beforeEach(() => {
-//     fixture = TestBed.createComponent(QuestionsListComponent);
+//     fixture = TestBed.createComponent(QuizPageComponent);
 //     component = fixture.componentInstance;
 //     fixture.detectChanges();
 //   });

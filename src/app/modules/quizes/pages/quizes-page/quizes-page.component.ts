@@ -55,8 +55,12 @@ export class QuizesPageComponent implements OnInit {
   }
 
   private addTest(): void {
-    this.openCreateEditDialog(this.translator.instant('actionQuizes.add'))
-      .pipe(take(1)).subscribe(result => {
+    const title = this.translator.instant('actionQuizes.add');
+    this.dialog.open(QuizPropertiesEditorComponent, { data: { title } }).afterClosed()
+      .pipe(
+        take(1),
+        filter((result) => !!result)
+      ).subscribe(result => {
         this.store.dispatch(addQuizAction({ quiz: result }));
       });
   }
@@ -73,16 +77,6 @@ export class QuizesPageComponent implements OnInit {
       .subscribe(() => {
         this.store.dispatch(deleteQuizAction({ id: quiz.id }));
       });
-  }
-
-  private openCreateEditDialog(title: string, quiz?: Quiz): Observable<Partial<Quiz>> {
-    console.info(quiz);
-    return this.dialog.open(QuizPropertiesEditorComponent, { data: { title, quiz } })
-      .afterClosed()
-      .pipe(
-        take(1),
-        filter((result) => !!result)
-      );
   }
 
   private onSearch(search: string) {

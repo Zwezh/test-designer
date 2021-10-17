@@ -14,8 +14,7 @@ export class QuizesActionsComponent {
 
   constructor() { }
 
-  onSearch(event: Event) {
-    const data = (event.target as HTMLInputElement).value;
+  onSearch(data: string) {
     this.action.emit({ action: QuizesEvents.SEARCH, data })
   }
 

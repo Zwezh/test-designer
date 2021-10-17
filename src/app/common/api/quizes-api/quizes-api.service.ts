@@ -9,9 +9,9 @@ import { Quiz } from './quizes-api.interface';
 export class QuizesApiService {
   constructor(private dbService: NgxIndexedDBService) { }
 
-  addQuiz$(test: Partial<Quiz>, teacherId: number): Observable<Quiz> {
+  addQuiz$(quiz: Partial<Quiz>, teacherId: number): Observable<Quiz> {
     return this.dbService.add(StoreNamesConstants.QUIZES_STORE, {
-      ...test,
+      ...quiz,
       teacherId
     }).pipe(
       switchMap((id: number) => this.dbService.getByID(StoreNamesConstants.QUIZES_STORE, id)),

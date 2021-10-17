@@ -7,7 +7,7 @@
   <mat-label>{{'actions.search' | translate}}</mat-label>
   <input matInput
          [value]="value"
-         (keyup)="onSearch($event)"
+         (keyup)="onSearch($event.target.value)"
          placeholder="{{'actions.search' | translate}}"
          #input>
 </mat-form-field>

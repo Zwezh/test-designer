@@ -1,19 +1,23 @@
-/* tslint:disable:no-unused-variable */
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { QuizesEvents } from '@appModules/quizes/shared/models';
+import { SearchModule } from '@appPipes/search';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { QuizesActionsComponent } from './quizes-actions.component';
 
 describe('QuizesActionsComponent', () => {
   let component: QuizesActionsComponent;
   let fixture: ComponentFixture<QuizesActionsComponent>;
-
-  beforeEach(async(() => {
+  const expectedSEarchValue = 'Test search';
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ QuizesActionsComponent ]
+      imports: [TranslateModule.forRoot(), NoopAnimationsModule, SearchModule],
+      declarations: [QuizesActionsComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -24,5 +28,19 @@ describe('QuizesActionsComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('onSearch should emit action', () => {
+    spyOn(component.action, 'emit');
+    component.onSearch(expectedSEarchValue);
+    fixture.detectChanges();
+    expect(component.action.emit).toHaveBeenCalledWith({ action: QuizesEvents.SEARCH, data: expectedSEarchValue });
+  });
+
+  it('onAddTest should emit action', () => {
+    spyOn(component.action, 'emit');
+    component.onAddTest()
+    fixture.detectChanges();
+    expect(component.action.emit).toHaveBeenCalledWith({ action: QuizesEvents.ADD });
   });
 });

@@ -7,7 +7,6 @@ import { TeachersApiService } from './teachers-api.service';
 
 describe('Service: TeacherApi', () => {
   let service: TeachersApiService;
-  let dbService: NgxIndexedDBService;
 
   const expectedId = 12;
   const expectedTeacher: Teacher = {
@@ -40,7 +39,6 @@ describe('Service: TeacherApi', () => {
     });
 
     service = TestBed.inject(TeachersApiService);
-    dbService = TestBed.inject(NgxIndexedDBService);
   });
 
   it('should be created', () => {

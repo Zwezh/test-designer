@@ -19,7 +19,6 @@ export class QuizPropertiesEditorComponent implements OnInit {
   public form: QuizPropertiesEditorForm;
 
   public ngOnInit() {
-    console.info(this.data);
     this.form = new QuizPropertiesEditorForm(this.data.quiz);
   }
 
