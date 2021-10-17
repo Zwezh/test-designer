@@ -1,5 +1,6 @@
-import { createAction, props } from '@ngrx/store';
 import { Quiz } from '@appApi';
+import { createAction, props } from '@ngrx/store';
+
 import { QuizActionTypes } from '../types';
 
 export const getQuizCollectionAction = createAction(

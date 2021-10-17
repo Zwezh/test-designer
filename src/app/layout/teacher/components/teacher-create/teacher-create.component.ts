@@ -23,7 +23,7 @@ export class TeacherCreateComponent extends TeacherBase implements OnInit {
     super(dialogRef);
   }
 
-  public ngOnInit(): void {
+  ngOnInit(): void {
     this.initListeners();
   }
 

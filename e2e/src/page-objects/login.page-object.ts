@@ -4,30 +4,29 @@ import { BasePageObject } from './base.page-object';
 
 export class LoginPageObject extends BasePageObject {
 
-
   private registrationButton: ElementFinder;
   private password: ElementFinder;
   private teacherSelector: ElementFinder;
   private helpButton: ElementFinder;
   private loginButton: ElementFinder;
 
-  public get isEnabledRegistrationButton(): promise.Promise<boolean> {
+  get isEnabledRegistrationButton(): promise.Promise<boolean> {
     return this.registrationButton.isEnabled();
   }
 
-  public get isEnabledHelpButton(): promise.Promise<boolean> {
+  get isEnabledHelpButton(): promise.Promise<boolean> {
     return this.helpButton.isEnabled();
   }
 
-  public get isEnabledLoginButton(): promise.Promise<boolean> {
+  get isEnabledLoginButton(): promise.Promise<boolean> {
     return this.loginButton.isEnabled();
   }
 
-  public get isEnabledSelect(): promise.Promise<boolean> {
+  get isEnabledSelect(): promise.Promise<boolean> {
     return this.helpButton.isEnabled();
   }
 
-  public get isEnabledPasswordField(): promise.Promise<boolean> {
+  get isEnabledPasswordField(): promise.Promise<boolean> {
     return this.password.isEnabled();
   }
 

@@ -1,10 +1,16 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output
+} from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Quiz } from '@appApi';
-import { QuizesEventEmmited, QuizesEvents } from '../../shared/models';
+import { FADE_IN_CONTENT_BY_OPACITY } from '@appConstants';
 
 import { QuizesTableColumnsConstants } from '../../shared/constants';
-import { FADE_IN_CONTENT_BY_OPACITY } from '@appConstants';
+import { QuizesEventEmmited, QuizesEvents } from '../../shared/models';
 
 @Component({
   selector: 'td-quizes-list',
@@ -14,16 +20,16 @@ import { FADE_IN_CONTENT_BY_OPACITY } from '@appConstants';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class QuizesListComponent {
+  @Output() action: EventEmitter<QuizesEventEmmited> =
+    new EventEmitter<QuizesEventEmmited>();
 
-  @Output() action: EventEmitter<QuizesEventEmmited> = new EventEmitter<QuizesEventEmmited>();
-
-  public dataSource: MatTableDataSource<Quiz>;
+  dataSource: MatTableDataSource<Quiz>;
 
   @Input() set collection(value: Quiz[]) {
     this.dataSource.data = value && [...value];
   }
 
-  public get displayedColumns(): string[] {
+  get displayedColumns(): string[] {
     return QuizesTableColumnsConstants;
   }
 
@@ -35,6 +41,6 @@ export class QuizesListComponent {
     this.action.emit({
       action: QuizesEvents.DELETE,
       data
-    })
+    });
   }
 }

@@ -13,15 +13,15 @@ import { Store } from '@ngrx/store';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class QuizPageComponent implements OnInit {
-  // public form: TestsAdd;
+  // form: TestsAdd;
 
   constructor(private store: Store) { }
 
-  public ngOnInit() {
+  ngOnInit() {
     // this.form = new TestsAdd();
   }
 
-  public onSave(): void {
+  onSave(): void {
     // this.store.dispatch(addQuizAction({ quiz: this.form.quizFromForm }));
   }
 }

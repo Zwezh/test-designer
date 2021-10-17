@@ -8,9 +8,10 @@ describe('Main page', () => {
     page = new AppPage();
   });
 
-  it('should display correct header title', () => {
+  it('should display correct header title', async () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('Конструктор тестов');
+    const title = await page.getTitleText();
+    expect(title).toEqual('Конструктор тестов');
   });
 
   afterEach(async () => {

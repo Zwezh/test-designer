@@ -1,5 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { AppState } from 'app/store/types';
+
 import { QuizState } from './types';
 
 const featureSelector = createFeatureSelector<AppState, QuizState>('quiz');

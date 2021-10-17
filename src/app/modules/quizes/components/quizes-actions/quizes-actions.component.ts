@@ -1,4 +1,11 @@
-import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output
+} from '@angular/core';
+
 import { QuizesEventEmmited, QuizesEvents } from '../../shared/models';
 
 @Component({
@@ -8,17 +15,17 @@ import { QuizesEventEmmited, QuizesEvents } from '../../shared/models';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class QuizesActionsComponent {
-
   @Input() value: string;
-  @Output() action: EventEmitter<QuizesEventEmmited> = new EventEmitter<QuizesEventEmmited>();
+  @Output() action: EventEmitter<QuizesEventEmmited> =
+    new EventEmitter<QuizesEventEmmited>();
 
-  constructor() { }
+  constructor() {}
 
-  onSearch(data: string) {
-    this.action.emit({ action: QuizesEvents.SEARCH, data })
+  onSearch(data: string): void {
+    this.action.emit({ action: QuizesEvents.SEARCH, data });
   }
 
   onAddTest(): void {
-    this.action.emit({ action: QuizesEvents.ADD })
+    this.action.emit({ action: QuizesEvents.ADD });
   }
 }

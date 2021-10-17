@@ -9,7 +9,13 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Teacher } from '@appApi';
 import { TeacherModule } from '@appLayouts/teacher';
 import { TeacherBarModule } from '@appLayouts/teacher-bar';
-import { AppState, authGetCurrentTeacherSelector, authIsLoggedInSelector, AuthState, logoutAction } from '@appStore';
+import {
+  AppState,
+  authGetCurrentTeacherSelector,
+  authIsLoggedInSelector,
+  AuthState,
+  logoutAction
+} from '@appStore';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
@@ -19,12 +25,12 @@ import { of } from 'rxjs';
 import { HeaderComponent } from './header.component';
 
 class MatDialogMock {
-  open() {
+  open(): any {
     return {
       afterClosed: () => of()
     };
   }
-};
+}
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -65,17 +71,27 @@ describe('HeaderComponent', () => {
           NoopAnimationsModule,
           TeacherModule,
           StoreModule.forRoot({}),
-          EffectsModule.forRoot([]),
+          EffectsModule.forRoot([])
         ],
         schemas: [CUSTOM_ELEMENTS_SCHEMA],
-        providers: [provideMockStore({ initialState }), {
-          provide: MatDialog, useClass: MatDialogMock,
-        }]
+        providers: [
+          provideMockStore({ initialState }),
+          {
+            provide: MatDialog,
+            useClass: MatDialogMock
+          }
+        ]
       }).compileComponents();
 
       store = TestBed.inject(MockStore);
-      mockCurrentTeacherSelector = store.overrideSelector(authGetCurrentTeacherSelector, { ...expectedTeacher });
-      mockIsLoggedInSelector = store.overrideSelector(authIsLoggedInSelector, true);
+      mockCurrentTeacherSelector = store.overrideSelector(
+        authGetCurrentTeacherSelector,
+        { ...expectedTeacher }
+      );
+      mockIsLoggedInSelector = store.overrideSelector(
+        authIsLoggedInSelector,
+        true
+      );
     })
   );
 
@@ -84,7 +100,7 @@ describe('HeaderComponent', () => {
     component = fixture.componentInstance;
     dialog = TestBed.inject(MatDialog);
     fixture.detectChanges();
-    spyOn(store, 'dispatch').and.callFake(() => { });
+    spyOn(store, 'dispatch').and.callFake(() => {});
   });
 
   it('Component should create', () => {
@@ -99,9 +115,7 @@ describe('HeaderComponent', () => {
 
   it('sign out method should dispatch logout action', () => {
     component.onSignOut();
-    expect(store.dispatch).toHaveBeenCalledWith(
-      logoutAction()
-    );
+    expect(store.dispatch).toHaveBeenCalledWith(logoutAction());
   });
 
   it('should open teacher edit dialog', () => {
@@ -110,5 +124,4 @@ describe('HeaderComponent', () => {
     fixture.detectChanges();
     expect(dialog.open).toHaveBeenCalled();
   });
-
 });

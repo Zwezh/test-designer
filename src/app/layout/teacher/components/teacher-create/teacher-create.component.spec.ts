@@ -20,7 +20,7 @@ describe('TeacherCreateComponent', () => {
   let component: TeacherCreateComponent;
   let fixture: ComponentFixture<TeacherCreateComponent>;
   let store: MockStore;
-  let actions$ = new Observable<Action>();
+  const actions$ = new Observable<Action>();
   const expectedTeacher: Teacher = {
     id: null,
     position: '',
@@ -70,7 +70,6 @@ describe('TeacherCreateComponent', () => {
     expect(form).toBeTruthy();
   });
 
-  
   it('should be shown title', () => {
     const nativeElement = fixture.nativeElement;
     const title = nativeElement.querySelector('.ts-registration-title');

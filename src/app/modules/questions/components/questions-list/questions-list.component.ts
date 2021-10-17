@@ -1,5 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy,  Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+
 import { QuestionsTableColumnsConstants } from '../../shared';
 
 export interface Question {
@@ -38,17 +39,17 @@ const ELEMENT_DATA: Question[] = [
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class QuestionsListComponent {
-  public dataSource: MatTableDataSource<Question>;
-  
-  public get displayedColumns(): string[] {
+  dataSource: MatTableDataSource<Question>;
+
+  get displayedColumns(): string[] {
     return QuestionsTableColumnsConstants;
   }
-  
+
   constructor() {
     this.dataSource = new MatTableDataSource(ELEMENT_DATA);
   }
 
-  public onFilter(event: Event): void {
+  onFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }

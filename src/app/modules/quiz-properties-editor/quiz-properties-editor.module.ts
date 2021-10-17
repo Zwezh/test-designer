@@ -4,6 +4,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { SharedModule } from '@appSharedModule';
+
 import { QuizPropertiesEditorComponent } from './components';
 
 const MATERIAL = [
@@ -14,11 +15,8 @@ const MATERIAL = [
 ];
 
 @NgModule({
-  imports: [
-    SharedModule,
-    ...MATERIAL
-  ],
+  imports: [SharedModule, ...MATERIAL],
   declarations: [QuizPropertiesEditorComponent],
   exports: [QuizPropertiesEditorComponent]
 })
-export class QuizPropertiesEditorModule { }
+export class QuizPropertiesEditorModule {}

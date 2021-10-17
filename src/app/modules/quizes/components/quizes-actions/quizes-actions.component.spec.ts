@@ -11,14 +11,19 @@ describe('QuizesActionsComponent', () => {
   let component: QuizesActionsComponent;
   let fixture: ComponentFixture<QuizesActionsComponent>;
   const expectedSEarchValue = 'Test search';
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot(), NoopAnimationsModule, SearchModule],
-      declarations: [QuizesActionsComponent],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [
+          TranslateModule.forRoot(),
+          NoopAnimationsModule,
+          SearchModule
+        ],
+        declarations: [QuizesActionsComponent],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      }).compileComponents();
     })
-      .compileComponents();
-  }));
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(QuizesActionsComponent);
@@ -34,13 +39,18 @@ describe('QuizesActionsComponent', () => {
     spyOn(component.action, 'emit');
     component.onSearch(expectedSEarchValue);
     fixture.detectChanges();
-    expect(component.action.emit).toHaveBeenCalledWith({ action: QuizesEvents.SEARCH, data: expectedSEarchValue });
+    expect(component.action.emit).toHaveBeenCalledWith({
+      action: QuizesEvents.SEARCH,
+      data: expectedSEarchValue
+    });
   });
 
   it('onAddTest should emit action', () => {
     spyOn(component.action, 'emit');
-    component.onAddTest()
+    component.onAddTest();
     fixture.detectChanges();
-    expect(component.action.emit).toHaveBeenCalledWith({ action: QuizesEvents.ADD });
+    expect(component.action.emit).toHaveBeenCalledWith({
+      action: QuizesEvents.ADD
+    });
   });
 });

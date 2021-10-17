@@ -87,7 +87,7 @@ export class DbApiConfigModel {
     ]
   };
 
-  public get DB_CONFIG(): DBConfig {
+  get DB_CONFIG(): DBConfig {
     return {
       name: 'test-desinger-db',
       version: 1,

@@ -1,6 +1,6 @@
 import { Teacher } from '@appApi';
-import { TeacherEditForm } from '.';
 
+import { TeacherEditForm } from '.';
 
 describe('Teacher Edit form', () => {
   const expectedTeacher: Teacher = {
@@ -12,16 +12,15 @@ describe('Teacher Edit form', () => {
     password: 'password'
   };
 
-  let form = new TeacherEditForm();
+  const form = new TeacherEditForm();
 
   beforeEach(() => {
     form.updateForm(expectedTeacher);
-  })
+  });
 
   it('Form should be created', () => {
     expect(form).toBeTruthy();
   });
-
 
   it('position field should be valid', () => {
     expect(form.position.value).toEqual(expectedTeacher.position);
@@ -76,7 +75,6 @@ describe('Teacher Edit form', () => {
     expect(form.valid).toBeFalse();
   });
 
-  
   it('form should be invalid if "confirmPassword" field is empty', () => {
     form.confirmPassword.setValue(null);
     expect(form.valid).toBeFalse();

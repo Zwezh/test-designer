@@ -1,8 +1,13 @@
 import { Teacher } from '@appApi';
-import { authGetCurrentTeacherSelector, authIsLoadingSelector, authIsLoggedInSelector, AuthState, authTeacherCollectionSelector } from '@appStore';
+import {
+  authGetCurrentTeacherSelector,
+  authIsLoadingSelector,
+  authIsLoggedInSelector,
+  AuthState,
+  authTeacherCollectionSelector
+} from '@appStore';
 
- 
-describe("Auth selectors", () => {
+describe('Auth selectors', () => {
   const expectedTeacher: Teacher = {
     id: null,
     position: '',
@@ -18,23 +23,23 @@ describe("Auth selectors", () => {
     teacherCollection: [],
     isLoggedIn: true
   };
- 
-  it("should select the loading", () => {
+
+  it('should select the loading', () => {
     const result = authIsLoadingSelector.projector(initialState);
     expect(result).toBeFalse();
   });
- 
-  it("should select the teacher collection", () => {
+
+  it('should select the teacher collection', () => {
     const result = authTeacherCollectionSelector.projector(initialState);
     expect(result).toEqual(initialState.teacherCollection);
   });
-   
-  it("should select the current teacher", () => {
+
+  it('should select the current teacher', () => {
     const result = authGetCurrentTeacherSelector.projector(initialState);
     expect(result).toEqual(initialState.currentTeacher);
   });
-   
-  it("should select the logged in", () => {
+
+  it('should select the logged in', () => {
     const result = authIsLoggedInSelector.projector(initialState);
     expect(result).toEqual(initialState.isLoggedIn);
   });

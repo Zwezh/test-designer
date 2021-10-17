@@ -3,6 +3,7 @@ import { StoreNamesConstants } from 'app/db';
 import { NgxIndexedDBService } from 'ngx-indexed-db';
 import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
+
 import { Quiz } from './quizes-api.interface';
 
 @Injectable()
@@ -15,7 +16,7 @@ export class QuizesApiService {
       teacherId
     }).pipe(
       switchMap((id: number) => this.dbService.getByID(StoreNamesConstants.QUIZES_STORE, id)),
-      map(res => res as Quiz));
+      map((res) => res as Quiz));
   }
 
   updateQuiz$(quiz: Partial<Quiz>): Observable<Quiz[]> {

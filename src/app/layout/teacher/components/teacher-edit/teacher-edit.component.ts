@@ -31,12 +31,12 @@ export class TeacherEditComponent extends TeacherBase implements OnInit, OnDestr
     super(dialogRef);
   }
 
-  public ngOnInit(): void {
+  ngOnInit(): void {
     this.initListeners();
     this.initSelectors();
   }
 
-  public ngOnDestroy(): void {
+  ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 

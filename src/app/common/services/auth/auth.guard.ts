@@ -16,7 +16,7 @@ export class AuthGuard implements CanActivate {
     private persistanceService: PersistanceService
   ) { }
 
-  public canActivate(): boolean {
+  canActivate(): boolean {
     if (!!this.persistanceService.get(PersistanceKeys.authKey)) {
       return true;
     }

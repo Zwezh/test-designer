@@ -2,7 +2,11 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {
+  MatDialogModule,
+  MatDialogRef,
+  MAT_DIALOG_DATA
+} from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule, MatLabel } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -14,7 +18,6 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ConfirmationDialogComponent } from '@appUI/dialog';
 import { TranslateModule } from '@ngx-translate/core';
 
-
 describe('ConfirmationDialogComponent', () => {
   let component: ConfirmationDialogComponent;
   let fixture: ComponentFixture<ConfirmationDialogComponent>;
@@ -22,7 +25,9 @@ describe('ConfirmationDialogComponent', () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        imports: [TranslateModule.forRoot(), ReactiveFormsModule,
+        imports: [
+          TranslateModule.forRoot(),
+          ReactiveFormsModule,
           MatCardModule,
           MatDialogModule,
           MatToolbarModule,
@@ -32,11 +37,12 @@ describe('ConfirmationDialogComponent', () => {
           MatIconModule,
           MatDividerModule,
           MatSelectModule,
-          NoopAnimationsModule],
+          NoopAnimationsModule
+        ],
         declarations: [ConfirmationDialogComponent],
         providers: [
           { provide: MAT_DIALOG_DATA, useValue: {} },
-          { provide: MatDialogRef, useValue: { close: (value) => value } },
+          { provide: MatDialogRef, useValue: { close: (value) => value } }
         ]
       }).compileComponents();
     })
@@ -52,13 +58,13 @@ describe('ConfirmationDialogComponent', () => {
   it('Component should be created', () => {
     expect(component).toBeTruthy();
   });
-  
 
   it('Click by "button" should trigger the dialog close', () => {
     spyOn(component.dialogRef, 'close').and.callThrough();
-    fixture.debugElement.query(By.css('button')).triggerEventHandler('click', null);
+    fixture.debugElement
+      .query(By.css('button'))
+      .triggerEventHandler('click', null);
     fixture.detectChanges();
-    expect(component.dialogRef.close).toHaveBeenCalled()
+    expect(component.dialogRef.close).toHaveBeenCalled();
   });
-
 });

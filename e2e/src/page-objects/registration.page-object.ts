@@ -15,19 +15,19 @@ export class RegistrationPageObject extends BasePageObject {
   private confirmPassword: ElementFinder;
 
 
-  public get isEnabledSaveButton(): promise.Promise<boolean> {
+  get isEnabledSaveButton(): promise.Promise<boolean> {
     return this.saveButton.isEnabled();
   }
 
-  public get isEnabledCancelButton(): promise.Promise<boolean> {
+  get isEnabledCancelButton(): promise.Promise<boolean> {
     return this.cancelButton.isEnabled();
   }
 
-  public get isPresentPage(): promise.Promise<boolean> {
+  get isPresentPage(): promise.Promise<boolean> {
     return this.page.isPresent();
   }
 
-  public get isClickableSaveButton(): promise.Promise<void> {
+  get isClickableSaveButton(): promise.Promise<void> {
     return this.waitingForClickable(this.saveButton);
   }
 
@@ -44,31 +44,31 @@ export class RegistrationPageObject extends BasePageObject {
     this.confirmPassword = element(by.css('.ts-confirm-password'));
   }
 
-  public clickCancel(): Promise<void> {
+  clickCancel(): Promise<void> {
     return this.cancelButton.click() as Promise<void>;
   }
 
-  public fillPosition(value: string): promise.Promise<void> {
+  fillPosition(value: string): promise.Promise<void> {
     return this.position.sendKeys(value);
   }
 
-  public fillName(value: string): promise.Promise<void> {
+  fillName(value: string): promise.Promise<void> {
     return this.name.sendKeys(value);
   }
 
-  public fillLastName(value: string): promise.Promise<void> {
+  fillLastName(value: string): promise.Promise<void> {
     return this.lastName.sendKeys(value);
   }
 
-  public fillPatronymic(value: string): promise.Promise<void> {
+  fillPatronymic(value: string): promise.Promise<void> {
     return this.patronymic.sendKeys(value);
   }
 
-  public fillPassword(value: string): promise.Promise<void> {
+  fillPassword(value: string): promise.Promise<void> {
     return this.password.sendKeys(value);
   }
 
-  public fillConfirmPassword(value: string): promise.Promise<void> {
+  fillConfirmPassword(value: string): promise.Promise<void> {
     return this.confirmPassword.sendKeys(value);
   }
 

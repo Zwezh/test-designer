@@ -17,7 +17,7 @@ export class UpdateCurrentTeacherEffect {
     private teacherApiService: TeachersApiService
   ) {}
 
-  public updateCurrentTeacherEffect$ = createEffect(() =>
+  updateCurrentTeacherEffect$ = createEffect(() =>
     this.actions$.pipe(
       ofType(updateCurrentTeacherAction),
       switchMap(({ teacher }) =>

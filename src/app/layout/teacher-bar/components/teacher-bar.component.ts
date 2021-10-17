@@ -12,7 +12,7 @@ export class TeacherBarComponent {
   @Output() signOut: EventEmitter<void>;
   @Output() editTeacher: EventEmitter<void>;
 
-  public get shortName(): string {
+  get shortName(): string {
     return `${this.teacher.lastName[0]}.${this.teacher.name[0]}.`;
   }
 
@@ -21,11 +21,11 @@ export class TeacherBarComponent {
     this.editTeacher = new EventEmitter<void>();
   }
 
-  public onSignOut(): void {
+  onSignOut(): void {
     this.signOut.emit();
   }
 
-  public onEditTeacher(): void {
+  onEditTeacher(): void {
     this.editTeacher.emit();
   }
 }

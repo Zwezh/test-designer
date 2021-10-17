@@ -1,4 +1,5 @@
 import { Quiz } from '@appApi';
+
 import { SearchPipe } from './search.pipe';
 
 describe('Pipe: Search', () => {
@@ -22,7 +23,6 @@ describe('Pipe: Search', () => {
   it('create an instance', () => {
     expect(pipe).toBeTruthy();
   });
-
 
   it('Search "Test" value in list', () => {
     expect(pipe.transform(expectedQuizCollection, 'Test').length).toBe(4);

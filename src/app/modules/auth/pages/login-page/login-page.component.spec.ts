@@ -12,7 +12,12 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Teacher } from '@appApi';
-import { authIsLoadingSelector, AuthState, authTeacherCollectionSelector, loginAction } from '@appStore';
+import {
+  authIsLoadingSelector,
+  AuthState,
+  authTeacherCollectionSelector,
+  loginAction
+} from '@appStore';
 import { Actions } from '@ngrx/effects';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Action } from '@ngrx/store';
@@ -26,7 +31,7 @@ describe('LoginPageComponent', () => {
   let component: LoginPageComponent;
   let fixture: ComponentFixture<LoginPageComponent>;
   let store: MockStore;
-  let actions$ = new Observable<Action>();
+  const actions$ = new Observable<Action>();
   let dialog: MatDialog;
 
   const MATERAIL = [
@@ -78,7 +83,10 @@ describe('LoginPageComponent', () => {
       }).compileComponents();
 
       store = TestBed.inject(MockStore);
-      store.overrideSelector(authTeacherCollectionSelector, expectedTeacherColleciton);
+      store.overrideSelector(
+        authTeacherCollectionSelector,
+        expectedTeacherColleciton
+      );
       store.overrideSelector(authIsLoadingSelector, initialState.isLoading);
     })
   );
@@ -88,7 +96,7 @@ describe('LoginPageComponent', () => {
     component = fixture.componentInstance;
     dialog = TestBed.inject(MatDialog);
     fixture.detectChanges();
-    spyOn(store, 'dispatch').and.callFake(() => { });
+    spyOn(store, 'dispatch').and.callFake(() => {});
   });
 
   it('Component should create', () => {
@@ -121,9 +129,7 @@ describe('LoginPageComponent', () => {
 
   it('sign in method should dispatch login action', () => {
     component.onSignIn();
-    expect(store.dispatch).toHaveBeenCalledWith(
-      loginAction({ id: undefined })
-    );
+    expect(store.dispatch).toHaveBeenCalledWith(loginAction({ id: undefined }));
   });
 
   it('should open teacher edit dialog by onOpenRegistrationPage', () => {

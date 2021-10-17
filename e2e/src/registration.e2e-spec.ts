@@ -12,7 +12,7 @@ describe('Registration page', () => {
 
   it('Should display correct title of the registration page', () => {
     page.navigateTo();
-    expect(page.title).toEqual('Добавить нового преподавателя');
+    expect(page.titlePage).toEqual('Добавить нового преподавателя');
   });
 
   it('Cancel buttin should be enabled', () => {

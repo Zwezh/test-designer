@@ -6,13 +6,13 @@ import {
 } from '@appLayouts/teacher/shared/types';
 
 export abstract class TeacherBase {
-  public form: TeacherEditForm;
+  form: TeacherEditForm;
 
   constructor(protected dialogRef: MatDialogRef<TeacherBase>) {
     this.form = new TeacherEditForm();
   }
 
-  public onAction(event: TeacherAction): void {
+  onAction(event: TeacherAction): void {
     if (event === TeacherActions.cancel) {
       this.dialogRef.close();
     } else {

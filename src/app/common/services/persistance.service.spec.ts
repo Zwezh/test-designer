@@ -3,9 +3,7 @@ import { Teacher, TeachersApiService } from '@appApi';
 import { PersistanceService } from '@appServices';
 import { of } from 'rxjs';
 
-
 describe('Service: PersistanceService', () => {
-
   let persistanceService: PersistanceService;
 
   beforeEach(() => {
@@ -15,19 +13,19 @@ describe('Service: PersistanceService', () => {
     persistanceService = TestBed.inject(PersistanceService);
     const store = {};
 
-    spyOn(localStorage, 'getItem').and.callFake(function (key) {
-      return store[key];
-    });
-    spyOn(localStorage, 'setItem').and.callFake(function (key, value) {
-      return store[key] = value + '';
-    });
+    spyOn(localStorage, 'getItem').and.callFake((key) => store[key]);
+    spyOn(localStorage, 'setItem').and.callFake(
+      (key, value): string => (store[key] = value + '')
+    );
   });
 
   const expectedStorageKey = 'key';
   const expectedStorageValue = 'value';
 
   it('should be got valid value from storage', () => {
-    persistanceService.set(expectedStorageKey,expectedStorageValue);
-      expect(expectedStorageValue).toEqual(persistanceService.get(expectedStorageKey));
+    persistanceService.set(expectedStorageKey, expectedStorageValue);
+    expect(expectedStorageValue).toEqual(
+      persistanceService.get(expectedStorageKey)
+    );
   });
 });

@@ -1,5 +1,11 @@
-import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Inject,
+  OnInit
+} from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+
 import { QuizPropertiesEditorForm } from '../../shared/forms';
 import { QuizPropertiesEditorData } from '../../shared/quiz-properties-editor.model';
 
@@ -9,25 +15,22 @@ import { QuizPropertiesEditorData } from '../../shared/quiz-properties-editor.mo
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class QuizPropertiesEditorComponent implements OnInit {
-
   constructor(
     public dialogRef: MatDialogRef<QuizPropertiesEditorComponent>,
     @Inject(MAT_DIALOG_DATA) public data: QuizPropertiesEditorData
-  ) {
-  }
+  ) {}
 
-  public form: QuizPropertiesEditorForm;
+  form: QuizPropertiesEditorForm;
 
-  public ngOnInit() {
+  ngOnInit(): void {
     this.form = new QuizPropertiesEditorForm(this.data.quiz);
   }
 
-  public onSave(): void {
+  onSave(): void {
     this.dialogRef.close(this.form.properties);
-
   }
 
-  public onCancel(): void {
+  onCancel(): void {
     this.dialogRef.close();
   }
 }

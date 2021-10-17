@@ -2,15 +2,15 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Quiz } from '@appApi';
 
 export class QuizPropertiesEditorForm extends FormGroup {
-  public get name(): FormControl {
+  get name(): FormControl {
     return this.get('name') as FormControl;
   }
 
-  public get discipline(): FormControl {
+  get discipline(): FormControl {
     return this.get('discipline') as FormControl;
   }
 
-  public get properties(): Partial<Quiz> {
+  get properties(): Partial<Quiz> {
     const quiz = {
       name: this.name.value,
       discipline: this.discipline.value

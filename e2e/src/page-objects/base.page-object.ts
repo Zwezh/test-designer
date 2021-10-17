@@ -5,7 +5,7 @@ export abstract class BasePageObject {
   protected url: string;
   protected title: ElementFinder;
 
-  public get titlePage(): Promise<string> {
+  get titlePage(): Promise<string> {
     return this.title.getText() as Promise<string>;
   }
 
@@ -14,17 +14,17 @@ export abstract class BasePageObject {
     this.title = element(by.css(titleClass));
   }
 
-  public static login(): void {
+  static login(): void {
     browser.executeScript(
       `return window.sessionStorage.setItem('currentTeacher', JSON.stringify({ id: 12 }));`
     );
   }
 
-  public static logout(): void {
+  static logout(): void {
     browser.executeScript(`return window.sessionStorage.clear();`);
   }
 
-  public navigateTo(): Promise<unknown> {
+  navigateTo(): Promise<unknown> {
     return browser.get(`${browser.baseUrl}${this.url}`) as Promise<unknown>;
   }
 

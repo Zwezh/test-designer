@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { NgxIndexedDBService } from 'ngx-indexed-db';
 import { Observable, of } from 'rxjs';
+
 import { Quiz } from './quizes-api.interface';
 import { QuizesApiService } from './quizes-api.service';
 
@@ -17,11 +18,7 @@ describe('Service: QuizApi', () => {
     teacherId: 0
   };
 
-  const expectedQuizCollection = [
-    expectedQuiz,
-    expectedQuiz,
-    expectedQuiz
-  ];
+  const expectedQuizCollection = [expectedQuiz, expectedQuiz, expectedQuiz];
 
   const dbServiceStub = {
     getByID: (): Observable<Quiz> => of(expectedQuiz),

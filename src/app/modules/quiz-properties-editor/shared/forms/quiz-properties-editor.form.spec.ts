@@ -1,6 +1,6 @@
 import { Quiz } from '@appApi';
-import { QuizPropertiesEditorForm } from './quiz-properties-editor.form';
 
+import { QuizPropertiesEditorForm } from './quiz-properties-editor.form';
 
 describe('Quiz Properties Editor Form', () => {
   const expectedQuiz: Partial<Quiz> = {
@@ -12,12 +12,11 @@ describe('Quiz Properties Editor Form', () => {
 
   beforeEach(() => {
     form = new QuizPropertiesEditorForm(expectedQuiz);
-  })
+  });
 
   it('Form should be created', () => {
     expect(form).toBeTruthy();
   });
-
 
   it('name field should be valid', () => {
     expect(form.name.value).toEqual(expectedQuiz.name);

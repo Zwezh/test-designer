@@ -20,23 +20,23 @@ import { take } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent implements OnInit {
-  public currentTeacher$: Observable<Teacher>;
-  public isLoggedIn$: Observable<boolean>;
+  currentTeacher$: Observable<Teacher>;
+  isLoggedIn$: Observable<boolean>;
 
   constructor(private store: Store, private dialog: MatDialog) {}
 
-  public ngOnInit(): void {
+  ngOnInit(): void {
     this.initSelectors();
   }
 
-  public onEditTeacher(): void {
+  onEditTeacher(): void {
     const dialogRef = this.dialog.open(TeacherEditComponent, {
       width: '550px'
     });
     dialogRef.afterClosed().pipe(take(1)).subscribe();
   }
 
-  public onSignOut(): void {
+  onSignOut(): void {
     this.store.dispatch(logoutAction());
   }
 

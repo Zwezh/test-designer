@@ -20,7 +20,7 @@ describe('TeacherEditComponent', () => {
   let component: TeacherEditComponent;
   let fixture: ComponentFixture<TeacherEditComponent>;
   let store: MockStore;
-  let actions$ = new Observable<Action>();
+  const actions$ = new Observable<Action>();
   const expectedTeacher: Teacher = {
     id: null,
     position: '',
@@ -52,7 +52,9 @@ describe('TeacherEditComponent', () => {
         schemas: [CUSTOM_ELEMENTS_SCHEMA]
       }).compileComponents();
       store = TestBed.inject(MockStore);
-      store.overrideSelector(authGetCurrentTeacherSelector, { ...expectedTeacher });
+      store.overrideSelector(authGetCurrentTeacherSelector, {
+        ...expectedTeacher
+      });
     })
   );
 
@@ -71,7 +73,6 @@ describe('TeacherEditComponent', () => {
     expect(form).toBeTruthy();
   });
 
-  
   it('should be shown title', () => {
     const nativeElement = fixture.nativeElement;
     const title = nativeElement.querySelector('.ts-edit-title');

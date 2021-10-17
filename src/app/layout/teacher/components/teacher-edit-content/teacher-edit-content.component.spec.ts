@@ -38,8 +38,9 @@ describe('TeacherEditContentComponent', () => {
           MatIconModule,
           MatDividerModule,
           MatSelectModule,
-          NoopAnimationsModule],
-        declarations: [TeacherEditContentComponent],
+          NoopAnimationsModule
+        ],
+        declarations: [TeacherEditContentComponent]
       }).compileComponents();
     })
   );
@@ -61,8 +62,8 @@ describe('TeacherEditContentComponent', () => {
   });
 
   it('Should input form', () => {
-    const form = component.form;
-    expect(form).toBeTruthy();
+    const result = component.form;
+    expect(result).toBeTruthy();
   });
 
   it('should emit on "Cancel" click', () => {

@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
-import { Quiz, QuizesApiService, } from '@appApi';
+import { Quiz, QuizesApiService } from '@appApi';
 import { PersistanceKeys } from '@appConstants';
 import { PersistanceService } from '@appServices';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
+
 import {
   addQuizAction,
-  addQuizSuccessAction,
-  addQuizFailureAction
+  addQuizFailureAction,
+  addQuizSuccessAction
 } from '../actions';
 
 @Injectable()
@@ -16,8 +17,8 @@ export class QuizAddEffect {
   constructor(
     private actions$: Actions,
     private quizesApi: QuizesApiService,
-    private persistanceService: PersistanceService,
-  ) { }
+    private persistanceService: PersistanceService
+  ) {}
 
   addQuiz$ = createEffect(() =>
     this.actions$.pipe(

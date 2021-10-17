@@ -21,9 +21,9 @@ export class TeacherEditContentComponent {
   @Input() form: TeacherEditForm;
   @Output() action: EventEmitter<TeacherAction>;
 
-  public hide: boolean;
-  public teacherActions = TeacherActions;
-  public get isDisable(): boolean {
+  hide: boolean;
+  teacherActions = TeacherActions;
+  get isDisable(): boolean {
     return this.form.invalid;
   }
 

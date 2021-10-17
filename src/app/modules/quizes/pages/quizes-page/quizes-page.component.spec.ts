@@ -10,10 +10,19 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Quiz } from '@appApi';
-import { QuizesActionsComponent, QuizesListComponent } from '@appModules/quizes/components';
+import {
+  QuizesActionsComponent,
+  QuizesListComponent
+} from '@appModules/quizes/components';
 import { QuizesEvents } from '@appModules/quizes/shared/models';
 import { SearchModule } from '@appPipes/search';
-import { quizGetCollectionSelector, quizIsLoadingSelector, quizSearchSelector, QuizState, searchQuizAction } from '@appStore';
+import {
+  quizGetCollectionSelector,
+  quizIsLoadingSelector,
+  quizSearchSelector,
+  QuizState,
+  searchQuizAction
+} from '@appStore';
 import { Actions } from '@ngrx/effects';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Action } from '@ngrx/store';
@@ -23,14 +32,12 @@ import { Observable } from 'rxjs';
 
 import { QuizesPageComponent } from './quizes-page.component';
 
-
-
 describe('QuizesPageComponent', () => {
   let component: QuizesPageComponent;
   let fixture: ComponentFixture<QuizesPageComponent>;
   let store: MockStore;
-  let actions$ = new Observable<Action>();
   let dialog: MatDialog;
+  const actions$ = new Observable<Action>();
 
   const MATERAIL = [
     MatButtonModule,
@@ -43,7 +50,6 @@ describe('QuizesPageComponent', () => {
     MatDialogModule
   ];
 
-
   const expectedquiz: Quiz = {
     id: 12,
     name: 'Expected Quiz Name',
@@ -51,7 +57,7 @@ describe('QuizesPageComponent', () => {
     createdDate: new Date(),
     modifiedDate: new Date(),
     teacherId: 2
-  }
+  };
 
   const expectedQuizCollection: Quiz[] = [expectedquiz];
   const expectedIsLoading = false;
@@ -64,34 +70,40 @@ describe('QuizesPageComponent', () => {
     quizCollection: expectedQuizCollection
   };
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      imports: [RouterTestingModule,
-        TranslateModule.forRoot(),
-        NoopAnimationsModule,
-        SearchModule,
-        MATERAIL
-      ],
-      providers: [
-        provideMockStore({ initialState }),
-        { provide: Actions, useValue: {} },
-        provideMockActions(() => actions$)
-      ],
-      declarations: [QuizesPageComponent, QuizesListComponent, QuizesActionsComponent]
-    })
-      .compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [
+          RouterTestingModule,
+          TranslateModule.forRoot(),
+          NoopAnimationsModule,
+          SearchModule,
+          MATERAIL
+        ],
+        providers: [
+          provideMockStore({ initialState }),
+          { provide: Actions, useValue: {} },
+          provideMockActions(() => actions$)
+        ],
+        declarations: [
+          QuizesPageComponent,
+          QuizesListComponent,
+          QuizesActionsComponent
+        ]
+      }).compileComponents();
 
-    store = TestBed.inject(MockStore);
-    store.overrideSelector(quizGetCollectionSelector, expectedQuizCollection);
-    store.overrideSelector(quizIsLoadingSelector, expectedIsLoading);
-    store.overrideSelector(quizSearchSelector, expectedSearch);
-  }));
+      store = TestBed.inject(MockStore);
+      store.overrideSelector(quizGetCollectionSelector, expectedQuizCollection);
+      store.overrideSelector(quizIsLoadingSelector, expectedIsLoading);
+      store.overrideSelector(quizSearchSelector, expectedSearch);
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(QuizesPageComponent);
     component = fixture.componentInstance;
     dialog = TestBed.inject(MatDialog);
-    spyOn(store, 'dispatch').and.callFake(() => { });
+    spyOn(store, 'dispatch').and.callFake(() => {});
     fixture.detectChanges();
   });
 
@@ -111,22 +123,22 @@ describe('QuizesPageComponent', () => {
     });
   });
 
-  it('Quiz Properties Editor should be called by Add event', ()=> {
+  it('Quiz Properties Editor should be called by Add event', () => {
     spyOn(dialog, 'open').and.callThrough();
-    component.onAction({action: QuizesEvents.ADD});
+    component.onAction({ action: QuizesEvents.ADD });
     fixture.detectChanges();
     expect(dialog.open).toHaveBeenCalled();
   });
 
-  it('Confirmation dialog of delete should be called by Delete event', ()=> {
+  it('Confirmation dialog of delete should be called by Delete event', () => {
     spyOn(dialog, 'open').and.callThrough();
-    component.onAction({action: QuizesEvents.DELETE, data: expectedquiz});
+    component.onAction({ action: QuizesEvents.DELETE, data: expectedquiz });
     fixture.detectChanges();
     expect(dialog.open).toHaveBeenCalled();
   });
 
-  it('Search action should be called by Search event', ()=> {
-    component.onAction({action: QuizesEvents.SEARCH});
+  it('Search action should be called by Search event', () => {
+    component.onAction({ action: QuizesEvents.SEARCH });
     fixture.detectChanges();
     expect(store.dispatch).toHaveBeenCalledWith(
       searchQuizAction({ search: undefined })

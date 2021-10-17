@@ -21,19 +21,19 @@ import { take } from 'rxjs/operators';
   animations: [FADE_IN_CONTENT_BY_HEIGHT_OPACITY]
 })
 export class LoginPageComponent implements OnInit {
-  public teacherCollection$: Observable<Teacher[] | null>;
-  public isLoading$: Observable<boolean>;
-  public selectedTeacher: Teacher;
-  public password: string;
-  public hide = true;
+  teacherCollection$: Observable<Teacher[] | null>;
+  isLoading$: Observable<boolean>;
+  selectedTeacher: Teacher;
+  password: string;
+  hide = true;
 
-  public get isDisable(): boolean {
+  get isDisable(): boolean {
     return (
       !this.selectedTeacher || this.selectedTeacher?.password !== this.password
     );
   }
 
-  public get isShowError(): boolean {
+  get isShowError(): boolean {
     return (
       this.selectedTeacher && this.selectedTeacher.password !== this.password
     );
@@ -51,11 +51,11 @@ export class LoginPageComponent implements OnInit {
     this.initSelectors();
   }
 
-  public trackByTeacher(index: number, teacher: Teacher): number {
+  trackByTeacher(index: number, teacher: Teacher): number {
     return teacher.id;
   }
 
-  public onOpenRegistrationPage(): void {
+  onOpenRegistrationPage(): void {
     this.dialog
       .open(TeacherCreateComponent, {
         width: '550px'
@@ -65,7 +65,7 @@ export class LoginPageComponent implements OnInit {
       .subscribe();
   }
 
-  public onSignIn(): void {
+  onSignIn(): void {
     this.store.dispatch(loginAction({ id: this.selectedTeacher?.id }));
   }
 

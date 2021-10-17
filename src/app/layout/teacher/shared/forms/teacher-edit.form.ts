@@ -4,31 +4,31 @@ import { Teacher } from '@appApi';
 import { CustomValidators } from '../validators';
 
 export class TeacherEditForm extends FormGroup {
-  public get position(): FormControl {
+  get position(): FormControl {
     return this.get('position') as FormControl;
   }
 
-  public get lastName(): FormControl {
+  get lastName(): FormControl {
     return this.get('lastName') as FormControl;
   }
 
-  public get name(): FormControl {
+  get name(): FormControl {
     return this.get('name') as FormControl;
   }
 
-  public get patronymic(): FormControl {
+  get patronymic(): FormControl {
     return this.get('patronymic') as FormControl;
   }
 
-  public get password(): FormControl {
+  get password(): FormControl {
     return this.get('password') as FormControl;
   }
 
-  public get confirmPassword(): FormControl {
+  get confirmPassword(): FormControl {
     return this.get('confirmPassword') as FormControl;
   }
 
-  public get teacherFromForm(): Teacher {
+  get teacherFromForm(): Teacher {
     const teacher = {
       position: this.position.value,
       name: this.name.value,
@@ -61,7 +61,7 @@ export class TeacherEditForm extends FormGroup {
     );
   }
 
-  public updateForm(teacher: Teacher): void {
+  updateForm(teacher: Teacher): void {
     this.patchValue({
       position: teacher.position,
       name: teacher.name,
