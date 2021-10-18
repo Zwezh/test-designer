@@ -3,22 +3,6 @@
   justify-content: space-between;
 }
 
-.test-form {
-  padding: 0.75rem 1rem 0;
-}
-.test-content {
-  padding: 0 1rem;
-}
-
-.form-field {
-  width: 16rem;
-  & + .form-field {
-    margin-left: 0.5rem;
-  }
-}
-
-._action {
-  & + ._action {
-    margin-left: 1rem;
-  }
+.quiz-page {
+  padding: 1.5rem;
 }

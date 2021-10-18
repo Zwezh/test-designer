@@ -17,11 +17,11 @@ import {
 import { QuizesEvents } from '@appModules/quizes/shared/models';
 import { SearchModule } from '@appPipes/search';
 import {
-  quizGetCollectionSelector,
-  quizIsLoadingSelector,
-  quizSearchSelector,
-  QuizState,
-  searchQuizAction
+  quizesGetCollectionSelector,
+  quizesIsLoadingSelector,
+  quizesSearchSelector,
+  QuizesState,
+  searchQuizesAction
 } from '@appStore';
 import { Actions } from '@ngrx/effects';
 import { provideMockActions } from '@ngrx/effects/testing';
@@ -63,7 +63,7 @@ describe('QuizesPageComponent', () => {
   const expectedIsLoading = false;
   const expectedSearch = 'false';
 
-  const initialState: QuizState = {
+  const initialState: QuizesState = {
     isLoading: expectedIsLoading,
     // currentQuiz: expectedquiz,
     search: '',
@@ -93,9 +93,9 @@ describe('QuizesPageComponent', () => {
       }).compileComponents();
 
       store = TestBed.inject(MockStore);
-      store.overrideSelector(quizGetCollectionSelector, expectedQuizCollection);
-      store.overrideSelector(quizIsLoadingSelector, expectedIsLoading);
-      store.overrideSelector(quizSearchSelector, expectedSearch);
+      store.overrideSelector(quizesGetCollectionSelector, expectedQuizCollection);
+      store.overrideSelector(quizesIsLoadingSelector, expectedIsLoading);
+      store.overrideSelector(quizesSearchSelector, expectedSearch);
     })
   );
 
@@ -141,7 +141,7 @@ describe('QuizesPageComponent', () => {
     component.onAction({ action: QuizesEvents.SEARCH });
     fixture.detectChanges();
     expect(store.dispatch).toHaveBeenCalledWith(
-      searchQuizAction({ search: undefined })
+      searchQuizesAction({ search: undefined })
     );
   });
 });

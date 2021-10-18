@@ -5,24 +5,22 @@ import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 
 import {
-  deleteQuizAction,
-  deleteQuizFailureAction,
-  deleteQuizSuccessAction
+  getQuizAction,
+  getQuizFailureAction,
+  getQuizSuccessAction
 } from '../actions';
 
 @Injectable()
-export class QuizDeleteEffect {
+export class QuizGetOneEffect {
   constructor(private actions$: Actions, private quizesApi: QuizesApiService) {}
 
-  quizQuiz$ = createEffect(() =>
+  getQuiz$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(deleteQuizAction),
+      ofType(getQuizAction),
       switchMap(({ id }) =>
-        this.quizesApi.deleteQuiz$(id).pipe(
-          map((quizCollection: Quiz[]) =>
-            deleteQuizSuccessAction({ quizCollection })
-          ),
-          catchError(() => of(deleteQuizFailureAction()))
+        this.quizesApi.getQuiz$(id).pipe(
+          map((quiz: Quiz) => getQuizSuccessAction({ quiz })),
+          catchError(() => of(getQuizFailureAction()))
         )
       )
     )

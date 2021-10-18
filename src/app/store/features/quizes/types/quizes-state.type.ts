@@ -1,7 +1,7 @@
 import { Quiz } from '@appApi';
 
-export interface QuizState {
+export interface QuizesState {
   isLoading: boolean;
-  quiz: Quiz | null;
   search: string;
+  quizCollection: Quiz[];
 }

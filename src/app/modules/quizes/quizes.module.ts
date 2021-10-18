@@ -13,10 +13,10 @@ import { SearchModule } from '@appPipes/search';
 import { SharedModule } from '@appSharedModule';
 import {
   QuizAddEffect,
-  QuizDeleteEffect,
-  QuizGetCollectionEffect,
-  quizReducers,
-  QuizUpdateEffect
+  QuizesDeleteEffect,
+  QuizesGetCollectionEffect,
+  quizesReducers,
+  QuizesUpdateEffect
 } from '@appStore';
 import { DialogModule } from '@appUI/dialog';
 import { EffectsModule } from '@ngrx/effects';
@@ -45,14 +45,13 @@ const MATERIAL = [
     QuizesRoutingModule,
     TeachersApiModule,
     QuizesApiModule,
-    QuestionsModule,
     EffectsModule.forFeature([
       QuizAddEffect,
-      QuizGetCollectionEffect,
-      QuizUpdateEffect,
-      QuizDeleteEffect
+      QuizesGetCollectionEffect,
+      QuizesUpdateEffect,
+      QuizesDeleteEffect
     ]),
-    StoreModule.forFeature('quiz', quizReducers),
+    StoreModule.forFeature('quizes', quizesReducers),
     SearchModule,
     DialogModule,
     QuizPropertiesEditorModule,

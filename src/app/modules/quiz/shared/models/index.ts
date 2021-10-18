@@ -1,1 +1,1 @@
-export * from './quizes-event.model';
+export * from './quiz-event.model';

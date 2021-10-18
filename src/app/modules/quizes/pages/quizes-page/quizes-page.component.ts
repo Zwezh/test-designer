@@ -3,13 +3,13 @@ import { MatDialog } from '@angular/material/dialog';
 import { Quiz } from '@appApi';
 import { QuizPropertiesEditorComponent } from '@appModules/quiz-properties-editor';
 import {
-  addQuizAction,
-  deleteQuizAction,
-  getQuizCollectionAction,
-  quizGetCollectionSelector,
-  quizIsLoadingSelector,
-  quizSearchSelector,
-  searchQuizAction
+  addQuizesAction,
+  deleteQuizesAction,
+  getQuizesCollectionAction,
+  quizesGetCollectionSelector,
+  quizesIsLoadingSelector,
+  quizesSearchSelector,
+  searchQuizesAction
 } from '@appStore';
 import { ConfirmationDialogComponent } from '@appUI/dialog';
 import { select, Store } from '@ngrx/store';
@@ -56,7 +56,7 @@ export class QuizesPageComponent implements OnInit {
   }
 
   private addTest(): void {
-    const title = this.translator.instant('actionQuizes.add');
+    const title = this.translator.instant('quizes.actions.add');
     this.dialog
       .open(QuizPropertiesEditorComponent, { data: { title } })
       .afterClosed()
@@ -65,14 +65,14 @@ export class QuizesPageComponent implements OnInit {
         filter((result) => !!result)
       )
       .subscribe((result) => {
-        this.store.dispatch(addQuizAction({ quiz: result }));
+        this.store.dispatch(addQuizesAction({ quiz: result }));
       });
   }
 
   private deleteTest(quiz: Quiz): void {
-    const title = this.translator.instant('actionQuizes.deleteTitle');
+    const title = this.translator.instant('quizes.actions.deleteTitle');
     const message = this.translator
-      .instant('actionQuizes.deleteMessage')
+      .instant('quizes.actions.deleteMessage')
       .replace('{1}', quiz.name);
     this.dialog
       .open(ConfirmationDialogComponent, {
@@ -81,21 +81,21 @@ export class QuizesPageComponent implements OnInit {
       .afterClosed()
       .pipe(take(1), filter(Boolean))
       .subscribe(() => {
-        this.store.dispatch(deleteQuizAction({ id: quiz.id }));
+        this.store.dispatch(deleteQuizesAction({ id: quiz.id }));
       });
   }
 
   private onSearch(search: string): void {
-    this.store.dispatch(searchQuizAction({ search }));
+    this.store.dispatch(searchQuizesAction({ search }));
   }
 
   private initSelectors(): void {
-    this.isLoading$ = this.store.pipe(select(quizIsLoadingSelector));
-    this.quizCollection$ = this.store.pipe(select(quizGetCollectionSelector));
+    this.isLoading$ = this.store.pipe(select(quizesIsLoadingSelector));
+    this.quizCollection$ = this.store.pipe(select(quizesGetCollectionSelector));
     this.store
       .pipe(
         takeWhile(() => this.alive),
-        select(quizSearchSelector)
+        select(quizesSearchSelector)
       )
       .subscribe((search: string) => {
         this.search = search;
@@ -103,6 +103,6 @@ export class QuizesPageComponent implements OnInit {
   }
 
   private initData(): void {
-    this.store.dispatch(getQuizCollectionAction());
+    this.store.dispatch(getQuizesCollectionAction());
   }
 }

@@ -7,9 +7,9 @@ import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 
 import {
-  addQuizAction,
-  addQuizFailureAction,
-  addQuizSuccessAction
+  addQuizesAction,
+  addQuizesFailureAction,
+  addQuizesSuccessAction
 } from '../actions';
 
 @Injectable()
@@ -22,7 +22,7 @@ export class QuizAddEffect {
 
   addQuiz$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(addQuizAction),
+      ofType(addQuizesAction),
       switchMap(({ quiz }) =>
         this.quizesApi
           .addQuiz$(
@@ -30,8 +30,8 @@ export class QuizAddEffect {
             +this.persistanceService.get(PersistanceKeys.authKey)
           )
           .pipe(
-            map((newQuiz: Quiz) => addQuizSuccessAction({ newQuiz })),
-            catchError(() => of(addQuizFailureAction()))
+            map((newQuiz: Quiz) => addQuizesSuccessAction({ newQuiz })),
+            catchError(() => of(addQuizesFailureAction()))
           )
       )
     )

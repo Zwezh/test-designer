@@ -7,13 +7,13 @@ import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 
 import {
-  getQuizCollectionAction,
-  getQuizCollectionFailureAction,
-  getQuizCollectionSuccessAction
+  getQuizesCollectionAction,
+  getQuizesCollectionFailureAction,
+  getQuizesCollectionSuccessAction
 } from '../actions';
 
 @Injectable()
-export class QuizGetCollectionEffect {
+export class QuizesGetCollectionEffect {
   constructor(
     private actions$: Actions,
     private quizesApi: QuizesApiService,
@@ -22,15 +22,15 @@ export class QuizGetCollectionEffect {
 
   getCollection$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(getQuizCollectionAction),
+      ofType(getQuizesCollectionAction),
       switchMap(() =>
         this.quizesApi
           .getAllQuiz$(+this.persistanceService.get(PersistanceKeys.authKey))
           .pipe(
             map((quizCollection: Quiz[]) =>
-              getQuizCollectionSuccessAction({ quizCollection })
+              getQuizesCollectionSuccessAction({ quizCollection })
             ),
-            catchError(() => of(getQuizCollectionFailureAction()))
+            catchError(() => of(getQuizesCollectionFailureAction()))
           )
       )
     )

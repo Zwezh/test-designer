@@ -1,13 +1,13 @@
+import { AppState } from '@appStore';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { AppState } from 'app/store/types';
 
 import { QuizState } from './types';
 
 const featureSelector = createFeatureSelector<AppState, QuizState>('quiz');
 
-export const quizSearchSelector = createSelector(
+export const quizGetSelector = createSelector(
   featureSelector,
-  (state: QuizState) => state.search
+  (state: QuizState) => state.quiz
 );
 
 export const quizIsLoadingSelector = createSelector(
@@ -15,7 +15,7 @@ export const quizIsLoadingSelector = createSelector(
   (state: QuizState) => state.isLoading
 );
 
-export const quizGetCollectionSelector = createSelector(
+export const quizSearchSelector = createSelector(
   featureSelector,
-  (state: QuizState) => state.quizCollection
+  (state: QuizState) => state.search
 );
