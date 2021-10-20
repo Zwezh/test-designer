@@ -2,7 +2,7 @@
   <td-quizes-actions [value]="search"
                     (action)="onAction($event)"></td-quizes-actions>
   <div class="test-list">
-    <td-quizes-list [collection]="quizCollection$ | async | search: search"
+    <td-quizes-list [list]="quizList$ | async | search: search"
                    (action)="onAction($event)"></td-quizes-list>
   </div>
 </div>

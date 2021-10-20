@@ -32,7 +32,7 @@ describe('Auth Reducer', () => {
   const initialState: AuthState = {
     isLoading: false,
     currentTeacher: null,
-    teacherCollection: [],
+    teacherList: [],
     isLoggedIn: true
   };
 
@@ -49,7 +49,7 @@ describe('Auth Reducer', () => {
 
   it('Should return the updated state with loading "false" and "new collection in state" by "get success current teacher" action', () => {
     const updatedCollecion = [
-      ...initialState.teacherCollection,
+      ...initialState.teacherList,
       { ...expectedTeacher, name: 'Joe' }
     ];
     const state = authReducers(
@@ -57,7 +57,7 @@ describe('Auth Reducer', () => {
       getTeacherCollectionSuccessAction({ teacherCollection: updatedCollecion })
     );
     expect(state.isLoading).toBe(false);
-    expect(state.teacherCollection).toEqual(updatedCollecion);
+    expect(state.teacherList).toEqual(updatedCollecion);
   });
 
   it('Should return the updated state with loading "false" by "get teacher collection failure" action', () => {

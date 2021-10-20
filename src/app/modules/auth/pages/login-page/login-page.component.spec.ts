@@ -58,7 +58,7 @@ describe('LoginPageComponent', () => {
   const initialState: AuthState = {
     isLoading: false,
     currentTeacher: expectedTeacher,
-    teacherCollection: [],
+    teacherList: [],
     isLoggedIn: true
   };
 

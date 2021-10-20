@@ -1,0 +1,26 @@
+<mat-card>
+  <section class="container">
+    <div class="props">
+      <p>
+        <mat-label class="title">{{ 'quizes.name' | translate }}:</mat-label>
+        {{quiz?.name}}
+      </p>
+      <p>
+        <mat-label class="title">{{ 'quizes.discipline' | translate }}:</mat-label>
+        {{quiz?.discipline}}
+      </p>
+    </div>
+    <div class="actions">
+      <button mat-flat-button
+              class="_action"
+              (click)="onUpdateQuizProperties()"
+              color="primary">
+        {{'quizes.actions.edit' | translate}}
+      </button>
+      <a mat-stroked-button
+         class="ts-exit-quiz _action"
+         color="accent"
+         [routerLink]="['/quizes']">{{ 'quizes.actions.exit' | translate }}</a>
+    </div>
+  </section>
+</mat-card>

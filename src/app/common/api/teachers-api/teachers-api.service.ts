@@ -18,8 +18,8 @@ export class TeachersApiService {
     return this.dbService
       .update(StoreNamesConstants.TEACHERS_STORE, teacher)
       .pipe(
-        map((teacherCollection: Teacher[]) =>
-          teacherCollection.find((t: Teacher) => t.id === teacher.id)
+        map((teacherList: Teacher[]) =>
+          teacherList.find((t: Teacher) => t.id === teacher.id)
         )
       );
   }

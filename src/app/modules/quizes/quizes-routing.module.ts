@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from '@appServices';
 
-import { QuizesPageComponent } from './pages';
+import { QuizDetailsPageComponent, QuizesPageComponent } from './pages';
 
 const routes: Routes = [
   {
@@ -11,9 +10,7 @@ const routes: Routes = [
   },
   {
     path: ':id',
-    loadChildren: () =>
-      import('../quiz/quiz.module').then((m) => m.QuizModule),
-    canActivate: [AuthGuard]
+    component: QuizDetailsPageComponent
   }
 ];
 

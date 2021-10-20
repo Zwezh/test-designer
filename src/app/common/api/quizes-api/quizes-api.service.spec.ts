@@ -18,14 +18,14 @@ describe('Service: QuizApi', () => {
     teacherId: 0
   };
 
-  const expectedQuizCollection = [expectedQuiz, expectedQuiz, expectedQuiz];
+  const expectedQuizList = [expectedQuiz, expectedQuiz, expectedQuiz];
 
   const dbServiceStub = {
     getByID: (): Observable<Quiz> => of(expectedQuiz),
     add: (): Observable<number> => of(expectedId),
-    getAllByIndex: (): Observable<Quiz[]> => of(expectedQuizCollection),
-    update: (): Observable<Quiz[]> => of(expectedQuizCollection),
-    delete: (): Observable<Quiz[]> => of(expectedQuizCollection)
+    getAllByIndex: (): Observable<Quiz[]> => of(expectedQuizList),
+    update: (): Observable<Quiz[]> => of(expectedQuizList),
+    delete: (): Observable<Quiz[]> => of(expectedQuizList)
   };
 
   beforeEach(() => {
@@ -56,20 +56,20 @@ describe('Service: QuizApi', () => {
   });
 
   it('should get all quizes from IndexedDB', () => {
-    service.getAllQuiz$(0).subscribe((quizCollection: Quiz[]) => {
-      expect(quizCollection).toEqual(expectedQuizCollection);
+    service.getAllQuiz$(0).subscribe((quizList: Quiz[]) => {
+      expect(quizList).toEqual(expectedQuizList);
     });
   });
 
   it('should update quiz from IndexedDB', () => {
     service.updateQuiz$(expectedQuiz).subscribe((result: Quiz[]) => {
-      expect(result).toEqual(expectedQuizCollection);
+      expect(result).toEqual(expectedQuizList);
     });
   });
 
   it('should delete quiz from IndexedDB', () => {
-    service.deleteQuiz$(expectedQuiz.id).subscribe((quizCollection: Quiz[]) => {
-      expect(quizCollection).toEqual(expectedQuizCollection);
+    service.deleteQuiz$(expectedQuiz.id).subscribe((quizList: Quiz[]) => {
+      expect(quizList).toEqual(expectedQuizList);
     });
   });
 });

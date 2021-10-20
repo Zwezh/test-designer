@@ -13,7 +13,11 @@ export enum QuizesActionTypes {
 
   SEARCH = '[Quizes] Search',
 
-  GET_COLLECTION = '[Quizes] Get Collection',
-  GET_COLLECTION_SUCCESS = '[Quizes] Get Collection success',
-  GET_COLLECTION_FAILURE = '[Quizes] Get Collection failure'
+  GET_ONE_QUIZ = '[Quizes] Get One Quiz',
+  GET_ONE_QUIZ_SUCCESS = '[Quizes] Get One Quiz success',
+  GET_ONE_QUIZ_FAILURE = '[Quizes] Get One Quiz failure',
+
+  GET_QUIZ_LIST = '[Quizes] Get Quiz List',
+  GET_QUIZ_LIST_SUCCESS = '[Quizes] Get Quiz List success',
+  GET_QUIZ_LIST_FAILURE = '[Quizes] Get Quiz List failure'
 }

@@ -1,36 +1,44 @@
 import { Quiz } from '@appApi';
 import {
-  addQuizesAction,
-  addQuizesFailureAction,
-  addQuizesSuccessAction,
-  deleteQuizesAction,
-  deleteQuizesFailureAction,
-  deleteQuizesSuccessAction,
-  getQuizesCollectionAction,
-  getQuizesCollectionFailureAction,
-  getQuizesCollectionSuccessAction,
+  addQuizAction,
+  addQuizFailureAction,
+  addQuizSuccessAction,
+  deleteQuizAction,
+  deleteQuizFailureAction,
+  deleteQuizSuccessAction,
+  getOneQuizAction,
+  getQuizListAction,
+  getQuizListFailureAction,
+  getQuizListSuccessAction,
   quizesReducers,
   QuizesState,
   searchQuizesAction,
-  updateQuizesAction,
-  updateQuizesFailureAction,
-  updateQuizesSuccessAction
+  updateQuizAction,
+  updateQuizFailureAction,
+  updateQuizSuccessAction
 } from '@appStore';
 
 describe('Quizes Reducer', () => {
-
   const expectedQuiz: Quiz = {
-    id: null,
-    name: 'Test',
-    discipline: 'Disc',
+    id: 12,
+    name: 'Test #3',
+    discipline: 'Disc #2',
     createdDate: new Date(),
     modifiedDate: new Date(),
-    teacherId: 36,
+    teacherId: 36
   };
 
   const initialState: QuizesState = {
     isLoading: false,
-    quizCollection: [],
+    quizList: [],
+    currentQuiz: {
+      id: 12,
+      name: 'Test',
+      discipline: 'Disc',
+      createdDate: new Date(),
+      modifiedDate: new Date(),
+      teacherId: 36
+    },
     search: ''
   };
 
@@ -47,67 +55,86 @@ describe('Quizes Reducer', () => {
   });
 
   it('Should return the updated state with loading "true" by "add quiz" action', () => {
-    const state = quizesReducers(initialState, addQuizesAction);
+    const state = quizesReducers(initialState, addQuizAction);
     expect(state.isLoading).toBe(true);
   });
 
-  it('Should return the updated state with loading "false" and quiz collection by "add quiz success" action', () => {
-    const state = quizesReducers(initialState, addQuizesSuccessAction({ newQuiz: expectedQuiz }));
+  it('Should return the updated state with loading "false" and quiz list by "add quiz success" action', () => {
+    const state = quizesReducers(initialState, addQuizSuccessAction({ newQuiz: expectedQuiz }));
     expect(state.isLoading).toBe(false);
-    expect(state.quizCollection).toEqual([expectedQuiz]);
+    expect(state.quizList).toEqual([expectedQuiz]);
   });
 
   it('Should return the updated state with loading "false" by "add quiz failure" action', () => {
-    const state = quizesReducers(initialState, addQuizesFailureAction);
+    const state = quizesReducers(initialState, addQuizFailureAction);
     expect(state.isLoading).toBe(false);
   });
 
   it('Should return the updated state with loading "true" by "update quiz" action', () => {
-    const state = quizesReducers(initialState, updateQuizesAction);
+    const state = quizesReducers(initialState, updateQuizAction);
     expect(state.isLoading).toBe(true);
   });
 
-  it('Should return the updated state with loading "false", quiz collection by "update quiz success" action', () => {
-    const state = quizesReducers(initialState, updateQuizesSuccessAction({ quizCollection: [] }));
+  it('Should return the updated state with loading "false", quiz list by "update quiz success" action', () => {
+    const state = quizesReducers(initialState, updateQuizSuccessAction({ quizList: [] }));
     expect(state.isLoading).toBe(false);
-    expect(state.quizCollection).toEqual([]);
+    expect(state.quizList).toEqual([]);
   });
 
   it('Should return the updated state with loading "false" by "update quiz failure" action', () => {
-    const state = quizesReducers(initialState, updateQuizesFailureAction);
+    const state = quizesReducers(initialState, updateQuizFailureAction);
     expect(state.isLoading).toBe(false);
   });
 
   it('Should return the updated state with loading "true" by "delete quiz" action', () => {
-    const state = quizesReducers(initialState, deleteQuizesAction);
+    const state = quizesReducers(initialState, deleteQuizAction);
     expect(state.isLoading).toBe(true);
   });
 
-  it('Should return the updated state with loading "false", quiz collectoin by "delete quiz success" action', () => {
-    const state = quizesReducers(initialState, deleteQuizesSuccessAction({ quizCollection: [] }));
+  it('Should return the updated state with loading "false", quiz list by "delete quiz success" action', () => {
+    const state = quizesReducers(initialState, deleteQuizSuccessAction({ quizList: [] }));
     expect(state.isLoading).toBe(false);
-    expect(state.quizCollection).toEqual([]);
+    expect(state.quizList).toEqual([]);
   });
 
   it('Should return the updated state with loading "false" by "delete quiz failure" action', () => {
-    const state = quizesReducers(initialState, deleteQuizesFailureAction);
+    const state = quizesReducers(initialState, deleteQuizFailureAction);
     expect(state.isLoading).toBe(false);
   });
 
-  it('Should return the updated state with loading "true" by "get quiz collection" action', () => {
-    const state = quizesReducers(initialState, getQuizesCollectionAction);
+  it('Should return the updated state with loading "true" by "get quiz list" action', () => {
+    const state = quizesReducers(initialState, getQuizListAction);
     expect(state.isLoading).toBe(true);
   });
 
-  it('Should return the updated state with loading "false", quiz collection by "get quiz collection success" action', () => {
-    const state = quizesReducers(initialState, getQuizesCollectionSuccessAction({ quizCollection: [expectedQuiz] }));
+  it('Should return the updated state with loading "false", quiz list, current quiz by "get quiz list success" action', () => {
+    initialState.currentQuiz = expectedQuiz;
+
+    const state = quizesReducers(initialState, getQuizListSuccessAction({ quizList: [expectedQuiz] }));
     expect(state.isLoading).toBe(false);
-    expect(state.quizCollection).toEqual([expectedQuiz]);
+    expect(state.quizList).toEqual([expectedQuiz]);
+    expect(state.currentQuiz).toEqual(expectedQuiz);
   });
 
-  it('Should return the updated state with loading "false" and empty quiz collection by "get quiz collection failure" action', () => {
-    const state = quizesReducers(initialState, getQuizesCollectionFailureAction);
+  it('Should return the updated state with loading "false" and empty quiz list by "get quiz list failure" action', () => {
+    const state = quizesReducers(initialState, getQuizListFailureAction);
     expect(state.isLoading).toBe(false);
-    expect(state.quizCollection).toEqual([]);
+    expect(state.quizList).toEqual([]);
+  });
+
+  it('Should return the updated state with loading "true" by "get one quiz" action', () => {
+    const state = quizesReducers(initialState, getOneQuizAction);
+    expect(state.isLoading).toBe(true);
+  });
+
+  it('Should return the updated state with loading "false", quiz by "get one quiz success" action', () => {
+    const state = quizesReducers(initialState, updateQuizSuccessAction({ quizList: [] }));
+    expect(state.isLoading).toBe(false);
+    expect(state.quizList).toEqual([]);
+  });
+
+  it('Should return the updated state with loading "false" by "get one quiz failure" action', () => {
+    const state = quizesReducers(initialState, updateQuizFailureAction);
+    expect(state.isLoading).toBe(false);
   });
 });

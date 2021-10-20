@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -8,25 +9,30 @@ import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { QuizesApiModule, TeachersApiModule } from '@appApi';
-import { QuizPropertiesEditorModule } from '@appModules/quiz-properties-editor';
 import { SearchModule } from '@appPipes/search';
 import { SharedModule } from '@appSharedModule';
 import {
+  DeleteQuizEffect,
+  GetOneQuizEffect,
+  GetQuizListEffect,
   QuizAddEffect,
-  QuizesDeleteEffect,
-  QuizesGetCollectionEffect,
   quizesReducers,
-  QuizesUpdateEffect
+  UpdateQuizEffect
 } from '@appStore';
 import { DialogModule } from '@appUI/dialog';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
-import { QuestionsModule } from '../questions/questions.module';
+import { QuizesDetailsHeaderComponent } from './components/quizes-details-header/quizes-details-header.component';
 
-import { QuizesActionsComponent, QuizesListComponent } from './components';
-import { QuizesPageComponent } from './pages';
+import {
+  QuizesActionsComponent,
+  QuizesListComponent,
+  QuizesPropertiesEditorComponent
+} from './components';
+import { QuizDetailsPageComponent, QuizesPageComponent } from './pages';
 import { QuizesRoutingModule } from './quizes-routing.module';
+import { QuestionsModule } from '@appModules/questions/questions.module';
 
 const MATERIAL = [
   MatButtonModule,
@@ -36,7 +42,8 @@ const MATERIAL = [
   MatIconModule,
   MatToolbarModule,
   MatTooltipModule,
-  MatDialogModule
+  MatDialogModule,
+  MatCardModule
 ];
 
 @NgModule({
@@ -47,20 +54,24 @@ const MATERIAL = [
     QuizesApiModule,
     EffectsModule.forFeature([
       QuizAddEffect,
-      QuizesGetCollectionEffect,
-      QuizesUpdateEffect,
-      QuizesDeleteEffect
+      GetQuizListEffect,
+      UpdateQuizEffect,
+      DeleteQuizEffect,
+      GetOneQuizEffect
     ]),
     StoreModule.forFeature('quizes', quizesReducers),
     SearchModule,
     DialogModule,
-    QuizPropertiesEditorModule,
+    QuestionsModule,
     ...MATERIAL
   ],
   declarations: [
     QuizesPageComponent,
+    QuizDetailsPageComponent,
     QuizesListComponent,
-    QuizesActionsComponent
+    QuizesActionsComponent,
+    QuizesPropertiesEditorComponent,
+    QuizesDetailsHeaderComponent
   ]
 })
 export class QuizesModule {}

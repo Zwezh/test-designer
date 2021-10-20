@@ -1,27 +1,30 @@
 import { Action, createReducer, on } from '@ngrx/store';
 
 import {
-  addQuizesAction,
-  addQuizesFailureAction,
-  addQuizesSuccessAction,
-  deleteQuizesAction,
-  deleteQuizesFailureAction,
-  deleteQuizesSuccessAction,
-  getQuizesCollectionAction,
-  getQuizesCollectionFailureAction,
-  getQuizesCollectionSuccessAction,
+  addQuizAction,
+  addQuizFailureAction,
+  addQuizSuccessAction,
+  deleteQuizAction,
+  deleteQuizFailureAction,
+  deleteQuizSuccessAction,
+  getOneQuizAction,
+  getOneQuizFailureAction,
+  getOneQuizSuccessAction,
+  getQuizListAction,
+  getQuizListFailureAction,
+  getQuizListSuccessAction,
   searchQuizesAction,
-  updateQuizesAction,
-  updateQuizesFailureAction,
-  updateQuizesSuccessAction
+  updateQuizAction,
+  updateQuizFailureAction,
+  updateQuizSuccessAction
 } from './actions';
 import { QuizesState } from './types';
 
 const initalState: QuizesState = {
   isLoading: false,
-  // currentQuiz: null,
+  currentQuiz: null,
   search: null,
-  quizCollection: null
+  quizList: null
 };
 
 const reducer = createReducer(
@@ -34,92 +37,116 @@ const reducer = createReducer(
     })
   ),
   on(
-    addQuizesAction,
+    addQuizAction,
     (state): QuizesState => ({
       ...state,
       isLoading: true
     })
   ),
   on(
-    addQuizesSuccessAction,
+    addQuizSuccessAction,
     (state, action): QuizesState => ({
       ...state,
       isLoading: false,
-      quizCollection: [...state.quizCollection, action.newQuiz]
+      quizList: [...state.quizList, action.newQuiz]
     })
   ),
   on(
-    addQuizesFailureAction,
+    addQuizFailureAction,
     (state): QuizesState => ({
       ...state,
       isLoading: false
     })
   ),
   on(
-    updateQuizesAction,
+    updateQuizAction,
     (state): QuizesState => ({
       ...state,
       isLoading: true
     })
   ),
   on(
-    updateQuizesSuccessAction,
+    updateQuizSuccessAction,
     (state, action): QuizesState => ({
       ...state,
       isLoading: false,
-      quizCollection: action.quizCollection
+      currentQuiz: action.quizList.find((quiz) => quiz.id === state.currentQuiz.id),
+      quizList: action.quizList
     })
   ),
   on(
-    updateQuizesFailureAction,
+    updateQuizFailureAction,
     (state): QuizesState => ({
       ...state,
       isLoading: false
     })
   ),
   on(
-    deleteQuizesAction,
+    deleteQuizAction,
     (state): QuizesState => ({
       ...state,
       isLoading: true
     })
   ),
   on(
-    deleteQuizesSuccessAction,
+    deleteQuizSuccessAction,
     (state, action): QuizesState => ({
       ...state,
       isLoading: false,
-      quizCollection: action.quizCollection
+      quizList: action.quizList
     })
   ),
   on(
-    deleteQuizesFailureAction,
+    deleteQuizFailureAction,
     (state): QuizesState => ({
       ...state,
       isLoading: false
     })
   ),
   on(
-    getQuizesCollectionAction,
+    getQuizListAction,
     (state): QuizesState => ({
       ...state,
       isLoading: true
     })
   ),
   on(
-    getQuizesCollectionSuccessAction,
+    getQuizListSuccessAction,
     (state, action): QuizesState => ({
       ...state,
       isLoading: false,
-      quizCollection: action.quizCollection
+      quizList: action.quizList
     })
   ),
   on(
-    getQuizesCollectionFailureAction,
+    getQuizListFailureAction,
     (state): QuizesState => ({
       ...state,
       isLoading: false,
-      quizCollection: []
+      quizList: []
+    })
+  ),
+  on(
+    getOneQuizAction,
+    (state): QuizesState => ({
+      ...state,
+      isLoading: true
+    })
+  ),
+  on(
+    getOneQuizSuccessAction,
+    (state, action): QuizesState => ({
+      ...state,
+      isLoading: false,
+      currentQuiz: action.quiz
+    })
+  ),
+  on(
+    getOneQuizFailureAction,
+    (state): QuizesState => ({
+      ...state,
+      isLoading: false,
+      currentQuiz: null
     })
   )
 );

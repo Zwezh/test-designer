@@ -5,17 +5,22 @@ import { QuizesState } from './types';
 
 const featureSelector = createFeatureSelector<AppState, QuizesState>('quizes');
 
-export const quizesSearchSelector = createSelector(
+export const searchQuizesSelector = createSelector(
   featureSelector,
   (state: QuizesState) => state.search
 );
 
-export const quizesIsLoadingSelector = createSelector(
+export const isLoadingQuizesSelector = createSelector(
   featureSelector,
   (state: QuizesState) => state.isLoading
 );
 
-export const quizesGetCollectionSelector = createSelector(
+export const getQuizListSelector = createSelector(
   featureSelector,
-  (state: QuizesState) => state.quizCollection
+  (state: QuizesState) => state.quizList
+);
+
+export const getOneQuizSelector = createSelector(
+  featureSelector,
+  (state: QuizesState) => state.currentQuiz
 );

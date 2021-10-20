@@ -21,7 +21,7 @@ import { AuthState } from './types';
 const initalState: AuthState = {
   isLoading: false,
   currentTeacher: null,
-  teacherCollection: null,
+  teacherList: null,
   isLoggedIn: false
 };
 
@@ -39,7 +39,7 @@ const reducer = createReducer(
     (state, action): AuthState => ({
       ...state,
       isLoading: false,
-      teacherCollection: action.teacherCollection
+      teacherList: action.teacherCollection
     })
   ),
   on(
