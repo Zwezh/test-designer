@@ -70,7 +70,7 @@ const reducer = createReducer(
     (state, action): QuizesState => ({
       ...state,
       isLoading: false,
-      currentQuiz: action.quizList.find((quiz) => quiz.id === state.currentQuiz.id),
+      currentQuiz: { ...state.currentQuiz, ...action.quizList.find((quiz) => quiz.id === state.currentQuiz.id) },
       quizList: action.quizList
     })
   ),

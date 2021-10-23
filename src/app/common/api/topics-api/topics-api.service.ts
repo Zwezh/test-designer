@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { StoreNamesConstants } from 'app/db';
 import { NgxIndexedDBService } from 'ngx-indexed-db';
 import { Observable } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 
 import { Topic } from './topics-api.interface';
 
@@ -37,11 +37,7 @@ export class TopicsApiService {
   // }
 
   getAllTopics$(quizId: number): Observable<Topic[]> {
-    return this.dbService.getAllByIndex(
-      StoreNamesConstants.QUESTIONS_STORE,
-      'quizId',
-      IDBKeyRange.only(quizId)
-    );
+    return this.dbService.getAllByIndex(StoreNamesConstants.TOPICS_STORE, 'quizId', IDBKeyRange.only(quizId));
   }
 
   // getTopic$(id: number): Observable<Topic> {

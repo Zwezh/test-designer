@@ -17,31 +17,21 @@ export class QuestionsApiService {
         quizId
       })
       .pipe(
-        switchMap((id: number) =>
-          this.dbService.getByID(StoreNamesConstants.QUESTIONS_STORE, id)
-        ),
+        switchMap((id: number) => this.dbService.getByID(StoreNamesConstants.QUESTIONS_STORE, id)),
         map((res) => res as Question)
       );
   }
 
   updateQuestion$(question: Partial<Question>): Observable<Question[]> {
-    return this.dbService
-      .update(StoreNamesConstants.QUESTIONS_STORE, question)
-      .pipe(map((list: Question[]) => list));
+    return this.dbService.update(StoreNamesConstants.QUESTIONS_STORE, question).pipe(map((list: Question[]) => list));
   }
 
   deleteQuestion$(id: number): Observable<Question[]> {
-    return this.dbService
-      .delete(StoreNamesConstants.QUESTIONS_STORE, id)
-      .pipe(map((list: Question[]) => list));
+    return this.dbService.delete(StoreNamesConstants.QUESTIONS_STORE, id).pipe(map((list: Question[]) => list));
   }
 
   getAllQuestions$(quizId: number): Observable<Question[]> {
-    return this.dbService.getAllByIndex(
-      StoreNamesConstants.QUESTIONS_STORE,
-      'quizId',
-      IDBKeyRange.only(quizId)
-    );
+    return this.dbService.getAllByIndex(StoreNamesConstants.QUESTIONS_STORE, 'quizId', IDBKeyRange.only(quizId));
   }
 
   getQuestion$(id: number): Observable<Question> {

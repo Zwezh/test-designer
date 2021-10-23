@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { QuestionsApiModule, QuizesApiModule, TeachersApiModule, TopicsApiModule } from '@appApi';
 import { TopicsModule } from '@appModules/topics';
 import { SearchModule } from '@appPipes/search';
 import { SharedModule } from '@appSharedModule';
@@ -45,6 +46,10 @@ const MATERIAL = [
   imports: [
     SharedModule,
     QuizesRoutingModule,
+    TeachersApiModule,
+    QuizesApiModule,
+    TopicsApiModule,
+    QuestionsApiModule,
     EffectsModule.forFeature([QuizAddEffect, GetQuizListEffect, UpdateQuizEffect, DeleteQuizEffect, GetOneQuizEffect]),
     StoreModule.forFeature('quizes', quizesReducers),
     SearchModule,

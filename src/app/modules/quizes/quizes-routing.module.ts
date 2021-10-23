@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { QuestionsDetailsPageComponent } from '@appModules/questions';
 
 import { QuizDetailsPageComponent, QuizesPageComponent } from './pages';
 
@@ -10,7 +11,18 @@ const routes: Routes = [
   },
   {
     path: ':id',
-    component: QuizDetailsPageComponent
+    component: QuizDetailsPageComponent,
+    children: [
+      {
+        path: 'questions/add',
+        component: QuestionsDetailsPageComponent,
+        pathMatch: 'full'
+      },
+      {
+        path: 'questions/:id',
+        component: QuestionsDetailsPageComponent
+      }
+    ]
   }
 ];
 
