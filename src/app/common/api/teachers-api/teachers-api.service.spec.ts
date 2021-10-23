@@ -18,7 +18,7 @@ describe('Service: TeacherApi', () => {
     password: ''
   };
 
-  const expectedTeacherCollection = [
+  const expectedTeacherList = [
     expectedTeacher,
     expectedTeacher,
     expectedTeacher
@@ -27,7 +27,7 @@ describe('Service: TeacherApi', () => {
   const dbServiceStub = {
     getByID: (): Observable<Teacher> => of(expectedTeacher),
     add: (): Observable<number> => of(expectedId),
-    getAll: (): Observable<Teacher[]> => of(expectedTeacherCollection)
+    getAll: (): Observable<Teacher[]> => of(expectedTeacherList)
   };
 
   beforeEach(() => {
@@ -59,8 +59,8 @@ describe('Service: TeacherApi', () => {
   });
 
   it('should get all teachers from IndexedDB', () => {
-    service.getAllTeachers$().subscribe((teacherCollection: Teacher[]) => {
-      expect(teacherCollection).toEqual(expectedTeacherCollection);
+    service.getAllTeachers$().subscribe((teacherList: Teacher[]) => {
+      expect(teacherList).toEqual(expectedTeacherList);
     });
   });
 });

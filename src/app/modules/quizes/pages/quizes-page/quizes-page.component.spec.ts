@@ -10,18 +10,14 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Quiz } from '@appApi';
-import {
-  QuizesActionsComponent,
-  QuizesListComponent
-} from '@appModules/quizes/components';
 import { QuizesEvents } from '@appModules/quizes/shared/models';
 import { SearchModule } from '@appPipes/search';
 import {
-  quizGetCollectionSelector,
-  quizIsLoadingSelector,
-  quizSearchSelector,
-  QuizState,
-  searchQuizAction
+  getQuizListSelector,
+  isLoadingQuizesSelector,
+  QuizesState,
+  searchQuizesAction,
+  searchQuizesSelector
 } from '@appStore';
 import { Actions } from '@ngrx/effects';
 import { provideMockActions } from '@ngrx/effects/testing';
@@ -29,6 +25,8 @@ import { Action } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
+
+import { QuizesActionsComponent, QuizesListComponent, QuizesPropertiesEditorComponent } from '../../components';
 
 import { QuizesPageComponent } from './quizes-page.component';
 
@@ -59,43 +57,27 @@ describe('QuizesPageComponent', () => {
     teacherId: 2
   };
 
-  const expectedQuizCollection: Quiz[] = [expectedquiz];
+  const expectedQuizList: Quiz[] = [expectedquiz];
   const expectedIsLoading = false;
   const expectedSearch = 'false';
-
-  const initialState: QuizState = {
-    isLoading: expectedIsLoading,
-    // currentQuiz: expectedquiz,
-    search: '',
-    quizCollection: expectedQuizCollection
-  };
 
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        imports: [
-          RouterTestingModule,
-          TranslateModule.forRoot(),
-          NoopAnimationsModule,
-          SearchModule,
-          MATERAIL
-        ],
-        providers: [
-          provideMockStore({ initialState }),
-          { provide: Actions, useValue: {} },
-          provideMockActions(() => actions$)
-        ],
+        imports: [RouterTestingModule, TranslateModule.forRoot(), NoopAnimationsModule, SearchModule, MATERAIL],
+        providers: [provideMockStore({}), { provide: Actions, useValue: {} }, provideMockActions(() => actions$)],
         declarations: [
           QuizesPageComponent,
           QuizesListComponent,
-          QuizesActionsComponent
+          QuizesActionsComponent,
+          QuizesPropertiesEditorComponent
         ]
       }).compileComponents();
 
       store = TestBed.inject(MockStore);
-      store.overrideSelector(quizGetCollectionSelector, expectedQuizCollection);
-      store.overrideSelector(quizIsLoadingSelector, expectedIsLoading);
-      store.overrideSelector(quizSearchSelector, expectedSearch);
+      store.overrideSelector(getQuizListSelector, expectedQuizList);
+      store.overrideSelector(isLoadingQuizesSelector, expectedIsLoading);
+      store.overrideSelector(searchQuizesSelector, expectedSearch);
     })
   );
 
@@ -111,15 +93,15 @@ describe('QuizesPageComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('Quiz colleciton is loaded', () => {
-    component.quizCollection$.subscribe((collection: Quiz[]) => {
-      expect(collection).toEqual(expectedQuizCollection);
+  it('Quiz list is loaded', () => {
+    component.quizList$.subscribe((list: Quiz[]) => {
+      expect(list).toEqual(expectedQuizList);
     });
   });
 
   it('Is loading should be true', () => {
     component.isLoading$.subscribe((value: boolean) => {
-      expect(value).toEqual(initialState.isLoading);
+      expect(value).toEqual(expectedIsLoading);
     });
   });
 
@@ -140,8 +122,6 @@ describe('QuizesPageComponent', () => {
   it('Search action should be called by Search event', () => {
     component.onAction({ action: QuizesEvents.SEARCH });
     fixture.detectChanges();
-    expect(store.dispatch).toHaveBeenCalledWith(
-      searchQuizAction({ search: undefined })
-    );
+    expect(store.dispatch).toHaveBeenCalledWith(searchQuizesAction({ search: undefined }));
   });
 });

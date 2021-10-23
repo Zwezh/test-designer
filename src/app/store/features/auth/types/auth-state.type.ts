@@ -3,6 +3,6 @@ import { Teacher } from '@appApi';
 export interface AuthState {
   isLoading: boolean;
   currentTeacher: Teacher | null;
-  teacherCollection: Teacher[];
+  teacherList: Teacher[];
   isLoggedIn: boolean | null;
 }

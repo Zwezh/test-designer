@@ -19,8 +19,6 @@ export class QuizesActionsComponent {
   @Output() action: EventEmitter<QuizesEventEmmited> =
     new EventEmitter<QuizesEventEmmited>();
 
-  constructor() {}
-
   onSearch(data: string): void {
     this.action.emit({ action: QuizesEvents.SEARCH, data });
   }

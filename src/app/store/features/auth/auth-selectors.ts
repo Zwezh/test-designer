@@ -14,7 +14,7 @@ export const authIsLoadingSelector = createSelector(
 
 export const authTeacherCollectionSelector = createSelector(
   authFeatureSelector,
-  (authState: AuthState) => authState.teacherCollection
+  (authState: AuthState) => authState.teacherList
 );
 
 export const authGetCurrentTeacherSelector = createSelector(

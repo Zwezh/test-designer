@@ -1,12 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { QuizesPageComponent } from './pages';
+import { QuizDetailsPageComponent, QuizesPageComponent } from './pages';
 
 const routes: Routes = [
   {
     path: '',
     component: QuizesPageComponent
+  },
+  {
+    path: ':id',
+    component: QuizDetailsPageComponent
   }
 ];
 

@@ -20,7 +20,7 @@ describe('Auth selectors', () => {
   const initialState: AuthState = {
     isLoading: false,
     currentTeacher: expectedTeacher,
-    teacherCollection: [],
+    teacherList: [],
     isLoggedIn: true
   };
 
@@ -31,7 +31,7 @@ describe('Auth selectors', () => {
 
   it('should select the teacher collection', () => {
     const result = authTeacherCollectionSelector.projector(initialState);
-    expect(result).toEqual(initialState.teacherCollection);
+    expect(result).toEqual(initialState.teacherList);
   });
 
   it('should select the current teacher', () => {

@@ -11,12 +11,12 @@ const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () =>
-      import('./modules/auth/auth.module').then((m) => m.AuthModule)
+      import('./modules/auth').then((m) => m.AuthModule)
   },
   {
     path: 'quizes',
     loadChildren: () =>
-      import('./modules/quizes/quizes.module').then((m) => m.QuizesModule),
+      import('./modules/quizes').then((m) => m.QuizesModule),
     canActivate: [AuthGuard]
   },
   {

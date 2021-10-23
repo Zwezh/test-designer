@@ -33,7 +33,7 @@ export class DbApiConfigModel {
     storeConfig: { keyPath: 'id', autoIncrement: true },
     storeSchema: [
       { name: 'title', keypath: 'title', options: { unique: false } },
-      { name: 'testId', keypath: 'testId', options: { unique: false } }
+      { name: 'quizId', keypath: 'quizId', options: { unique: false } }
     ]
   };
 
@@ -44,7 +44,8 @@ export class DbApiConfigModel {
       { name: 'category', keypath: 'category', options: { unique: false } },
       { name: 'weight', keypath: 'weight', options: { unique: false } },
       { name: 'description', keypath: 'description', options: { unique: false } },
-      { name: 'topicId', keypath: 'topicId', options: { unique: false } }
+      { name: 'topicId', keypath: 'topicId', options: { unique: false } },
+      { name: 'quizId', keypath: 'quizId', options: { unique: false } }
     ]
   };
 

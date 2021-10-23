@@ -1,21 +1,21 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Quiz } from '@appApi';
-import { QuizPropertiesEditorComponent } from '@appModules/quiz-properties-editor';
 import {
   addQuizAction,
   deleteQuizAction,
-  getQuizCollectionAction,
-  quizGetCollectionSelector,
-  quizIsLoadingSelector,
-  quizSearchSelector,
-  searchQuizAction
+  getQuizListAction,
+  getQuizListSelector,
+  isLoadingQuizesSelector,
+  searchQuizesAction,
+  searchQuizesSelector
 } from '@appStore';
 import { ConfirmationDialogComponent } from '@appUI/dialog';
 import { select, Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { filter, Observable, take, takeWhile } from 'rxjs';
 
+import { QuizesPropertiesEditorComponent } from '../../components';
 import { QuizesEventEmmited, QuizesEvents } from '../../shared/models';
 
 @Component({
@@ -24,7 +24,7 @@ import { QuizesEventEmmited, QuizesEvents } from '../../shared/models';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class QuizesPageComponent implements OnInit {
-  quizCollection$: Observable<Quiz[] | null>;
+  quizList$: Observable<Quiz[] | null>;
   isLoading$: Observable<boolean>;
   search: string;
 
@@ -56,9 +56,9 @@ export class QuizesPageComponent implements OnInit {
   }
 
   private addTest(): void {
-    const title = this.translator.instant('actionQuizes.add');
+    const title = this.translator.instant('quizes.actions.add');
     this.dialog
-      .open(QuizPropertiesEditorComponent, { data: { title } })
+      .open(QuizesPropertiesEditorComponent, { data: { title } })
       .afterClosed()
       .pipe(
         take(1),
@@ -70,9 +70,9 @@ export class QuizesPageComponent implements OnInit {
   }
 
   private deleteTest(quiz: Quiz): void {
-    const title = this.translator.instant('actionQuizes.deleteTitle');
+    const title = this.translator.instant('quizes.actions.deleteTitle');
     const message = this.translator
-      .instant('actionQuizes.deleteMessage')
+      .instant('quizes.actions.deleteMessage')
       .replace('{1}', quiz.name);
     this.dialog
       .open(ConfirmationDialogComponent, {
@@ -86,16 +86,16 @@ export class QuizesPageComponent implements OnInit {
   }
 
   private onSearch(search: string): void {
-    this.store.dispatch(searchQuizAction({ search }));
+    this.store.dispatch(searchQuizesAction({ search }));
   }
 
   private initSelectors(): void {
-    this.isLoading$ = this.store.pipe(select(quizIsLoadingSelector));
-    this.quizCollection$ = this.store.pipe(select(quizGetCollectionSelector));
+    this.isLoading$ = this.store.pipe(select(isLoadingQuizesSelector));
+    this.quizList$ = this.store.pipe(select(getQuizListSelector));
     this.store
       .pipe(
         takeWhile(() => this.alive),
-        select(quizSearchSelector)
+        select(searchQuizesSelector)
       )
       .subscribe((search: string) => {
         this.search = search;
@@ -103,6 +103,6 @@ export class QuizesPageComponent implements OnInit {
   }
 
   private initData(): void {
-    this.store.dispatch(getQuizCollectionAction());
+    this.store.dispatch(getQuizListAction());
   }
 }

@@ -1,0 +1,10 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+._action {
+  & + ._action {
+    margin-left: 1rem;
+  }
+}

@@ -1,6 +1,7 @@
-import { AuthState, QuizState } from '../features';
+import { AuthState, QuestionsState, QuizesState } from '../features';
 
 export interface AppState {
   auth: AuthState;
-  quiz: QuizState;
+  quizes: QuizesState;
+  questions: QuestionsState;
 }

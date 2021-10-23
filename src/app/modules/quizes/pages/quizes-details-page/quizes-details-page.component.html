@@ -1,0 +1,33 @@
+<section class="ts-quiz-page quiz-page"
+         *ngIf="quiz$ | async as quiz">
+  <td-quizes-details-header [quiz]="quiz"
+                            (action)="onAction($event)"></td-quizes-details-header>
+  <div class="test-content">
+    <!-- <mat-toolbar>
+      <mat-toolbar-row class="header-row">
+        <span>{{ 'questions.count' | translate }}: 0</span>
+        <div>
+          <button mat-raised-button
+                  class="ts-save-button _action"
+                  [disabled]="form.invalid"
+                  matTooltip="{{ 'actions.save' | translate }}"
+                  [attr.aria-label]="'actions.save' | translate"
+                  (click)="onSave()"
+                  color="accent">{{'actions.save' | translate}}</button>
+          <button mat-raised-button
+                  class="ts-cancel-button _action"
+                  matTooltip="{{ 'actions.cancel' | translate }}"
+                  [attr.aria-label]="'actions.cancel' | translate"
+                  [routerLink]="['/tests']">{{'actions.cancel' | translate}}</button>
+        </div>
+      </mat-toolbar-row>
+      <mat-toolbar-row>
+        <button mat-raised-button
+                matTooltip="{{ 'questions.add' | translate }}"
+                [attr.aria-label]="'questions.add' | translate"
+                color="primary">{{'questions.add' | translate}}</button>
+      </mat-toolbar-row>
+    </mat-toolbar> -->
+    <td-topics-list [topicList]="quiz.topicList"></td-topics-list>
+  </div>
+</section>

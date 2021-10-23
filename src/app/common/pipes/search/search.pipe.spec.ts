@@ -13,7 +13,7 @@ describe('Pipe: Search', () => {
     teacherId: 0
   };
 
-  const expectedQuizCollection = [
+  const expectedQuizList = [
     { ...expectedQuiz, name: 'Test 1' },
     { ...expectedQuiz, name: 'Test 2' },
     { ...expectedQuiz, name: 'Test 3' },
@@ -25,14 +25,14 @@ describe('Pipe: Search', () => {
   });
 
   it('Search "Test" value in list', () => {
-    expect(pipe.transform(expectedQuizCollection, 'Test').length).toBe(4);
+    expect(pipe.transform(expectedQuizList, 'Test').length).toBe(4);
   });
 
   it('Search "Test 2" value in list', () => {
-    expect(pipe.transform(expectedQuizCollection, 'Test 2').length).toBe(2);
+    expect(pipe.transform(expectedQuizList, 'Test 2').length).toBe(2);
   });
 
   it('Search "Test 3" value in list', () => {
-    expect(pipe.transform(expectedQuizCollection, 'Test 3').length).toBe(1);
+    expect(pipe.transform(expectedQuizList, 'Test 3').length).toBe(1);
   });
 });
