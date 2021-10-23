@@ -1,8 +1,9 @@
 import { Quiz } from '@appApi';
+import { QuizModel } from '@appStore';
 
 export interface QuizesState {
   isLoading: boolean;
   search: string;
-  currentQuiz: Quiz;
+  currentQuiz: QuizModel;
   quizList: Quiz[];
 }

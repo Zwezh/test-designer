@@ -1,5 +1,6 @@
-<section class="ts-quiz-page quiz-page">
-  <td-quizes-details-header [quiz]="quiz$ | async"
+<section class="ts-quiz-page quiz-page"
+         *ngIf="quiz$ | async as quiz">
+  <td-quizes-details-header [quiz]="quiz"
                             (action)="onAction($event)"></td-quizes-details-header>
   <div class="test-content">
     <!-- <mat-toolbar>
@@ -27,8 +28,6 @@
                 color="primary">{{'questions.add' | translate}}</button>
       </mat-toolbar-row>
     </mat-toolbar> -->
-    <div class="question-list">
-      <td-questions-list></td-questions-list>
-    </div>
+    <td-topics-list [topicList]="quiz.topicList"></td-topics-list>
   </div>
 </section>

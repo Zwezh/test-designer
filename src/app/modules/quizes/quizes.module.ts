@@ -8,7 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { QuizesApiModule, TeachersApiModule } from '@appApi';
+import { TopicsModule } from '@appModules/topics';
 import { SearchModule } from '@appPipes/search';
 import { SharedModule } from '@appSharedModule';
 import {
@@ -25,14 +25,9 @@ import { StoreModule } from '@ngrx/store';
 
 import { QuizesDetailsHeaderComponent } from './components/quizes-details-header/quizes-details-header.component';
 
-import {
-  QuizesActionsComponent,
-  QuizesListComponent,
-  QuizesPropertiesEditorComponent
-} from './components';
+import { QuizesActionsComponent, QuizesListComponent, QuizesPropertiesEditorComponent } from './components';
 import { QuizDetailsPageComponent, QuizesPageComponent } from './pages';
 import { QuizesRoutingModule } from './quizes-routing.module';
-import { QuestionsModule } from '@appModules/questions/questions.module';
 
 const MATERIAL = [
   MatButtonModule,
@@ -50,19 +45,11 @@ const MATERIAL = [
   imports: [
     SharedModule,
     QuizesRoutingModule,
-    TeachersApiModule,
-    QuizesApiModule,
-    EffectsModule.forFeature([
-      QuizAddEffect,
-      GetQuizListEffect,
-      UpdateQuizEffect,
-      DeleteQuizEffect,
-      GetOneQuizEffect
-    ]),
+    EffectsModule.forFeature([QuizAddEffect, GetQuizListEffect, UpdateQuizEffect, DeleteQuizEffect, GetOneQuizEffect]),
     StoreModule.forFeature('quizes', quizesReducers),
     SearchModule,
     DialogModule,
-    QuestionsModule,
+    TopicsModule,
     ...MATERIAL
   ],
   declarations: [

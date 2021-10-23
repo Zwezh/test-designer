@@ -9,7 +9,6 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { environment } from 'environments/environment';
-import { TeachersApiModule } from './common/api/teachers-api';
 import { GetCurrentTeacherEffect } from './store/features';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -36,7 +35,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
       }
     }),
     HeaderModule,
-    TeachersApiModule,
     StoreModule.forRoot({}),
     StoreDevtoolsModule.instrument({
       maxAge: 25,

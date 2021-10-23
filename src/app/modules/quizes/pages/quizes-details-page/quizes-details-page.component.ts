@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Quiz } from '@appApi';
 import { QuizesPropertiesEditorComponent } from '@appModules/quizes/components';
 import { QuizesEventEmmited, QuizesEvents, QuizesPropertiesEditorData } from '@appModules/quizes/shared/models';
-import { getOneQuizAction, getOneQuizSelector, isLoadingQuizesSelector, updateQuizAction } from '@appStore';
+import { getOneQuizAction, getOneQuizSelector, isLoadingQuizesSelector, QuizModel, updateQuizAction } from '@appStore';
 import { select, Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { filter, Observable, take } from 'rxjs';
@@ -15,7 +15,7 @@ import { filter, Observable, take } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class QuizDetailsPageComponent implements OnInit {
-  quiz$: Observable<Quiz | null>;
+  quiz$: Observable<QuizModel | null>;
   isLoading$: Observable<boolean>;
 
   constructor(
