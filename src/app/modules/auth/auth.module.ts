@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { TeachersApiModule } from '@appApi';
 import { TeacherModule } from '@appLayouts/teacher';
 import { SharedModule } from '@appSharedModule';
 import {
@@ -41,6 +42,7 @@ const MATERAIL = [
     SharedModule,
     AuthRoutingModule,
     TeacherModule,
+    TeachersApiModule,
     EffectsModule.forFeature([
       GetTeacherCollectionEffect,
       RegisterEffect,

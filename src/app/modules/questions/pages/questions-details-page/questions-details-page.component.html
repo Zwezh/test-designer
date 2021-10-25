@@ -1,0 +1,31 @@
+<mat-card class="ts-add-question-page add-question-page">
+  <mat-card-title>
+
+    <mat-toolbar color="primary">
+      <mat-toolbar-row>
+        <h1 class="ts-add-question-title"
+            title="{{ 'questions.addPageTitle' | translate }}">{{ 'questions.addPageTitle' | translate }}</h1>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </mat-card-title>
+
+  <mat-card-content>
+    <td-questions-details-editor [topics]="topics"></td-questions-details-editor>
+
+
+    <!-- <mat-error *ngIf="isShowError"
+               @fadeInContentByHeightOpacity>
+      {{'errors.passwordNotEqual' | translate}}
+    </mat-error> -->
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-raised-button
+            title="{{ 'actions.cancel' | translate }}"
+            class="ts-add-question-cancel-button">{{ 'actions.cancel' | translate }}</button>
+    <button mat-raised-button
+            [disabled]="true"
+            color="primary"
+            title="{{ 'actions.save' | translate }}"
+            class="ts-add-question-save-button">{{ 'actions.save' | translate }}</button>
+  </mat-card-actions>
+</mat-card>

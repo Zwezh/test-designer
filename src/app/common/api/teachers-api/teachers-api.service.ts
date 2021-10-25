@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { StoreNamesConstants } from 'app/db';
 import { NgxIndexedDBService } from 'ngx-indexed-db';
 import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 import { Teacher } from './teachers-api.interface';
 
@@ -17,11 +17,7 @@ export class TeachersApiService {
   updateTeacher$(teacher: Teacher): Observable<Teacher> {
     return this.dbService
       .update(StoreNamesConstants.TEACHERS_STORE, teacher)
-      .pipe(
-        map((teacherList: Teacher[]) =>
-          teacherList.find((t: Teacher) => t.id === teacher.id)
-        )
-      );
+      .pipe(map((teacherList: Teacher[]) => teacherList.find((t: Teacher) => t.id === teacher.id)));
   }
 
   getAllTeachers$(): Observable<Teacher[]> {

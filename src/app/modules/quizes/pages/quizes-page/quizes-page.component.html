@@ -1,8 +1,8 @@
 <div class="page-wrapper">
   <td-quizes-actions [value]="search"
-                    (action)="onAction($event)"></td-quizes-actions>
+                     (action)="onAction($event)"></td-quizes-actions>
   <div class="test-list">
     <td-quizes-list [list]="quizList$ | async | search: search"
-                   (action)="onAction($event)"></td-quizes-list>
+                    (action)="onAction($event)"></td-quizes-list>
   </div>
 </div>

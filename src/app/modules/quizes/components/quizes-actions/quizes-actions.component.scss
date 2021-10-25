@@ -1,6 +1,10 @@
 .search-field {
   width: 100%;
 }
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+}
 .add-test {
   margin-bottom: 1rem;
 }
