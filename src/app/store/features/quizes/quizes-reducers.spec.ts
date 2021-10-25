@@ -1,4 +1,3 @@
-import { Quiz } from '@appApi';
 import {
   addQuizAction,
   addQuizFailureAction,
@@ -12,6 +11,7 @@ import {
   getQuizListSuccessAction,
   quizesReducers,
   QuizesState,
+  QuizModel,
   searchQuizesAction,
   updateQuizAction,
   updateQuizFailureAction,
@@ -19,13 +19,14 @@ import {
 } from '@appStore';
 
 describe('Quizes Reducer', () => {
-  const expectedQuiz: Quiz = {
+  const expectedQuiz: QuizModel = {
     id: 12,
     name: 'Test #3',
     discipline: 'Disc #2',
     createdDate: new Date(),
     modifiedDate: new Date(),
-    teacherId: 36
+    teacherId: 36,
+    topicList: []
   };
 
   const initialState: QuizesState = {
@@ -37,7 +38,8 @@ describe('Quizes Reducer', () => {
       discipline: 'Disc',
       createdDate: new Date(),
       modifiedDate: new Date(),
-      teacherId: 36
+      teacherId: 36,
+      topicList:[]
     },
     search: ''
   };

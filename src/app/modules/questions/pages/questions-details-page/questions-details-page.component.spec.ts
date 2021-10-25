@@ -1,7 +1,10 @@
 /* tslint:disable:no-unused-variable */
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { QuestionsDetailsPageComponent } from './questions-details-page.component';
 
@@ -9,12 +12,14 @@ describe('QuestionsDetailsPageComponent', () => {
   let component: QuestionsDetailsPageComponent;
   let fixture: ComponentFixture<QuestionsDetailsPageComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ QuestionsDetailsPageComponent ]
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [TranslateModule.forRoot(), MatCardModule, MatToolbarModule, MatButtonModule, NoopAnimationsModule],
+        declarations: [QuestionsDetailsPageComponent]
+      }).compileComponents();
     })
-    .compileComponents();
-  }));
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(QuestionsDetailsPageComponent);

@@ -11,10 +11,14 @@ const routes: Routes = [
   },
   {
     path: ':id',
-    component: QuizDetailsPageComponent,
     children: [
       {
-        path: 'questions/add',
+        path: '',
+        component: QuizDetailsPageComponent,
+        pathMatch: 'full'
+      },
+      {
+        path: '/questions/add',
         component: QuestionsDetailsPageComponent,
         pathMatch: 'full'
       },

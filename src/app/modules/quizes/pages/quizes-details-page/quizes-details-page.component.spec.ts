@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Quiz } from '@appApi';
-import { getOneQuizSelector, isLoadingQuizesSelector } from '@appStore';
+import { getOneQuizSelector, isLoadingQuizesSelector, QuizModel } from '@appStore';
 import { Actions } from '@ngrx/effects';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Action } from '@ngrx/store';
@@ -20,13 +20,14 @@ describe('QuizDetailsPageComponent', () => {
   let dialog: MatDialog;
   const actions$ = new Observable<Action>();
 
-  const expectedQuiz: Quiz = {
+  const expectedQuiz: QuizModel = {
     id: 12,
     name: 'Expected Quiz Name',
     discipline: 'Expected Quiz Discipline',
     createdDate: new Date(),
     modifiedDate: new Date(),
-    teacherId: 2
+    teacherId: 2,
+    topicList: []
   };
 
   const expectedIsLoading = false;

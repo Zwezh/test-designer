@@ -32,11 +32,24 @@
   },
   "questions": {
     "add": "Добавить вопрос",
+    "addPageTitle": "Добавить вопрос",
     "exit": "Сохранить и выйти",
     "count": "Количество вопросов",
-    "weight": "Вес",
-    "description": "Описание",
-    "category": "Тип вопроса"
+    "weight": "Вес вопроса",
+    "description": "Описание вопроса",
+    "descriptionPlaceholder": "Введите описание вопроса",
+    "category": "Тип вопроса",
+    "categories": {
+      "fillAnswer": "Ввод ответа вручную",
+      "chooseSingleAnswer": "Одиночный выбор",
+      "chooseMultipleAnswers": "Множественный выбор",
+      "comparisonAnswers": "Сопоставление",
+      "orderAnswers": "Сортировка"
+    }
+  },
+  "topics": {
+    "topic": "Tема",
+    "add": "Добавить тему"
   },
   "errors": {
     "required": "Данное поле является обязательным",
