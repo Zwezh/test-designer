@@ -36,10 +36,7 @@ describe('Question Reducer', () => {
   });
 
   it('Should return the updated state with loading "false", question list by "get question list success" action', () => {
-    const state = questionsReducers(
-      initialState,
-      getQuestionListSuccessAction({ questionList: [expectedQuestion] })
-    );
+    const state = questionsReducers(initialState, getQuestionListSuccessAction({ questionList: [expectedQuestion] }));
     expect(state.isLoading).toBe(false);
     expect(state.questionList).toEqual([expectedQuestion]);
   });
@@ -52,10 +49,7 @@ describe('Question Reducer', () => {
 
   it('Should return the updated state with search value by "search" action', () => {
     const expectedResult = 'Search';
-    const state = questionsReducers(
-      initialState,
-      searchQuestionsAction({ search: expectedResult })
-    );
+    const state = questionsReducers(initialState, searchQuestionsAction({ search: expectedResult }));
     expect(state.search).toEqual(expectedResult);
   });
 });

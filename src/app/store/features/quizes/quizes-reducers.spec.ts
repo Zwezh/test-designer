@@ -39,7 +39,7 @@ describe('Quizes Reducer', () => {
       createdDate: new Date(),
       modifiedDate: new Date(),
       teacherId: 36,
-      topicList:[]
+      topicList: []
     },
     search: ''
   };

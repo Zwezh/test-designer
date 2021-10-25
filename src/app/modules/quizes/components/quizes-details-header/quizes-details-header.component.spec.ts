@@ -1,4 +1,3 @@
-/* tslint:disable:no-unused-variable */
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Quiz } from '@appApi';
 import { QuizesEvents } from '@appModules/quizes/shared/models';

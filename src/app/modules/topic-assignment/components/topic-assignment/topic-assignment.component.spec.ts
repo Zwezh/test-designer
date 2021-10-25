@@ -10,11 +10,11 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { QuestionsDetailsEditorComponent } from './questions-details-editor.component';
+import { TopicAssignmentComponent } from './topic-assignment.component';
 
-describe('QuestionsDetailsEditorComponent', () => {
-  let component: QuestionsDetailsEditorComponent;
-  let fixture: ComponentFixture<QuestionsDetailsEditorComponent>;
+describe('TopicAssignmentComponent', () => {
+  let component: TopicAssignmentComponent;
+  let fixture: ComponentFixture<TopicAssignmentComponent>;
 
   beforeEach(
     waitForAsync(() => {
@@ -31,13 +31,13 @@ describe('QuestionsDetailsEditorComponent', () => {
           MatSelectModule,
           NoopAnimationsModule
         ],
-        declarations: [QuestionsDetailsEditorComponent]
+        declarations: [TopicAssignmentComponent]
       }).compileComponents();
     })
   );
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(QuestionsDetailsEditorComponent);
+    fixture = TestBed.createComponent(TopicAssignmentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

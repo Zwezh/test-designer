@@ -19,11 +19,10 @@ export class QuestionsDetailsEditorComponent {
   }
 
   getWeightValues(): number[] {
-    console.info(new Array(10).fill(0).map((_, index) => index + 1));
     return new Array(10).fill(0).map((_, index) => index + 1);
   }
 
   onAddTopic(): void {
-    console.info('On Add Topic');
+    // console.info('On Add Topic');
   }
 }
