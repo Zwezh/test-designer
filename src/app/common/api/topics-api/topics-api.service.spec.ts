@@ -42,12 +42,12 @@ describe('Service: TopicApi', () => {
   //   });
   // });
 
-  // it('should add new Topic to IndexedDB', () => {
-  //   const Topic = { ...expectedTopic, id: expectedId } as Topic;
-  //   service.addTopic$(Topic, expectedTopic.quizId).subscribe((result: Topic) => {
-  //     expect(result.id).toEqual(expectedId);
-  //   });
-  // });
+  it('should add new Topic to IndexedDB', () => {
+    const topic = { ...expectedTopic, id: expectedId } as Topic;
+    service.addTopic$(topic).subscribe((result: Topic[]) => {
+      expect(result).toEqual(expectedTopicList);
+    });
+  });
 
   it('should get all Topics from IndexedDB', () => {
     service.getAllTopics$(0).subscribe((TopicList: Topic[]) => {

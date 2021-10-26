@@ -1,5 +1,8 @@
 import { Topic } from '@appApi';
 import {
+  addTopicAction,
+  addTopicFailureAction,
+  addTopicSuccessAction,
   getTopicListAction,
   getTopicListFailureAction,
   getTopicListSuccessAction,
@@ -40,5 +43,21 @@ describe('Topic Reducer', () => {
     const state = topicsReducers(initialState, getTopicListFailureAction);
     expect(state.isLoading).toBe(false);
     expect(state.topicList).toEqual([]);
+  });
+
+  it('Should return the updated state with loading "true" by "add topic" action', () => {
+    const state = topicsReducers(initialState, addTopicAction);
+    expect(state.isLoading).toBe(true);
+  });
+
+  it('Should return the updated state with loading "false" and topic list by "add topic success" action', () => {
+    const state = topicsReducers(initialState, addTopicSuccessAction({ topicList: [expectedTopic] }));
+    expect(state.isLoading).toBe(false);
+    expect(state.topicList).toEqual([expectedTopic]);
+  });
+
+  it('Should return the updated state with loading "false" by "add topic failure" action', () => {
+    const state = topicsReducers(initialState, addTopicFailureAction);
+    expect(state.isLoading).toBe(false);
   });
 });

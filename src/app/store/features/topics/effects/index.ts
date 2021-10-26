@@ -1,1 +1,2 @@
-export * from './get-question-list.effect';
+export * from './get-topic-list.effect';
+export * from './add-topic.effect';

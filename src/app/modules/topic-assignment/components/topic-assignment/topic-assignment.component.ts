@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Topic } from '@appApi';
+import { getTopicListAction, topicListSelector } from '@appStore';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'td-topic-assignment',
@@ -6,10 +10,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./topic-assignment.component.scss']
 })
 export class TopicAssignmentComponent implements OnInit {
+  @Input() quizId: number;
 
-  constructor() { }
+  topicList$: Observable<Topic[]>;
 
-  ngOnInit() {
+  constructor(private store: Store) {}
+
+  ngOnInit(): void {
+    this.initSelectors();
+    this.initData();
   }
 
+  private initSelectors(): void {
+    this.topicList$ = this.store.pipe(select(topicListSelector));
+  }
+
+  private initData(): void {
+    this.store.dispatch(getTopicListAction({ quizId: this.quizId }));
+  }
 }
