@@ -29,6 +29,7 @@ import { QuizesDetailsHeaderComponent } from './components/quizes-details-header
 import { QuizesActionsComponent, QuizesListComponent, QuizesPropertiesEditorComponent } from './components';
 import { QuizDetailsPageComponent, QuizesPageComponent } from './pages';
 import { QuizesRoutingModule } from './quizes-routing.module';
+import { QuestionsModule } from '@appModules/questions';
 
 const MATERIAL = [
   MatButtonModule,
@@ -50,6 +51,7 @@ const MATERIAL = [
     QuizesApiModule,
     TopicsApiModule,
     QuestionsApiModule,
+    QuestionsModule,
     EffectsModule.forFeature([QuizAddEffect, GetQuizListEffect, UpdateQuizEffect, DeleteQuizEffect, GetOneQuizEffect]),
     StoreModule.forFeature('quizes', quizesReducers),
     SearchModule,

@@ -1,15 +1,17 @@
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
-import { TranslateModule } from '@ngx-translate/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { SharedModule } from '@appSharedModule';
 
-import { ConfirmationDialogComponent } from './components';
+import { ConfirmationDialogComponent, PromptDialogComponent } from './components';
 
-const MATERIAL = [MatButtonModule, MatDialogModule];
+const MATERIAL = [MatButtonModule, MatDialogModule, MatFormFieldModule, MatInputModule];
 
 @NgModule({
-  imports: [TranslateModule, ...MATERIAL],
-  declarations: [ConfirmationDialogComponent],
-  exports: [ConfirmationDialogComponent]
+  imports: [SharedModule, ...MATERIAL],
+  declarations: [ConfirmationDialogComponent, PromptDialogComponent],
+  exports: [ConfirmationDialogComponent, PromptDialogComponent]
 })
 export class DialogModule {}

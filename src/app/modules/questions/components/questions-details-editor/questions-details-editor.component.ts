@@ -9,6 +9,7 @@ import { QuestionsCategoriesConstants } from '@appModules/questions/shared';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class QuestionsDetailsEditorComponent {
+  @Input() quizId: number;
   @Input() topics: Topic[];
 
   questionsCategories = QuestionsCategoriesConstants;

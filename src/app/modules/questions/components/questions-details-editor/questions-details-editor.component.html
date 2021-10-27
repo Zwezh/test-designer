@@ -1,20 +1,5 @@
 <div class="form-line">
-  <mat-form-field appearance="outline"
-                  class="form-field">
-    <mat-label>{{ 'topics.topic' | translate }}</mat-label>
-    <mat-select class="ts-questions-select-topic-selector">
-      <mat-option *ngFor="let topic of topics; trackBy:trackBy"
-                  [value]="topic.id">
-        {{topic.title}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <div>
-    <button mat-stroked-button
-            class="add-topic"
-            (click)="onAddTopic()"
-            color="primary">{{ 'topics.add' | translate }}</button>
-  </div>
+  <td-topic-assignment [quizId]="quizId"></td-topic-assignment>
 </div>
 <div class="form-line">
   <mat-form-field appearance="outline"

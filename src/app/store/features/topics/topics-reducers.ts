@@ -1,7 +1,14 @@
-import { addTopicAction, addTopicFailureAction, addTopicSuccessAction, TopicsState } from '@appStore';
 import { Action, createReducer, on } from '@ngrx/store';
 
-import { getTopicListAction, getTopicListFailureAction, getTopicListSuccessAction } from './actions';
+import {
+  addTopicAction,
+  addTopicFailureAction,
+  addTopicSuccessAction,
+  getTopicListAction,
+  getTopicListFailureAction,
+  getTopicListSuccessAction
+} from './actions';
+import { TopicsState } from './types';
 
 const initalState: TopicsState = {
   isLoading: false,
