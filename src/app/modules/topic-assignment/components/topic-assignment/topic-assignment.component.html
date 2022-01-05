@@ -1,7 +1,7 @@
 <mat-form-field appearance="outline">
   <mat-label>{{ 'topics.topic' | translate }}</mat-label>
   <mat-select>
-    <mat-option *ngFor="let topic of topicList$ | async; trackBy:trackBy" [value]="topic.id">
+    <mat-option *ngFor="let topic of topicList; trackBy:trackBy" [value]="topic.id">
     {{topic.title}}
     </mat-option>
   </mat-select>

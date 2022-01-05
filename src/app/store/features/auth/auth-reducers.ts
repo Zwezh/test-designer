@@ -18,7 +18,7 @@ import {
 } from './actions';
 import { AuthState } from './types';
 
-const initalState: AuthState = {
+const initialState: AuthState = {
   isLoading: false,
   currentTeacher: null,
   teacherList: null,
@@ -26,12 +26,12 @@ const initalState: AuthState = {
 };
 
 const reducer = createReducer(
-  initalState,
+  initialState,
   on(
     getCurrentTeacherAction,
     (state): AuthState => ({
       ...state,
-      isLoading: true
+      isLoading: true,
     })
   ),
   on(

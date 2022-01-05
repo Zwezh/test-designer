@@ -12,15 +12,22 @@ import { PromptDialogData } from '../../shared/dialog-data.model';
 })
 export class PromptDialogComponent implements OnInit {
   field: FormControl;
-
   type: string;
   title: string;
   message: string;
   label: string;
 
+  get errors(): string[] {
+    return this.field.errors
+      ? Object.keys(this.field.errors)
+          .filter((value: string) => !!this.data.field.errorMessages[value])
+          .map((value: string) => this.data.field.errorMessages[value])
+      : [];
+  }
+
   constructor(
-    public dialogRef: MatDialogRef<PromptDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: PromptDialogData
+    private dialogRef: MatDialogRef<PromptDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) private data: PromptDialogData
   ) {
     this.title = data.title || '';
     this.message = data.message || '';
@@ -41,7 +48,7 @@ export class PromptDialogComponent implements OnInit {
   }
 
   private initControl(): void {
-    const validators = this.data.field?.validators ? [...this.data.field.validators] : [];
-    this.field = new FormControl(this.data.field?.value || '', [Validators.required, ...validators]);
+    const validators = this.data.field?.validators ? [...this.data.field.validators] : [Validators.required];
+    this.field = new FormControl(this.data.field?.value || '', validators);
   }
 }

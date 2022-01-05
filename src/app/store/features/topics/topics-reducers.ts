@@ -10,13 +10,13 @@ import {
 } from './actions';
 import { TopicsState } from './types';
 
-const initalState: TopicsState = {
+const initialState: TopicsState = {
   isLoading: false,
   topicList: []
 };
 
 const reducer = createReducer(
-  initalState,
+  initialState,
   on(
     getTopicListAction,
     (state): TopicsState => ({

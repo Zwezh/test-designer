@@ -14,7 +14,8 @@
       "@appStores": ["app/common/stores"],
       "@appStore": ["app/store"],
       "@appModules/*": ["app/modules/*"],
-      "@appUI/*": ["app/ui/*"]
+      "@appUI/*": ["app/ui/*"],
+      "@appValidators/*": ["app/common/validators/*"]
     },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,

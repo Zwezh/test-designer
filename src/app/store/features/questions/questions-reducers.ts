@@ -8,14 +8,14 @@ import {
 } from './actions';
 import { QuestionsState } from './types';
 
-const initalState: QuestionsState = {
+const initialState: QuestionsState = {
   isLoading: false,
   search: '',
   questionList: []
 };
 
 const reducer = createReducer(
-  initalState,
+  initialState,
   on(
     searchQuestionsAction,
     (state, action): QuestionsState => ({

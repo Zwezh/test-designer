@@ -1,12 +1,13 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Topic } from '@appApi';
 import { addTopicAction, getTopicListAction, topicListSelector } from '@appStore';
-import { PromptDialogComponent } from '@appUI/dialog';
+import { PromptDialogComponent, PromptDialogData, PromptFieldData } from '@appUI/dialog';
+import { CustomValidators } from '@appValidators/custom.validators';
 import { select, Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
-import { filter, Observable, take } from 'rxjs';
+import { filter, take, takeWhile } from 'rxjs';
 
 @Component({
   selector: 'td-topic-assignment',
@@ -21,18 +22,16 @@ import { filter, Observable, take } from 'rxjs';
     }
   ]
 })
-export class TopicAssignmentComponent implements OnInit {
+export class TopicAssignmentComponent implements OnInit, OnDestroy {
   topicId: number;
 
   @Input() quizId: number;
 
-  topicList$: Observable<Topic[]>;
+  topicList: Topic[];
   touched = false;
   disabled = false;
 
-  onChange = (topicId) => {};
-
-  onTouched = () => {};
+  private alive = true;
 
   constructor(private store: Store, private dialog: MatDialog, private translator: TranslateService) {}
 
@@ -40,6 +39,13 @@ export class TopicAssignmentComponent implements OnInit {
     this.initSelectors();
     this.initData();
   }
+
+  ngOnDestroy(): void {
+    this.alive = false;
+  }
+
+  onChange = (topicId) => {};
+  onTouched = () => {};
 
   trackBy(index: number, field: Topic): any {
     return field.id;
@@ -50,19 +56,16 @@ export class TopicAssignmentComponent implements OnInit {
     if (this.disabled) {
       return;
     }
-    const title = this.translator.instant('topics.add');
+    const data = this.getPromptDialogData();
     this.dialog
-      .open(PromptDialogComponent, { data: { title, message: 'message', type: 'primary' } })
+      .open(PromptDialogComponent, { data })
       .afterClosed()
       .pipe(
         take(1),
         filter((result) => !!result)
       )
       .subscribe((result) => {
-        const topic = {
-          title: result,
-          quizId: this.quizId
-        };
+        const topic = { title: result, quizId: this.quizId };
         this.store.dispatch(addTopicAction({ topic }));
       });
     // this.quantity+= this.increment;
@@ -93,10 +96,32 @@ export class TopicAssignmentComponent implements OnInit {
   }
 
   private initSelectors(): void {
-    this.topicList$ = this.store.pipe(select(topicListSelector));
+    this.store
+      .pipe(
+        select(topicListSelector),
+        takeWhile(() => this.alive)
+      )
+      .subscribe((topicList: Topic[]) => {
+        this.topicList = topicList;
+      });
   }
 
   private initData(): void {
     this.store.dispatch(getTopicListAction({ quizId: this.quizId }));
+  }
+
+  private getPromptDialogData(): PromptDialogData {
+    const title = this.translator.instant('topics.add');
+    const message = this.translator.instant('topics.topicDescription');
+    const field = this.getPromptFieldData();
+    return { title, message, type: 'primary', field };
+  }
+
+  private getPromptFieldData(): PromptFieldData {
+    const label = this.translator.instant('topics.topicName');
+    const existNames = this.topicList.map((topic: Topic) => topic.title);
+    const validators = [CustomValidators.required(), CustomValidators.uniqueNameValidator(existNames)];
+    const errorMessages = this.translator.instant('topics.errorMessages');
+    return { label, value: null, validators, errorMessages };
   }
 }

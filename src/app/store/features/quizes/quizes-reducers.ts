@@ -20,7 +20,7 @@ import {
 } from './actions';
 import { QuizesState } from './types';
 
-const initalState: QuizesState = {
+const initialState: QuizesState = {
   isLoading: false,
   currentQuiz: null,
   search: null,
@@ -28,7 +28,7 @@ const initalState: QuizesState = {
 };
 
 const reducer = createReducer(
-  initalState,
+  initialState,
   on(
     searchQuizesAction,
     (state, action): QuizesState => ({

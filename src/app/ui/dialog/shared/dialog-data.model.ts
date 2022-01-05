@@ -6,10 +6,15 @@ export interface DialogData {
   type: 'primary' | 'accent';
 }
 
-export interface PromptDialogData extends DialogData {
-  field: {
-    label: string;
-    value: string;
-    validators: ValidatorFn[];
+export interface PromptFieldData {
+  label: string;
+  value: string;
+  validators?: ValidatorFn[];
+  errorMessages?: {
+    [key: string]: string;
   };
+}
+
+export interface PromptDialogData extends DialogData {
+  field: PromptFieldData;
 }

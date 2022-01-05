@@ -1,7 +1,6 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Teacher } from '@appApi';
-
-import { CustomValidators } from '../validators';
+import { CustomValidators } from '@appValidators/custom.validators';
 
 export class TeacherEditForm extends FormGroup {
   get position(): FormControl {
