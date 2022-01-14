@@ -8,7 +8,7 @@ import { QuestionsApiService } from './questions-api.service';
 describe('Service: QuestionApi', () => {
   let service: QuestionsApiService;
 
-  const expectedId = 0;
+  const expectedId = 11;
   const expectedQuestion: Question = {
     id: 0,
     category: 'Category',
@@ -26,7 +26,7 @@ describe('Service: QuestionApi', () => {
 
   const dbServiceStub = {
     getByID: (): Observable<Question> => of(expectedQuestion),
-    add: (): Observable<number> => of(expectedId),
+    add: (): Observable<Question> => of({...expectedQuestion, id: expectedId}),
     getAllByIndex: (): Observable<Question[]> => of(expectedQuestionList),
     update: (): Observable<Question[]> => of(expectedQuestionList),
     delete: (): Observable<Question[]> => of(expectedQuestionList)

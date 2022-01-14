@@ -15,7 +15,6 @@ import { SearchModule } from '@appPipes/search';
 import {
   getQuizListSelector,
   isLoadingQuizesSelector,
-  QuizesState,
   searchQuizesAction,
   searchQuizesSelector
 } from '@appStore';

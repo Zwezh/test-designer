@@ -1,9 +1,8 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { AppState } from 'app/store/types';
 
 import { QuizesState } from './types';
 
-const featureSelector = createFeatureSelector<AppState, QuizesState>('quizes');
+const featureSelector = createFeatureSelector<QuizesState>('quizes');
 
 export const searchQuizesSelector = createSelector(featureSelector, (state: QuizesState) => state.search);
 

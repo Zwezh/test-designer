@@ -19,7 +19,7 @@ describe('Service: TopicApi', () => {
 
   const dbServiceStub = {
     getByID: (): Observable<Topic> => of(expectedTopic),
-    add: (): Observable<number> => of(expectedId),
+    add: (): Observable<Topic> => of({...expectedTopic, id: expectedId}),
     getAllByIndex: (): Observable<Topic[]> => of(expectedTopicList),
     update: (): Observable<Topic[]> => of(expectedTopicList),
     delete: (): Observable<Topic[]> => of(expectedTopicList)
@@ -44,8 +44,8 @@ describe('Service: TopicApi', () => {
 
   it('should add new Topic to IndexedDB', () => {
     const topic = { ...expectedTopic, id: expectedId } as Topic;
-    service.addTopic$(topic).subscribe((result: Topic[]) => {
-      expect(result).toEqual(expectedTopicList);
+    service.addTopic$(topic).subscribe((result: Topic) => {
+      expect(result).toEqual(expectedTopic);
     });
   });
 

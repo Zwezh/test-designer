@@ -8,12 +8,12 @@ import { Topic } from './topics-api.interface';
 
 @Injectable()
 export class TopicsApiService {
-  constructor(private dbService: NgxIndexedDBService) {}
+  constructor(private dbService: NgxIndexedDBService) {
+  }
 
-  addTopic$(topic: Partial<Topic>): Observable<Topic[]> {
+  addTopic$(topic: Partial<Topic>): Observable<Topic> {
     return this.dbService.add(StoreNamesConstants.TOPICS_STORE, topic).pipe(
-      switchMap(() => this.getAllTopics$(topic.quizId)),
-      map((res) => res as Topic[])
+      map((res) => res as Topic)
     );
   }
 

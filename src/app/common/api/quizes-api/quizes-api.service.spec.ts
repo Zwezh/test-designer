@@ -8,7 +8,7 @@ import { QuizesApiService } from './quizes-api.service';
 describe('Service: QuizApi', () => {
   let service: QuizesApiService;
 
-  const expectedId = 0;
+  const expectedId = 11;
   const expectedQuiz: Quiz = {
     id: 0,
     name: '',
@@ -22,7 +22,7 @@ describe('Service: QuizApi', () => {
 
   const dbServiceStub = {
     getByID: (): Observable<Quiz> => of(expectedQuiz),
-    add: (): Observable<number> => of(expectedId),
+    add: (): Observable<Quiz> => of({...expectedQuiz, id: expectedId}),
     getAllByIndex: (): Observable<Quiz[]> => of(expectedQuizList),
     update: (): Observable<Quiz[]> => of(expectedQuizList),
     delete: (): Observable<Quiz[]> => of(expectedQuizList)

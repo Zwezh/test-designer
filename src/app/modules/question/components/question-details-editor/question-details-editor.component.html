@@ -1,0 +1,62 @@
+<mat-card class="question-details-editor">
+  <mat-card-title>
+    <mat-toolbar color="primary">
+      <mat-toolbar-row>
+        <ng-content></ng-content>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </mat-card-title>
+  <mat-card-content>
+    <div class="form-line">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'topics.topic' | translate }}</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let topic of topicList; trackBy:trackBy" [value]="topic.id">
+            {{topic.title}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div>
+        <button mat-stroked-button
+                class="add-topic"
+                (click)="onAddTopic()"
+                color="primary">{{ 'topics.add' | translate }}</button>
+      </div>
+    </div>
+    <div class="form-line">
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>{{ 'questions.category' | translate }}</mat-label>
+        <mat-select class="ts-questions-category-selector">
+          <mat-option *ngFor="let category of questionsCategories; trackBy:trackBy" [value]="category">
+            {{('questions.categories.' + category) | translate}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>{{ 'questions.weight' | translate }}</mat-label>
+        <mat-select class="ts-questions-weight-selector">
+          <mat-option *ngFor="let weight of weights; trackBy:trackBy" [value]="weight">
+            {{weight}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="form-line">
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>{{ 'questions.description' | translate }}</mat-label>
+        <input matInput class="ts-description" placeholder="{{ 'questions.descriptionPlaceholder' | translate }}"
+               type="text">
+      </mat-form-field>
+    </div>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-raised-button
+            title="{{ 'actions.cancel' | translate }}"
+            class="ts-question-details-cancel-button">{{ 'actions.cancel' | translate }}</button>
+    <button mat-raised-button
+            [disabled]="true"
+            color="primary"
+            title="{{ 'actions.save' | translate }}"
+            class="ts-question-details-save-button">{{ 'actions.save' | translate }}</button>
+  </mat-card-actions>
+</mat-card>

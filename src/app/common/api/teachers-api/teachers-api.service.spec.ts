@@ -26,7 +26,7 @@ describe('Service: TeacherApi', () => {
 
   const dbServiceStub = {
     getByID: (): Observable<Teacher> => of(expectedTeacher),
-    add: (): Observable<number> => of(expectedId),
+    add: (): Observable<Teacher> => of({...expectedTeacher, id: expectedId}),
     getAll: (): Observable<Teacher[]> => of(expectedTeacherList)
   };
 

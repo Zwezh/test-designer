@@ -9,6 +9,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { QuestionsApiModule, QuizesApiModule, TeachersApiModule, TopicsApiModule } from '@appApi';
+import { QuestionsModule } from '@appModules/questions';
 import { TopicsModule } from '@appModules/topics';
 import { SearchModule } from '@appPipes/search';
 import { SharedModule } from '@appSharedModule';
@@ -29,7 +30,6 @@ import { QuizesDetailsHeaderComponent } from './components/quizes-details-header
 import { QuizesActionsComponent, QuizesListComponent, QuizesPropertiesEditorComponent } from './components';
 import { QuizDetailsPageComponent, QuizesPageComponent } from './pages';
 import { QuizesRoutingModule } from './quizes-routing.module';
-import { QuestionsModule } from '@appModules/questions';
 
 const MATERIAL = [
   MatButtonModule,

@@ -11,7 +11,7 @@ export class TeachersApiService {
   constructor(private dbService: NgxIndexedDBService) {}
 
   addTeacher$(teacher: Teacher): Observable<number> {
-    return this.dbService.add(StoreNamesConstants.TEACHERS_STORE, teacher);
+    return this.dbService.add(StoreNamesConstants.TEACHERS_STORE, teacher).pipe(map((res: Teacher) => res.id));
   }
 
   updateTeacher$(teacher: Teacher): Observable<Teacher> {

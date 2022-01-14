@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { QuestionsDetailsPageComponent } from '@appModules/questions';
 
 import { QuizDetailsPageComponent, QuizesPageComponent } from './pages';
 
@@ -18,13 +17,8 @@ const routes: Routes = [
         pathMatch: 'full'
       },
       {
-        path: '/questions/add',
-        component: QuestionsDetailsPageComponent,
-        pathMatch: 'full'
-      },
-      {
-        path: 'questions/:id',
-        component: QuestionsDetailsPageComponent
+        path: 'questions',
+        loadChildren: () => import('@appModules/question').then((m) => m.QuestionModule)
       }
     ]
   }
@@ -34,4 +28,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class QuizesRoutingModule {}
+export class QuizesRoutingModule { }

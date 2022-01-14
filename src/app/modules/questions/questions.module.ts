@@ -9,11 +9,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { TopicAssignmentModule } from '@appModules/topic-assignment';
 import { SharedModule } from '@appSharedModule';
 
-import { QuestionsDetailsEditorComponent, QuestionsListComponent } from './components';
-import { QuestionsDetailsPageComponent } from './pages';
+import { QuestionsListComponent } from './components';
 
 const MATERIAL = [
   MatCardModule,
@@ -28,8 +26,8 @@ const MATERIAL = [
 ];
 
 @NgModule({
-  imports: [CommonModule, SharedModule, ...MATERIAL, TopicAssignmentModule],
-  declarations: [QuestionsListComponent, QuestionsDetailsPageComponent, QuestionsDetailsEditorComponent],
-  exports: [QuestionsListComponent, QuestionsDetailsPageComponent]
+  imports: [CommonModule, SharedModule, ...MATERIAL],
+  declarations: [QuestionsListComponent],
+  exports: [QuestionsListComponent]
 })
 export class QuestionsModule {}

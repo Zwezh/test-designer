@@ -1,25 +1,21 @@
 import { Injectable } from '@angular/core';
 import { StoreNamesConstants } from 'app/db';
 import { NgxIndexedDBService } from 'ngx-indexed-db';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
 import { Question } from './questions-api.interface';
 
 @Injectable()
 export class QuestionsApiService {
-  constructor(private dbService: NgxIndexedDBService) {}
+  constructor(private dbService: NgxIndexedDBService) { }
 
-  addQuestion$(question: Partial<Question>, quizId: number): Observable<Question> {
+  addQuestion$(question: Partial<Question>, quizId: number): Observable<any> {
     return this.dbService
       .add(StoreNamesConstants.QUESTIONS_STORE, {
         ...question,
         quizId
-      })
-      .pipe(
-        switchMap((id: number) => this.dbService.getByID(StoreNamesConstants.QUESTIONS_STORE, id)),
-        map((res) => res as Question)
-      );
+      });
   }
 
   updateQuestion$(question: Partial<Question>): Observable<Question[]> {

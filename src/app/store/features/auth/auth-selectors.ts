@@ -1,11 +1,8 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { AppState } from 'app/store/types';
 
 import { AuthState } from './types';
 
-export const authFeatureSelector = createFeatureSelector<AppState, AuthState>(
-  'auth'
-);
+export const authFeatureSelector = createFeatureSelector<AuthState>('auth');
 
 export const authIsLoadingSelector = createSelector(
   authFeatureSelector,

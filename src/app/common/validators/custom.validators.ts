@@ -3,7 +3,6 @@ import { FormControl, FormGroup, ValidationErrors, ValidatorFn } from '@angular/
 export class CustomValidators {
   static required(): ValidatorFn {
     return (control: FormControl): ValidationErrors | null => {
-      console.info(!!control.value.toString().trim());
       const hasValue = !!control.value.toString().trim();
       const error = hasValue ? null : { required: true };
       return error;
@@ -17,7 +16,7 @@ export class CustomValidators {
       confirmPassword.setErrors({ notMathced: true });
     }
     return null;
-  };
+  }
 
   static uniqueNameValidator(existNames: string[]): ValidatorFn {
     return (control: FormControl): ValidationErrors | null => {
