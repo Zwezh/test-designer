@@ -49,10 +49,6 @@ export class QuestionDetailsEditorComponent implements OnInit, OnDestroy {
     return index;
   }
 
-  getWeightValues(): number[] {
-    return new Array(10).fill(0).map((_, index) => index + 1);
-  }
-
   onAddTopic(): void {
     const data = this.getPromptDialogData();
     this.dialog

@@ -8,7 +8,7 @@
   </mat-card-title>
   <mat-card-content>
     <div class="form-line">
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" class="form-field">
         <mat-label>{{ 'topics.topic' | translate }}</mat-label>
         <mat-select>
           <mat-option *ngFor="let topic of topicList; trackBy:trackBy" [value]="topic.id">
