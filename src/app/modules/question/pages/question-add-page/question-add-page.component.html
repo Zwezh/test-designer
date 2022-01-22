@@ -1,4 +1,4 @@
-<td-question-details-editor>
+<td-question-details-editor [form]="form" (save)="onAddQuestion($event)">
   <h1 class="ts-question-add-page-title"
       title="{{ 'questions.addPageTitle' | translate }}">{{ 'questions.addPageTitle' | translate }}</h1>
 </td-question-details-editor>

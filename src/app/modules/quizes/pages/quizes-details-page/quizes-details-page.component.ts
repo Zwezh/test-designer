@@ -17,13 +17,17 @@ import { filter, Observable, take } from 'rxjs';
 export class QuizDetailsPageComponent implements OnInit {
   quiz$: Observable<QuizModel | null>;
   isLoading$: Observable<boolean>;
+  quizId: number;
 
   constructor(
+    route: ActivatedRoute,
     private store: Store,
-    private route: ActivatedRoute,
     private translator: TranslateService,
     private dialog: MatDialog
-  ) {}
+  ) {
+    this.quizId = +route.snapshot.paramMap.get('id');
+
+  }
 
   ngOnInit(): void {
     this.initData();
@@ -58,7 +62,6 @@ export class QuizDetailsPageComponent implements OnInit {
   }
 
   private initData(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.store.dispatch(getOneQuizAction({ id }));
+    this.store.dispatch(getOneQuizAction({ id: this.quizId }));
   }
 }

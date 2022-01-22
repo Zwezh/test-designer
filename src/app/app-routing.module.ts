@@ -5,7 +5,7 @@ import { AuthGuard } from '@appServices';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/auth',
+    redirectTo: '/quizes',
     pathMatch: 'full'
   },
   {
@@ -21,7 +21,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: '/auth'
+    redirectTo: '/quizes'
   }
 ];
 

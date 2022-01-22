@@ -13,6 +13,10 @@ const routes: Routes = [
     path: ':id',
     component: QuestionEditPageComponent,
     pathMatch: 'full'
+  },
+  {
+    path: '**',
+    redirectTo: '..'
   }
 ];
 

@@ -28,13 +28,13 @@ export class QuestionDetailsForm extends FormGroup {
     return question;
   }
 
-  constructor() {
+  constructor(question?: Question) {
     super(
       {
-        topicId: new FormControl('', Validators.required),
-        weight: new FormControl('', Validators.required),
-        category: new FormControl( '', Validators.required),
-        description: new FormControl( '', Validators.required),
+        topicId: new FormControl(question?.topicId || '', Validators.required),
+        weight: new FormControl(question?.weight || '', Validators.required),
+        category: new FormControl( question?.category || '', Validators.required),
+        description: new FormControl( question?.description || '', Validators.required),
       }
     );
   }

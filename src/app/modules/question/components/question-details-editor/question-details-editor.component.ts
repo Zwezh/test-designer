@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Topic } from '@appApi';
+import { QuestionDetailsForm } from '@appModules/question/shared';
 import { QuestionsCategoriesConstants } from '@appModules/questions/shared';
 import { PromptDialogComponent, PromptDialogData, PromptFieldData } from '@appUI/dialog';
 import { CustomValidators } from '@appValidators/custom.validators';
@@ -19,6 +20,8 @@ import { addTopicAction, getTopicListAction, questionTopicListSelector } from '.
 })
 export class QuestionDetailsEditorComponent implements OnInit, OnDestroy {
 
+  @Input() form: QuestionDetailsForm;
+  @Output() save = new EventEmitter<number>();
   readonly quizId: number;
 
   questionsCategories = QuestionsCategoriesConstants;
@@ -27,18 +30,19 @@ export class QuestionDetailsEditorComponent implements OnInit, OnDestroy {
   topicList: Topic[];
   #alive = true;
 
+  ngOnInit(): void {
+    this.initData();
+    this.initSelectors();
+  }
+
   constructor(
-    route: ActivatedRoute,
+    private route: ActivatedRoute,
+    private router: Router,
     private store: Store,
     private dialog: MatDialog,
     private translator: TranslateService
   ) {
-    this.quizId = route.snapshot.params.id;
-  }
-
-  ngOnInit(): void {
-    this.initData();
-    this.initSelectors();
+    this.quizId = +route.snapshot.params.id;
   }
 
   ngOnDestroy(): void {
@@ -62,6 +66,10 @@ export class QuestionDetailsEditorComponent implements OnInit, OnDestroy {
         const topic = {title: result, quizId: this.quizId};
         this.store.dispatch(addTopicAction({topic}));
       });
+  }
+
+  onCancel(): void {
+    this.router.navigate(['../..'], {relativeTo: this.route} );
   }
 
   private initSelectors(): void {

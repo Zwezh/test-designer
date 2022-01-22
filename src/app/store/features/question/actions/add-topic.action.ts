@@ -5,4 +5,4 @@ import { QuestionActionTypes } from '../types';
 
 export const addTopicAction = createAction(QuestionActionTypes.ADD_TOPIC, props<{ topic: Partial<Topic> }>());
 export const addTopicSuccessAction = createAction(QuestionActionTypes.ADD_TOPIC_SUCCESS, props<{ topic: Topic }>());
-export const addTopicFailureAction = createAction(QuestionActionTypes.GET_TOPIC_LIST_FAILURE);
+export const addTopicFailureAction = createAction(QuestionActionTypes.ADD_TOPIC_FAILURE);

@@ -20,7 +20,7 @@ export class AuthGuard implements CanActivate {
     if (!!this.persistanceService.get(PersistanceKeys.authKey)) {
       return true;
     }
-    this.router.navigate(['auth/login']);
+    this.router.navigate(['auth']);
     return false;
   }
 }

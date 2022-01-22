@@ -15,7 +15,7 @@ import { SharedModule } from '@appSharedModule';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
-import { AddTopicEffect, GetQuestionEffect, GetTopicListEffect, questionReducers } from '../../store/features/question';
+import { AddQuestionEffect, AddTopicEffect, GetQuestionEffect, GetTopicListEffect, questionReducers } from '../../store/features/question';
 import { QuestionAddPageComponent } from './pages/question-add-page/question-add-page.component';
 import { QuestionEditPageComponent } from './pages/question-edit-page/question-edit-page.component';
 
@@ -30,13 +30,15 @@ const MATERIAL = [
   MatTooltipModule
 ];
 
+const EFFECTS = [GetQuestionEffect, GetTopicListEffect, AddTopicEffect, AddQuestionEffect];
+
 @NgModule({
   imports: [
     CommonModule,
     SharedModule,
     ...MATERIAL,
     QuestionRoutingModule,
-    EffectsModule.forFeature([GetQuestionEffect, GetTopicListEffect, AddTopicEffect]),
+    EffectsModule.forFeature(EFFECTS),
     StoreModule.forFeature('question', questionReducers),
   ],
   declarations: [

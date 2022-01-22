@@ -6,11 +6,11 @@
       </mat-toolbar-row>
     </mat-toolbar>
   </mat-card-title>
-  <mat-card-content>
+  <mat-card-content [formGroup]="form">
     <div class="form-line">
       <mat-form-field appearance="outline" class="form-field">
         <mat-label>{{ 'topics.topic' | translate }}</mat-label>
-        <mat-select>
+        <mat-select formControlName="topicId">
           <mat-option *ngFor="let topic of topicList; trackBy:trackBy" [value]="topic.id">
             {{topic.title}}
           </mat-option>
@@ -26,7 +26,7 @@
     <div class="form-line">
       <mat-form-field appearance="outline" class="form-field">
         <mat-label>{{ 'questions.category' | translate }}</mat-label>
-        <mat-select class="ts-questions-category-selector">
+        <mat-select class="ts-questions-category-selector" formControlName="category">
           <mat-option *ngFor="let category of questionsCategories; trackBy:trackBy" [value]="category">
             {{('questions.categories.' + category) | translate}}
           </mat-option>
@@ -34,7 +34,7 @@
       </mat-form-field>
       <mat-form-field appearance="outline" class="form-field">
         <mat-label>{{ 'questions.weight' | translate }}</mat-label>
-        <mat-select class="ts-questions-weight-selector">
+        <mat-select class="ts-questions-weight-selector" formControlName="weight">
           <mat-option *ngFor="let weight of weights; trackBy:trackBy" [value]="weight">
             {{weight}}
           </mat-option>
@@ -44,7 +44,8 @@
     <div class="form-line">
       <mat-form-field appearance="outline" class="form-field">
         <mat-label>{{ 'questions.description' | translate }}</mat-label>
-        <input matInput class="ts-description" placeholder="{{ 'questions.descriptionPlaceholder' | translate }}"
+        <input formControlName="description" matInput class="ts-description"
+               placeholder="{{ 'questions.descriptionPlaceholder' | translate }}"
                type="text">
       </mat-form-field>
     </div>
@@ -52,11 +53,11 @@
   <mat-card-actions align="end">
     <button mat-raised-button
             title="{{ 'actions.cancel' | translate }}"
-            class="ts-question-details-cancel-button">{{ 'actions.cancel' | translate }}</button>
+            class="ts-question-details-cancel-button" (click)="onCancel()">{{ 'actions.cancel' | translate }}</button>
     <button mat-raised-button
-            [disabled]="true"
+            [disabled]="form.pristine || form.invalid"
             color="primary"
             title="{{ 'actions.save' | translate }}"
-            class="ts-question-details-save-button">{{ 'actions.save' | translate }}</button>
+            class="ts-question-details-save-button" (click)="save.emit(quizId)">{{ 'actions.save' | translate }}</button>
   </mat-card-actions>
 </mat-card>

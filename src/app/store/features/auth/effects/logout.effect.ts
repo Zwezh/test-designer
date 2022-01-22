@@ -14,7 +14,7 @@ export class LogoutEffect {
       this.actions$.pipe(
         ofType(logoutAction),
         tap(() => {
-          this.router.navigateByUrl('');
+          this.router.navigateByUrl('auth');
           this.persistanceService.set(PersistanceKeys.authKey, '');
         })
       ),
