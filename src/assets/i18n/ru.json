@@ -16,7 +16,7 @@
   "quizes": {
     "name": "Название теста",
     "discipline": "Дисциплина",
-    "countOfQuestions": "Количество вопросов",
+    "countOfQuestions": "Общее количество вопросов",
     "date": "Дата",
     "createdDate": "Дата создания",
     "modifiedDate": "Дата редактирования",
@@ -52,6 +52,7 @@
     "topic": "Tема",
     "topicName": "Название темы",
     "topicDescription": "Введите название новой темы",
+    "countOfQuestions": "Количество вопросов",
     "add": "Добавить тему",
     "errorMessages": {
       "required": "Название темы не может быть пустым",
@@ -72,6 +73,8 @@
     "delete": "Удалить",
     "help": "Помощь",
     "signIn": "Войти",
-    "signOut": "Выйти"
+    "signOut": "Выйти",
+    "expandAll": "Развернуть все",
+    "collapseAll": "Свернуть все"
   }
 }

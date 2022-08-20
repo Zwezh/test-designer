@@ -1,6 +1,9 @@
 import { Action, createReducer, on } from '@ngrx/store';
 
 import {
+  addQuestionAction,
+  addQuestionFailureAction,
+  addQuestionSuccessAction,
   addTopicAction, addTopicFailureAction, addTopicSuccessAction,
   getQuestionAction,
   getQuestionFailureAction,
@@ -79,6 +82,27 @@ const reducer = createReducer(
   ),
   on(
     addTopicFailureAction,
+    (state): QuestionState => ({
+      ...state,
+      isLoading: false
+    })
+  ),
+  on(
+    addQuestionAction,
+    (state): QuestionState => ({
+      ...state,
+      isLoading: true
+    })
+  ),
+  on(
+    addQuestionSuccessAction,
+    (state): QuestionState => ({
+      ...state,
+      isLoading: false,
+    })
+  ),
+  on(
+    addQuestionFailureAction,
     (state): QuestionState => ({
       ...state,
       isLoading: false

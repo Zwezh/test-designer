@@ -32,11 +32,11 @@ export class GetOneQuizEffect {
 
   private getQuizModel(quiz: Quiz, apiTopics: Topic[], questions: Question[]): QuizModel {
     const topics = apiTopics.map((topic: Topic) => this.getTopicModel(topic, questions));
-    return { ...quiz, topicList: topics };
+    return { ...quiz, topicList: topics, countOfQuestions: questions.length };
   }
 
   private getTopicModel(topic: Topic, questionsApi: Question[]): TopicModel {
     const questions = questionsApi.filter((question: Question) => question.topicId === topic.id);
-    return { ...topic, questionList: questions };
+    return { ...topic, questionList: questions, countOfQuestions: questions.length };
   }
 }

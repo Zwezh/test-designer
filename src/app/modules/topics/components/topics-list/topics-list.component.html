@@ -1,20 +1,31 @@
-<ng-container *ngIf="topicList$ | async as topicList">
-  <div class="example-action-buttons" *ngIf="topicList.length > 0">
-    <button mat-button (click)="accordion.openAll()">Expand All</button>
-    <button mat-button (click)="accordion.closeAll()">Collapse All</button>
-  </div>
-  <mat-accordion class="example-headers-align" multi>
-    <mat-expansion-panel togglePosition="before" *ngFor="let topic of topicList">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          {{topic.title}}
-        </mat-panel-title>
-<!--        <mat-panel-description>-->
-<!--          Type your name and age-->
-<!--          <mat-icon>account_circle</mat-icon>-->
-<!--        </mat-panel-description>-->
-      </mat-expansion-panel-header>
-      Questions
-    </mat-expansion-panel>
-  </mat-accordion>
-</ng-container>
+<div class="example-action-buttons" *ngIf="topicList?.length > 0">
+  <button mat-button (click)="accordion.openAll()">{{'actions.expandAll' | translate}}</button>
+  <button mat-button (click)="accordion.closeAll()">{{'actions.collapseAll' | translate}}</button>
+</div>
+<mat-accordion class="example-headers-align" multi>
+  <mat-expansion-panel togglePosition="before" *ngFor="let topic of topicList">
+    <mat-expansion-panel-header>
+      <mat-panel-title class="topic-title">
+        {{topic.title}}
+      </mat-panel-title>
+      <mat-panel-description class="topic-header">
+        {{ 'topics.countOfQuestions' | translate }}:{{topic.countOfQuestions}}
+        <div>
+          <button mat-icon-button
+                  disabled
+                  color="primary"
+                  title="{{'actions.edit' | translate}}">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button
+                  disabled
+                  color="accent"
+                  title="{{'actions.delete' | translate}}">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <td-questions-list [questionList]="topic.questionList"></td-questions-list>
+  </mat-expansion-panel>
+</mat-accordion>

@@ -26,7 +26,8 @@ describe('QuizDetailsPageComponent', () => {
     createdDate: new Date(),
     modifiedDate: new Date(),
     teacherId: 2,
-    topicList: []
+    topicList: [],
+    countOfQuestions: 0
   };
 
   const expectedIsLoading = false;

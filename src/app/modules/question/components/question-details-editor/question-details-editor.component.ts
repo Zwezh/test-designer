@@ -49,7 +49,7 @@ export class QuestionDetailsEditorComponent implements OnInit, OnDestroy {
     this.#alive = false;
   }
 
-  trackBy(index: number, field: any): any {
+  trackBy(index: number): number {
     return index;
   }
 

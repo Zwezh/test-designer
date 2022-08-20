@@ -3,12 +3,8 @@ import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
-import {
-  GetTopicListEffect,
-  topicsReducers
-} from '@appStore';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreModule } from '@ngrx/store';
+import { QuestionsModule } from '@appModules/questions';
+import { SharedModule } from '@appSharedModule';
 
 import { TopicsListComponent } from './components';
 
@@ -21,9 +17,9 @@ const MATERIAL = [
 @NgModule({
   imports: [
     CommonModule,
-    EffectsModule.forFeature([GetTopicListEffect]),
-    StoreModule.forFeature('topics', topicsReducers),
-    ...MATERIAL
+    SharedModule,
+    ...MATERIAL,
+    QuestionsModule
   ],
   declarations: [TopicsListComponent],
   exports: [TopicsListComponent]

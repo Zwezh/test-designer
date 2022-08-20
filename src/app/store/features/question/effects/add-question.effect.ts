@@ -5,7 +5,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
-import { addQuestionAction, addQuestionSuccessAction, addTopicFailureAction } from '../actions';
+import { addQuestionAction, addQuestionFailureAction, addQuestionSuccessAction } from '../actions';
 
 @Injectable()
 export class AddQuestionEffect {
@@ -22,8 +22,8 @@ export class AddQuestionEffect {
       ofType(addQuestionAction),
       switchMap(({question, quizId}) =>
         this.questionsApi.addQuestion$(question, quizId).pipe(
-          map(() => addQuestionSuccessAction()),
-          catchError(() => of(addTopicFailureAction()))
+          map(() => addQuestionSuccessAction({quizId})),
+          catchError(() => of(addQuestionFailureAction()))
         )
       )
     )
@@ -33,8 +33,7 @@ export class AddQuestionEffect {
     () =>
       this.actions$.pipe(
         ofType(addQuestionSuccessAction),
-        tap(() => this.router.navigate(['../..'], {relativeTo: this.activatedRoute}))
-      ),
-    {dispatch: false}
+        tap(({quizId}) => this.router.navigate(['/quizes', quizId], {relativeTo: this.activatedRoute}))
+      ), {dispatch: false}
   );
 }

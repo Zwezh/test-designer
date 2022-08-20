@@ -26,7 +26,8 @@ describe('Quizes Reducer', () => {
     createdDate: new Date(),
     modifiedDate: new Date(),
     teacherId: 36,
-    topicList: []
+    topicList: [],
+    countOfQuestions: 0
   };
 
   const initialState: QuizesState = {
@@ -39,7 +40,8 @@ describe('Quizes Reducer', () => {
       createdDate: new Date(),
       modifiedDate: new Date(),
       teacherId: 36,
-      topicList: []
+      topicList: [],
+      countOfQuestions: 0
     },
     search: ''
   };

@@ -52,9 +52,7 @@ describe('TeacherEditComponent', () => {
         schemas: [CUSTOM_ELEMENTS_SCHEMA]
       }).compileComponents();
       store = TestBed.inject(MockStore);
-      store.overrideSelector(authGetCurrentTeacherSelector, {
-        ...expectedTeacher
-      });
+      store.overrideSelector(authGetCurrentTeacherSelector, { ...expectedTeacher });
     })
   );
 

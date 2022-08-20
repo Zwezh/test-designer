@@ -1,6 +1,9 @@
 import { Question, Topic } from '@appApi';
 
 import {
+  addQuestionAction,
+  addQuestionFailureAction,
+  addQuestionSuccessAction,
   addTopicAction,
   addTopicFailureAction,
   addTopicSuccessAction,
@@ -89,6 +92,21 @@ describe('Question Reducer', () => {
 
   it('Should return the updated state with loading "false" by "add topic failure" action', () => {
     const state = questionReducers(initialState, addTopicFailureAction);
+    expect(state.isLoading).toBe(false);
+  });
+
+  it('Should return the updated state with loading "true" by "add question" action', () => {
+    const state = questionReducers(initialState, addQuestionAction);
+    expect(state.isLoading).toBe(true);
+  });
+
+  it('Should return the updated state with loading "false" and topic list by "add topic success" action', () => {
+    const state = questionReducers(initialState, addQuestionSuccessAction({ quizId: null }));
+    expect(state.isLoading).toBe(false);
+  });
+
+  it('Should return the updated state with loading "false" by "add topic failure" action', () => {
+    const state = questionReducers(initialState, addQuestionFailureAction);
     expect(state.isLoading).toBe(false);
   });
 });

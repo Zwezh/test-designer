@@ -29,7 +29,7 @@ describe('Service: AuthGuard', () => {
 
   it('should redirect an unauthenticated user to the login route', () => {
     expect(guard.canActivate()).toEqual(false);
-    expect(routerStub.navigate).toHaveBeenCalledWith(['auth/login']);
+    expect(routerStub.navigate).toHaveBeenCalledWith(['auth']);
   });
 
   it('should allow the authenticated user to access app', () => {
