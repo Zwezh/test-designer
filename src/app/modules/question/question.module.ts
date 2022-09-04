@@ -8,14 +8,20 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { TopicsApiModule } from '@appApi';
 import { QuestionDetailsEditorComponent } from '@appModules/question/components/question-details-editor/question-details-editor.component';
 import { QuestionRoutingModule } from '@appModules/question/question-routing.module';
 import { SharedModule } from '@appSharedModule';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
-import { AddQuestionEffect, AddTopicEffect, GetQuestionEffect, GetTopicListEffect, questionReducers } from '../../store/features/question';
+import {
+  AddQuestionEffect,
+  AddTopicEffect,
+  GetQuestionEffect,
+  GetTopicListEffect,
+  questionReducers,
+  UpdateQuestionEffect
+} from '../../store/features/question';
 import { QuestionAddPageComponent } from './pages/question-add-page/question-add-page.component';
 import { QuestionEditPageComponent } from './pages/question-edit-page/question-edit-page.component';
 
@@ -30,7 +36,7 @@ const MATERIAL = [
   MatTooltipModule
 ];
 
-const EFFECTS = [GetQuestionEffect, GetTopicListEffect, AddTopicEffect, AddQuestionEffect];
+const EFFECTS = [GetQuestionEffect, GetTopicListEffect, AddTopicEffect, AddQuestionEffect, UpdateQuestionEffect];
 
 @NgModule({
   imports: [

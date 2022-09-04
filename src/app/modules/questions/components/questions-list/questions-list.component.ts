@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Question } from '@appApi';
+import { QuizesActionTypes } from '@appStore';
 
 import { QuestionsTableColumnsConstants } from '../../shared';
 
@@ -21,4 +22,5 @@ export class QuestionsListComponent {
   get displayedColumns(): string[] {
     return QuestionsTableColumnsConstants;
   }
+  // deleteAction = QuizesActionTypes.DELETE;
 }

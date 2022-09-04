@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Quiz } from '@appApi';
 import { QuizesPropertiesEditorComponent } from '@appModules/quizes/components';
 import { QuizesEventEmmited, QuizesEvents, QuizesPropertiesEditorData } from '@appModules/quizes/shared/models';
-import { getOneQuizAction, getOneQuizSelector, isLoadingQuizesSelector, QuizModel, updateQuizAction } from '@appStore';
+import { getOneQuizAction, getOneQuizSelector, isLoadingQuizesSelector, QuizesActionTypes, QuizModel, updateQuizAction } from '@appStore';
 import { select, Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { filter, Observable, take } from 'rxjs';
@@ -35,14 +35,23 @@ export class QuizDetailsPageComponent implements OnInit {
   }
 
   onAction({ action, data }: QuizesEventEmmited): void {
-    switch (action) {
-      case QuizesEvents.UPDATE:
-        this.updateQuestion(data as Quiz);
-        break;
-    }
+    // switch (action) {
+    //   case QuizesEvents.UPDATE:
+    //     this.updateQuiz(data as Quiz);
+    //     break;
+    // }
   }
 
-  private updateQuestion(quiz: Quiz): void {
+  // onChangeHandler(event: PointerEvent, quiz: Quiz): void {
+  //   const button = this.closest(event.target as HTMLElement, 'button');
+  //   if (!button) { return; }
+  //   const { action, id } = button;
+  //   if (QuizesActionTypes.UPDATE === action) {
+  //     this.updateQuiz(quiz);
+  //   }
+  // }
+
+  private updateQuiz(quiz: Quiz): void {
     const title = this.translator.instant('quizes.actions.add');
     this.dialog
       .open(QuizesPropertiesEditorComponent, { data: { title, quiz } as QuizesPropertiesEditorData })
@@ -64,4 +73,11 @@ export class QuizDetailsPageComponent implements OnInit {
   private initData(): void {
     this.store.dispatch(getOneQuizAction({ id: this.quizId }));
   }
+
+  // private closest(element: HTMLElement, selector: string): DOMStringMap {
+  //   do {
+  //     if (element.matches && element.matches(selector)) { return element.dataset; }
+  //     element = element.parentNode as HTMLElement;
+  //   } while (element);
+  // }
 }

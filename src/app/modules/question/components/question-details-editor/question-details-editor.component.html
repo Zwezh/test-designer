@@ -58,6 +58,6 @@
             [disabled]="form.pristine || form.invalid"
             color="primary"
             title="{{ 'actions.save' | translate }}"
-            class="ts-question-details-save-button" (click)="save.emit(quizId)">{{ 'actions.save' | translate }}</button>
+            class="ts-question-details-save-button" (click)="save.emit()">{{ 'actions.save' | translate }}</button>
   </mat-card-actions>
 </mat-card>

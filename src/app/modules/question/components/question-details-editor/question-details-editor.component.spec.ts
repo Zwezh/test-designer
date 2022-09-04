@@ -20,7 +20,7 @@ import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
 
-import { questionTopicListSelector } from '../../../../store/features/question';
+import { addTopicAction, getTopicListAction, questionTopicListSelector } from '../../../../store/features/question';
 
 import { QuestionDetailsEditorComponent } from './question-details-editor.component';
 
@@ -38,6 +38,8 @@ describe('QuestionsDetailsEditorComponent', () => {
   let fixture: ComponentFixture<QuestionDetailsEditorComponent>;
   let store: MockStore;
   let dialog: MatDialog;
+  let dispatchSpy;
+
   const router = { navigate: jasmine.createSpy('navigate') };
   const route = { snapshot: { params: { id: '12' } } };
   const actions$ = new Observable<Action>();
@@ -47,6 +49,8 @@ describe('QuestionsDetailsEditorComponent', () => {
     title: 'Test topic name',
     quizId: 1
   };
+
+  const quizId = 12;
 
   const categories = [
     'fillAnswer',
@@ -85,6 +89,7 @@ describe('QuestionsDetailsEditorComponent', () => {
       }).compileComponents();
       store = TestBed.inject(MockStore);
       store.overrideSelector(questionTopicListSelector, [expectedTopic]);
+      dispatchSpy = spyOn(store, 'dispatch').and.callThrough(); // spy on the store 
     })
   );
 
@@ -93,7 +98,7 @@ describe('QuestionsDetailsEditorComponent', () => {
     component = fixture.componentInstance;
     component.form = new QuestionDetailsForm();
     dialog = TestBed.inject(MatDialog);
-    spyOn(store, 'dispatch').and.callFake(() => { });
+    component.quizId = 12;
     fixture.detectChanges();
   });
 
@@ -104,11 +109,6 @@ describe('QuestionsDetailsEditorComponent', () => {
   it('Check input data', () => {
     const result = component.form;
     expect(result).toBeTruthy();
-  });
-
-  it('Check valid quizId', () => {
-    console.log(component.quizId);
-    expect(component.quizId).toBe(12);
   });
 
   it('Should contain all questions\' categories', () => {
@@ -131,7 +131,7 @@ describe('QuestionsDetailsEditorComponent', () => {
     const addTopicButton = nativeElement.querySelector('.ts-add-topic');
     addTopicButton.click();
     fixture.detectChanges();
-    expect(component.onAddTopic).toHaveBeenCalledWith();
+    expect(component.onAddTopic).toHaveBeenCalled();
   });
 
   it('Should be opened add topic dialog', () => {
@@ -153,7 +153,7 @@ describe('QuestionsDetailsEditorComponent', () => {
   it('Should be navigated back', () => {
     component.onCancel();
     fixture.detectChanges();
-    expect(router.navigate).toHaveBeenCalledWith(['../..'], {relativeTo: route} );
+    expect(router.navigate).toHaveBeenCalledWith(['../..'], { relativeTo: route });
   });
 
   it('Should be got topic list', () => {
@@ -161,5 +161,14 @@ describe('QuestionsDetailsEditorComponent', () => {
       .subscribe((value: Topic[]) => {
         expect(value).toEqual([expectedTopic]);
       });
+  });
+
+  it('Should be triggered getTopicList', () => {
+    spyOn(component, 'onCancel').and.callThrough();
+
+  });
+
+  it('Should dispatch getTopicList action', () => {
+    expect(dispatchSpy).toHaveBeenCalledWith(getTopicListAction({ quizId }));
   });
 });

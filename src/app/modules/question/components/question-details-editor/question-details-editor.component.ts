@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Topic } from '@appApi';
@@ -20,18 +20,21 @@ import { addTopicAction, getTopicListAction, questionTopicListSelector } from '.
 })
 export class QuestionDetailsEditorComponent implements OnInit, OnDestroy {
 
+  @Input() set quizId(value: number) {
+    if (!value) { return; }
+    this.initData(value);
+    this.#quizId = value;
+  }
   @Input() form: QuestionDetailsForm;
-  @Output() save = new EventEmitter<number>();
-  readonly quizId: number;
+  @Output() save = new EventEmitter<void>();
 
   questionsCategories = QuestionsCategoriesConstants;
   weights = new Array(10).fill(0).map((_, index) => index + 1);
 
   topicList: Topic[];
   #alive = true;
-
+  #quizId = null
   ngOnInit(): void {
-    this.initData();
     this.initSelectors();
   }
 
@@ -40,10 +43,9 @@ export class QuestionDetailsEditorComponent implements OnInit, OnDestroy {
     private router: Router,
     private store: Store,
     private dialog: MatDialog,
-    private translator: TranslateService
-  ) {
-    this.quizId = +route.snapshot.params.id;
-  }
+    private translator: TranslateService,
+    private changeDetectionRef: ChangeDetectorRef
+  ) { }
 
   ngOnDestroy(): void {
     this.#alive = false;
@@ -56,20 +58,20 @@ export class QuestionDetailsEditorComponent implements OnInit, OnDestroy {
   onAddTopic(): void {
     const data = this.getPromptDialogData();
     this.dialog
-      .open(PromptDialogComponent, {data})
+      .open(PromptDialogComponent, { data })
       .afterClosed()
       .pipe(
         take(1),
         filter((result) => !!result)
       )
       .subscribe((result) => {
-        const topic = {title: result, quizId: this.quizId};
-        this.store.dispatch(addTopicAction({topic}));
+        const topic = { title: result, quizId: this.#quizId };
+        this.store.dispatch(addTopicAction({ topic }));
       });
   }
 
   onCancel(): void {
-    this.router.navigate(['../..'], {relativeTo: this.route} );
+    this.router.navigate(['../..'], { relativeTo: this.route });
   }
 
   private initSelectors(): void {
@@ -80,18 +82,19 @@ export class QuestionDetailsEditorComponent implements OnInit, OnDestroy {
       )
       .subscribe((topicList: Topic[]) => {
         this.topicList = topicList;
+        this.changeDetectionRef.markForCheck();
       });
   }
 
-  private initData(): void {
-    this.store.dispatch(getTopicListAction({quizId: this.quizId}));
+  private initData(quizId): void {
+    this.store.dispatch(getTopicListAction({ quizId }));
   }
 
   private getPromptDialogData(): PromptDialogData {
     const title = this.translator.instant('topics.add');
     const message = this.translator.instant('topics.topicDescription');
     const field = this.getPromptFieldData();
-    return {title, message, type: 'primary', field};
+    return { title, message, type: 'primary', field };
   }
 
   private getPromptFieldData(): PromptFieldData {
@@ -99,6 +102,6 @@ export class QuestionDetailsEditorComponent implements OnInit, OnDestroy {
     const existNames = this.topicList.map((topic: Topic) => topic.title);
     const validators = [CustomValidators.required(), CustomValidators.uniqueNameValidator(existNames)];
     const errorMessages = this.translator.instant('topics.errorMessages');
-    return {label, value: null, validators, errorMessages};
+    return { label, value: null, validators, errorMessages };
   }
 }

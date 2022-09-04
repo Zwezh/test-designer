@@ -1,4 +1,6 @@
-<td-question-details-editor>
+<td-question-details-editor [form]="form"
+                            [quizId]="quizId"
+                            (save)="onChangeQuestion()">
   <h1 class="ts-question-edit-page-title"
       title="{{ 'questions.editPageTitle' | translate }}">{{ 'questions.editPageTitle' | translate }}</h1>
 </td-question-details-editor>

@@ -9,6 +9,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { RouterModule } from '@angular/router';
 import { SharedModule } from '@appSharedModule';
 
 import { QuestionsListComponent } from './components';
@@ -26,7 +27,7 @@ const MATERIAL = [
 ];
 
 @NgModule({
-  imports: [CommonModule, SharedModule, ...MATERIAL],
+  imports: [CommonModule, SharedModule, RouterModule, ...MATERIAL],
   declarations: [QuestionsListComponent],
   exports: [QuestionsListComponent]
 })

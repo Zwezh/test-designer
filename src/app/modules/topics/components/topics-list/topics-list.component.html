@@ -2,7 +2,7 @@
   <button mat-button (click)="accordion.openAll()">{{'actions.expandAll' | translate}}</button>
   <button mat-button (click)="accordion.closeAll()">{{'actions.collapseAll' | translate}}</button>
 </div>
-<mat-accordion class="example-headers-align" multi>
+<mat-accordion multi>
   <mat-expansion-panel togglePosition="before" *ngFor="let topic of topicList">
     <mat-expansion-panel-header>
       <mat-panel-title class="topic-title">
@@ -10,9 +10,8 @@
       </mat-panel-title>
       <mat-panel-description class="topic-header">
         {{ 'topics.countOfQuestions' | translate }}:{{topic.countOfQuestions}}
-        <div>
+        <div (click)="$event.stopPropagation();">
           <button mat-icon-button
-                  disabled
                   color="primary"
                   title="{{'actions.edit' | translate}}">
             <mat-icon>edit</mat-icon>

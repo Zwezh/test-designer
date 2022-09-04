@@ -8,7 +8,14 @@
       <th mat-header-cell
           *matHeaderCellDef> {{'questions.description' | translate}} </th>
       <td mat-cell
-          *matCellDef="let element"> {{element.description}} </td>
+          *matCellDef="let element">
+        <a mat-icon-button
+           color="primary"
+           title="{{ 'questions.edit' | translate }}"
+           class="ts-edit-question edit-question"
+           color="primary"
+           [routerLink]="['questions/', element.id]">{{element.description}}</a>
+      </td>
     </ng-container>
 
     <!-- Category Column -->
@@ -38,14 +45,10 @@
           *matCellDef="let element">
         <button mat-icon-button
                 disabled
-                color="primary"
-                title="{{'actions.edit' | translate}}">
-          <mat-icon>edit</mat-icon>
-        </button>
-        <button mat-icon-button
-                disabled
                 color="accent"
-                title="{{'actions.delete' | translate}}">
+                title="{{'actions.delete' | translate}}"
+                [attr.data-action]="deleteAction"
+                [attr.data-id]="element.id">
           <mat-icon>delete</mat-icon>
         </button>
       </td>
