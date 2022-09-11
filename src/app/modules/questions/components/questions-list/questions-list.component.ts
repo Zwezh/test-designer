@@ -22,5 +22,5 @@ export class QuestionsListComponent {
   get displayedColumns(): string[] {
     return QuestionsTableColumnsConstants;
   }
-  // deleteAction = QuizesActionTypes.DELETE;
+  deleteAction = QuizesActionTypes.DELETE_QUESTION;
 }

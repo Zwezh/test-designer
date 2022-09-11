@@ -4,7 +4,16 @@ import { ActivatedRoute } from '@angular/router';
 import { Quiz } from '@appApi';
 import { QuizesPropertiesEditorComponent } from '@appModules/quizes/components';
 import { QuizesEventEmmited, QuizesEvents, QuizesPropertiesEditorData } from '@appModules/quizes/shared/models';
-import { getOneQuizAction, getOneQuizSelector, isLoadingQuizesSelector, QuizesActionTypes, QuizModel, updateQuizAction } from '@appStore';
+import {
+  deleteQuestionAction,
+  getOneQuizAction,
+  getOneQuizSelector,
+  isLoadingQuizesSelector,
+  QuizesActionTypes,
+  QuizModel,
+  updateQuizAction
+} from '@appStore';
+import { ConfirmationDialogComponent, DialogData } from '@appUI/dialog';
 import { select, Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { filter, Observable, take } from 'rxjs';
@@ -35,21 +44,21 @@ export class QuizDetailsPageComponent implements OnInit {
   }
 
   onAction({ action, data }: QuizesEventEmmited): void {
-    // switch (action) {
-    //   case QuizesEvents.UPDATE:
-    //     this.updateQuiz(data as Quiz);
-    //     break;
-    // }
+    switch (action) {
+      case QuizesEvents.UPDATE:
+        this.updateQuiz(data as Quiz);
+        break;
+    }
   }
 
-  // onChangeHandler(event: PointerEvent, quiz: Quiz): void {
-  //   const button = this.closest(event.target as HTMLElement, 'button');
-  //   if (!button) { return; }
-  //   const { action, id } = button;
-  //   if (QuizesActionTypes.UPDATE === action) {
-  //     this.updateQuiz(quiz);
-  //   }
-  // }
+  onChangeHandler(event: PointerEvent): void {
+    const button = this.closest(event.target as HTMLElement, 'button');
+    if (!button) { return; }
+    const { action, id } = button;
+    if (QuizesActionTypes.DELETE_QUESTION === action) {
+      this.deleteQuestion(+id);
+    }
+  }
 
   private updateQuiz(quiz: Quiz): void {
     const title = this.translator.instant('quizes.actions.add');
@@ -65,6 +74,20 @@ export class QuizDetailsPageComponent implements OnInit {
       });
   }
 
+  private deleteQuestion(id: number): void {
+    const title = this.translator.instant('questions.deleteTitle');
+    const message = this.translator.instant('questions.deleteMessage');
+    this.dialog.open(ConfirmationDialogComponent, { data: { title, message, type: 'accent' } as DialogData })
+      .afterClosed()
+      .pipe(
+        take(1),
+        filter((result) => !!result)
+      )
+      .subscribe(() => {
+        this.store.dispatch(deleteQuestionAction({ id }));
+      });
+  }
+
   private initSelectors(): void {
     this.isLoading$ = this.store.pipe(select(isLoadingQuizesSelector));
     this.quiz$ = this.store.pipe(select(getOneQuizSelector));
@@ -74,10 +97,10 @@ export class QuizDetailsPageComponent implements OnInit {
     this.store.dispatch(getOneQuizAction({ id: this.quizId }));
   }
 
-  // private closest(element: HTMLElement, selector: string): DOMStringMap {
-  //   do {
-  //     if (element.matches && element.matches(selector)) { return element.dataset; }
-  //     element = element.parentNode as HTMLElement;
-  //   } while (element);
-  // }
+  private closest(element: HTMLElement, selector: string): DOMStringMap {
+    do {
+      if (element.matches && element.matches(selector)) { return element.dataset; }
+      element = element.parentNode as HTMLElement;
+    } while (element);
+  }
 }

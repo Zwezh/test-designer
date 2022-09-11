@@ -1,9 +1,13 @@
+import { Question } from '@appApi';
 import { Action, createReducer, on } from '@ngrx/store';
 
 import {
   addQuizAction,
   addQuizFailureAction,
   addQuizSuccessAction,
+  deleteQuestionAction,
+  deleteQuestionFailureAction,
+  deleteQuestionSuccessAction,
   deleteQuizAction,
   deleteQuizFailureAction,
   deleteQuizSuccessAction,
@@ -18,7 +22,7 @@ import {
   updateQuizFailureAction,
   updateQuizSuccessAction
 } from './actions';
-import { QuizesState } from './types';
+import { QuizesState, TopicModel } from './types';
 
 const initialState: QuizesState = {
   isLoading: false,
@@ -147,6 +151,36 @@ const reducer = createReducer(
       ...state,
       isLoading: false,
       currentQuiz: null
+    })
+  ),
+  on(
+    deleteQuestionAction,
+    (state): QuizesState => ({
+      ...state,
+      isLoading: true
+    })
+  ),
+  on(
+    deleteQuestionSuccessAction,
+    (state, action): QuizesState => ({
+      ...state,
+      isLoading: false,
+      currentQuiz: {
+        ...state.currentQuiz,
+        countOfQuestions: state.currentQuiz.countOfQuestions - 1,
+        topicList: state.currentQuiz.topicList
+          .map((topic: TopicModel) => {
+            const questionList = topic.questionList.filter((question: Question) => question.id !== action.id);
+            return { ...topic, countOfQuestions: questionList.length, questionList };
+          })
+      }
+    })
+  ),
+  on(
+    deleteQuestionFailureAction,
+    (state): QuizesState => ({
+      ...state,
+      isLoading: false
     })
   )
 );

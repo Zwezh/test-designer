@@ -33,7 +33,7 @@ export class QuestionDetailsEditorComponent implements OnInit, OnDestroy {
 
   topicList: Topic[];
   #alive = true;
-  #quizId = null
+  #quizId = null;
   ngOnInit(): void {
     this.initSelectors();
   }

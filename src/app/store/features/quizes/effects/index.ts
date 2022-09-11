@@ -3,3 +3,4 @@ export * from './update-quiz.effect';
 export * from './get-quiz-list.effect';
 export * from './delete-quiz.effect';
 export * from './get-one-quizes.effect';
+export * from './delete-question.effect';

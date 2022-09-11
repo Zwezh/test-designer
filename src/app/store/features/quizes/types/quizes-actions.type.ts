@@ -19,5 +19,9 @@ export enum QuizesActionTypes {
 
   GET_QUIZ_LIST = '[Quizes] Get Quiz List',
   GET_QUIZ_LIST_SUCCESS = '[Quizes] Get Quiz List success',
-  GET_QUIZ_LIST_FAILURE = '[Quizes] Get Quiz List failure'
+  GET_QUIZ_LIST_FAILURE = '[Quizes] Get Quiz List failure',
+
+  DELETE_QUESTION = '[Quizes] Delete question',
+  DELETE_QUESTION_SUCCESS = '[Quizes] Delete question success',
+  DELETE_QUESTION_FAILURE = '[Quizes] Delete question failure'
 }

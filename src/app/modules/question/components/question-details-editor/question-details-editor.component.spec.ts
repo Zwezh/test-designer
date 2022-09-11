@@ -89,7 +89,7 @@ describe('QuestionsDetailsEditorComponent', () => {
       }).compileComponents();
       store = TestBed.inject(MockStore);
       store.overrideSelector(questionTopicListSelector, [expectedTopic]);
-      dispatchSpy = spyOn(store, 'dispatch').and.callThrough(); // spy on the store 
+      dispatchSpy = spyOn(store, 'dispatch').and.callThrough();
     })
   );
 

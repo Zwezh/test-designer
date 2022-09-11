@@ -24,7 +24,7 @@ describe('QuestionAddPageComponent', () => {
     await TestBed.configureTestingModule({
       imports: [TranslateModule.forRoot(), NoopAnimationsModule],
       providers: [
-        provideMockStore({}), 
+        provideMockStore({}),
         { provide: Actions, useValue: {} },
         { provide: ActivatedRoute, useValue: route },
          provideMockActions(() => actions$)],

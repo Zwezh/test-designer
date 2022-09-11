@@ -8,7 +8,7 @@
        color="primary"
        [routerLink]="['questions/add']">{{ 'questions.add' | translate }}</a>
   </div>
-  <div class="test-content" (click)="onChangeHandler($event, quiz)">
+  <div class="test-content" (click)="onChangeHandler($event)">
     <td-topics-list [topicList]="quiz.topicList"></td-topics-list>
   </div>
 </section>

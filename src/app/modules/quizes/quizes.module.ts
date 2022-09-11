@@ -14,6 +14,7 @@ import { TopicsModule } from '@appModules/topics';
 import { SearchModule } from '@appPipes/search';
 import { SharedModule } from '@appSharedModule';
 import {
+  DeleteQuestionEffect,
   DeleteQuizEffect,
   GetOneQuizEffect,
   GetQuizListEffect,
@@ -43,6 +44,14 @@ const MATERIAL = [
   MatCardModule
 ];
 
+const EFFECTS = [
+  QuizAddEffect,
+  GetQuizListEffect,
+  UpdateQuizEffect,
+  DeleteQuizEffect,
+  GetOneQuizEffect,
+  DeleteQuestionEffect
+];
 @NgModule({
   imports: [
     SharedModule,
@@ -52,7 +61,7 @@ const MATERIAL = [
     TopicsApiModule,
     QuestionsApiModule,
     QuestionsModule,
-    EffectsModule.forFeature([QuizAddEffect, GetQuizListEffect, UpdateQuizEffect, DeleteQuizEffect, GetOneQuizEffect]),
+    EffectsModule.forFeature(EFFECTS),
     StoreModule.forFeature('quizes', quizesReducers),
     SearchModule,
     DialogModule,
@@ -68,4 +77,4 @@ const MATERIAL = [
     QuizesDetailsHeaderComponent
   ]
 })
-export class QuizesModule {}
+export class QuizesModule { }

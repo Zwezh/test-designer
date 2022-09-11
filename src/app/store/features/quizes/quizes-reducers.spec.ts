@@ -1,7 +1,11 @@
+import { Question } from '@appApi';
 import {
   addQuizAction,
   addQuizFailureAction,
   addQuizSuccessAction,
+  deleteQuestionAction,
+  deleteQuestionFailureAction,
+  deleteQuestionSuccessAction,
   deleteQuizAction,
   deleteQuizFailureAction,
   deleteQuizSuccessAction,
@@ -13,12 +17,26 @@ import {
   QuizesState,
   QuizModel,
   searchQuizesAction,
+  TopicModel,
   updateQuizAction,
   updateQuizFailureAction,
   updateQuizSuccessAction
 } from '@appStore';
 
 describe('Quizes Reducer', () => {
+
+  const question = {
+    id: 13
+  } as Question;
+
+  const topic: TopicModel = {
+    id: 1,
+    countOfQuestions: 1,
+    questionList: [question],
+    quizId: 12,
+    title: 'Title'
+  };
+
   const expectedQuiz: QuizModel = {
     id: 12,
     name: 'Test #3',
@@ -26,7 +44,7 @@ describe('Quizes Reducer', () => {
     createdDate: new Date(),
     modifiedDate: new Date(),
     teacherId: 36,
-    topicList: [],
+    topicList: [topic],
     countOfQuestions: 0
   };
 
@@ -139,6 +157,21 @@ describe('Quizes Reducer', () => {
 
   it('Should return the updated state with loading "false" by "get one quiz failure" action', () => {
     const state = quizesReducers(initialState, updateQuizFailureAction);
+    expect(state.isLoading).toBe(false);
+  });
+
+  it('Should return the updated state with loading "true" by "delete question" action', () => {
+    const state = quizesReducers(initialState, deleteQuestionAction);
+    expect(state.isLoading).toBe(true);
+  });
+
+  it('Should return the updated state with loading "false" by "delete question" action', () => {
+    const state = quizesReducers(initialState, deleteQuestionSuccessAction);
+    expect(state.isLoading).toBe(false);
+  });
+
+  it('Should return the updated state with loading "false" by "get one quiz failure" action', () => {
+    const state = quizesReducers(initialState, deleteQuestionFailureAction);
     expect(state.isLoading).toBe(false);
   });
 });

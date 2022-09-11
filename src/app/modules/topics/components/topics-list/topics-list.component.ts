@@ -13,4 +13,8 @@ export class TopicsListComponent {
   @Input() topicList: TopicModel[];
   @ViewChild(MatAccordion) accordion: MatAccordion;
 
+
+  trackByTopic(index: number, item: TopicModel): number {
+    return item.id;
+  }
 }

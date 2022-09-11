@@ -3,7 +3,7 @@
   <button mat-button (click)="accordion.closeAll()">{{'actions.collapseAll' | translate}}</button>
 </div>
 <mat-accordion multi>
-  <mat-expansion-panel togglePosition="before" *ngFor="let topic of topicList">
+  <mat-expansion-panel togglePosition="before" *ngFor="let topic of topicList; trackBy:trackByTopic">
     <mat-expansion-panel-header>
       <mat-panel-title class="topic-title">
         {{topic.title}}
